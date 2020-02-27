@@ -65,5 +65,6 @@
 			"schema": "dbo",
 			"table": "OECD_STRICTNESS_OF_EMPLOYMENT_PROTECTION"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

@@ -43,5 +43,6 @@
 			"schema": "dbo",
 			"table": "OTEXA_EXE_HTS"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

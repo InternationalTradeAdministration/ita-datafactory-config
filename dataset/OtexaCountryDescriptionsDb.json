@@ -22,5 +22,6 @@
 			"schema": "dbo",
 			"table": "OTEXA_COUNTRY_REF"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
