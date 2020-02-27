@@ -14,5 +14,6 @@
 				"container": "demo"
 			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
