@@ -1,0 +1,52 @@
+{
+	"name": "UsageStatsDb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "FILE_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "SNAPSHOT",
+				"type": "varchar"
+			},
+			{
+				"name": "URL",
+				"type": "varchar"
+			},
+			{
+				"name": "SIZE",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "CONTAINER",
+				"type": "varchar"
+			},
+			{
+				"name": "UPLOADED_AT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "UPLOADED_BY",
+				"type": "varchar"
+			},
+			{
+				"name": "PII",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DATALOADER_USAGE_STATS"
+		}
+	}
+}

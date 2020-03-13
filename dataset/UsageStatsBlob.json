@@ -1,0 +1,55 @@
+{
+	"name": "UsageStatsBlob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "usage-stats",
+				"container": "dataloader"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"fileName": {
+					"type": "string"
+				},
+				"snapshot": {
+					"type": "string"
+				},
+				"url": {
+					"type": "string"
+				},
+				"size": {
+					"type": "integer"
+				},
+				"containerName": {
+					"type": "string"
+				},
+				"uploadedAt": {
+					"type": "string"
+				},
+				"metadata": {
+					"type": "object",
+					"properties": {
+						"user_upload": {
+							"type": "string"
+						},
+						"pii": {
+							"type": "string"
+						},
+						"uploaded_by": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	}
+}
