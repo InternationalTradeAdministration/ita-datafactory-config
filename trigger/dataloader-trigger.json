@@ -1,0 +1,24 @@
+{
+	"name": "dataloader-trigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "dataloader",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2020-03-13T19:31:00.000Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
