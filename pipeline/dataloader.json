@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy Usage Stats",
+				"name": "Copy Storage Log",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
