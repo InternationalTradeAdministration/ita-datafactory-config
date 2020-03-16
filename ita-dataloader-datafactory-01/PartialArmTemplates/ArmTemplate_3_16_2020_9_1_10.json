@@ -1,0 +1,240 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ita-dataloader-datafactory-01"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/dataloader')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Storage Log",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.json",
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE DATALOADER_USAGE_STATS;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['fileName']"
+										},
+										"sink": {
+											"name": "FILE_NAME",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['snapshot']"
+										},
+										"sink": {
+											"name": "SNAPSHOT",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['url']"
+										},
+										"sink": {
+											"name": "URL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['size']"
+										},
+										"sink": {
+											"name": "SIZE",
+											"type": "Int64"
+										}
+									},
+									{
+										"source": {
+											"path": "$['containerName']"
+										},
+										"sink": {
+											"name": "CONTAINER",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['uploadedAt']"
+										},
+										"sink": {
+											"name": "UPLOADED_AT",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['metadata']['pii']"
+										},
+										"sink": {
+											"name": "PII",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['metadata']['uploaded_by']"
+										},
+										"sink": {
+											"name": "UPLOADED_BY",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "UsageStatsBlob",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "UsageStatsDb",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/UsageStatsBlob')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageStatsBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "storage-log",
+						"container": "dataloader"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"fileName": {
+							"type": "string"
+						},
+						"snapshot": {
+							"type": "string"
+						},
+						"url": {
+							"type": "string"
+						},
+						"size": {
+							"type": "integer"
+						},
+						"containerName": {
+							"type": "string"
+						},
+						"uploadedAt": {
+							"type": "string"
+						},
+						"metadata": {
+							"type": "object",
+							"properties": {
+								"user_upload": {
+									"type": "string"
+								},
+								"pii": {
+									"type": "string"
+								},
+								"uploaded_by": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataloader-trigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dataloader",
+							"type": "PipelineReference"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2020-03-13T19:31:00.000Z",
+						"timeZone": "UTC",
+						"schedule": {
+							"hours": [
+								3
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/dataloader')]"
+			]
+		}
+	]
+}

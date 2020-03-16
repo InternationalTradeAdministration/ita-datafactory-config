@@ -29,6 +29,141 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/dataloader')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Storage Log",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.json",
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE DATALOADER_USAGE_STATS;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['fileName']"
+										},
+										"sink": {
+											"name": "FILE_NAME",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['snapshot']"
+										},
+										"sink": {
+											"name": "SNAPSHOT",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['url']"
+										},
+										"sink": {
+											"name": "URL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['size']"
+										},
+										"sink": {
+											"name": "SIZE",
+											"type": "Int64"
+										}
+									},
+									{
+										"source": {
+											"path": "$['containerName']"
+										},
+										"sink": {
+											"name": "CONTAINER",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['uploadedAt']"
+										},
+										"sink": {
+											"name": "UPLOADED_AT",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['metadata']['pii']"
+										},
+										"sink": {
+											"name": "PII",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['metadata']['uploaded_by']"
+										},
+										"sink": {
+											"name": "UPLOADED_BY",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "UsageStatsBlob",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "UsageStatsDb",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/UsageStatsBlob')]",
+				"[concat(variables('factoryId'), '/datasets/UsageStatsDb')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/demo')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -8438,6 +8573,123 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/UsageStatsBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "storage-log",
+						"container": "dataloader"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"fileName": {
+							"type": "string"
+						},
+						"snapshot": {
+							"type": "string"
+						},
+						"url": {
+							"type": "string"
+						},
+						"size": {
+							"type": "integer"
+						},
+						"containerName": {
+							"type": "string"
+						},
+						"uploadedAt": {
+							"type": "string"
+						},
+						"metadata": {
+							"type": "object",
+							"properties": {
+								"user_upload": {
+									"type": "string"
+								},
+								"pii": {
+									"type": "string"
+								},
+								"uploaded_by": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageStatsDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FILE_NAME",
+						"type": "varchar"
+					},
+					{
+						"name": "SNAPSHOT",
+						"type": "varchar"
+					},
+					{
+						"name": "URL",
+						"type": "varchar"
+					},
+					{
+						"name": "SIZE",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "CONTAINER",
+						"type": "varchar"
+					},
+					{
+						"name": "UPLOADED_AT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "UPLOADED_BY",
+						"type": "varchar"
+					},
+					{
+						"name": "PII",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DATALOADER_USAGE_STATS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/WorldbankEaseCountryIndexBlob')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -8652,6 +8904,41 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/dataloader-trigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dataloader",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2020-03-13T19:31:00.000Z",
+						"timeZone": "UTC",
+						"schedule": {
+							"hours": [
+								3
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/dataloader')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/otexa-blob-trigger')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -8709,289 +8996,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/select-usa')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dataloader')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy Usage Stats",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "JsonSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*.json",
-									"enablePartitionDiscovery": false
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"preCopyScript": "TRUNCATE TABLE DATALOADER_USAGE_STATS;",
-								"disableMetricsCollection": false
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "$['fileName']"
-										},
-										"sink": {
-											"name": "FILE_NAME",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['snapshot']"
-										},
-										"sink": {
-											"name": "SNAPSHOT",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['url']"
-										},
-										"sink": {
-											"name": "URL",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['size']"
-										},
-										"sink": {
-											"name": "SIZE",
-											"type": "Int64"
-										}
-									},
-									{
-										"source": {
-											"path": "$['containerName']"
-										},
-										"sink": {
-											"name": "CONTAINER",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['uploadedAt']"
-										},
-										"sink": {
-											"name": "UPLOADED_AT",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"path": "$['metadata']['pii']"
-										},
-										"sink": {
-											"name": "PII",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"path": "$['metadata']['uploaded_by']"
-										},
-										"sink": {
-											"name": "UPLOADED_BY",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "UsageStatsBlob",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "UsageStatsDb",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/UsageStatsBlob')]",
-				"[concat(variables('factoryId'), '/datasets/UsageStatsDb')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/UsageStatsBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "usage-stats",
-						"container": "dataloader"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"fileName": {
-							"type": "string"
-						},
-						"snapshot": {
-							"type": "string"
-						},
-						"url": {
-							"type": "string"
-						},
-						"size": {
-							"type": "integer"
-						},
-						"containerName": {
-							"type": "string"
-						},
-						"uploadedAt": {
-							"type": "string"
-						},
-						"metadata": {
-							"type": "object",
-							"properties": {
-								"user_upload": {
-									"type": "string"
-								},
-								"pii": {
-									"type": "string"
-								},
-								"uploaded_by": {
-									"type": "string"
-								}
-							}
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/UsageStatsDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "FILE_NAME",
-						"type": "varchar"
-					},
-					{
-						"name": "SNAPSHOT",
-						"type": "varchar"
-					},
-					{
-						"name": "URL",
-						"type": "varchar"
-					},
-					{
-						"name": "SIZE",
-						"type": "bigint",
-						"precision": 19
-					},
-					{
-						"name": "CONTAINER",
-						"type": "varchar"
-					},
-					{
-						"name": "UPLOADED_AT",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "UPLOADED_BY",
-						"type": "varchar"
-					},
-					{
-						"name": "PII",
-						"type": "bit"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "DATALOADER_USAGE_STATS"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dataloader-trigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "dataloader",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2020-03-13T19:31:00.000Z",
-						"timeZone": "UTC",
-						"schedule": {}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/dataloader')]"
 			]
 		}
 	]
