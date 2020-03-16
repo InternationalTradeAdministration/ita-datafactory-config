@@ -253,7 +253,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/UsageStatsBlob')]",
+			"name": "[concat(parameters('factoryName'), '/DataloaderStorageLogBlob')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -311,7 +311,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/UsageStatsDb')]",
+			"name": "[concat(parameters('factoryName'), '/DataloaderStorageLogDb')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -360,7 +360,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "DATALOADER_USAGE_STATS"
+					"table": "DATALOADER_STORAGE_LOG"
 				}
 			},
 			"dependsOn": []
@@ -575,7 +575,7 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"preCopyScript": "TRUNCATE TABLE DATALOADER_USAGE_STATS;",
+								"preCopyScript": "TRUNCATE TABLE DATALOADER_STORAGE_LOG;",
 								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
@@ -659,14 +659,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "UsageStatsBlob",
+								"referenceName": "DataloaderStorageLogBlob",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "UsageStatsDb",
+								"referenceName": "DataloaderStorageLogDb",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -676,8 +676,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/UsageStatsBlob')]",
-				"[concat(variables('factoryId'), '/datasets/UsageStatsDb')]"
+				"[concat(variables('factoryId'), '/datasets/DataloaderStorageLogBlob')]",
+				"[concat(variables('factoryId'), '/datasets/DataloaderStorageLogDb')]"
 			]
 		},
 		{
