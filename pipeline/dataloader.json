@@ -110,7 +110,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "UsageStatsBlob",
+						"referenceName": "DataloaderStorageLogBlob",
 						"type": "DatasetReference"
 					}
 				],
