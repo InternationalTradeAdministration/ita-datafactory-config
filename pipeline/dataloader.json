@@ -116,7 +116,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "UsageStatsDb",
+						"referenceName": "DataloaderStorageLogDb",
 						"type": "DatasetReference"
 					}
 				]

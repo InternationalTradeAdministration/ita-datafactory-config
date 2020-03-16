@@ -1,5 +1,5 @@
 {
-	"name": "UsageStatsDb",
+	"name": "DataloaderStorageLogDb",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase",
@@ -46,7 +46,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "DATALOADER_USAGE_STATS"
+			"table": "DATALOADER_STORAGE_LOG"
 		}
 	}
 }
