@@ -4388,6 +4388,306 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/sima')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy License Data",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.txt",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE SIMA_LICENSE;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Date of Importation",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Date of Importation",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "Country of Origin",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Country of Origin",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Category",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Category",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HTS Code",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HTS Code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Value",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Volume",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Volume",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "License #",
+											"type": "String"
+										},
+										"sink": {
+											"name": "License_Number",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SimaLicenseBlobs",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SimaLisenceDb",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy Census Data",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE SIMA_CENSUS;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "COUNTRY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COUNTRY",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CNTYDESC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CNTYDESC",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ldesccen36",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ldesccen36",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "grade",
+											"type": "String"
+										},
+										"sink": {
+											"name": "grade",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "VALUE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "VALUE",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "UNKNOWN_FIELD_1",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UNKNOWN_FIELD_1",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "UNKNOWN_FIELD_2",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UNKNOWN_FIELD_2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "QTYMT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QTYMT",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "UNKNOWN_FIELD_3",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UNKNOWN_FIELD_3",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "SMONTH",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SMONTH",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "SYEAR",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SYEAR",
+											"type": "Int32"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SImaCensusBlobs",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SimaCensusDb",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SimaLicenseBlobs')]",
+				"[concat(variables('factoryId'), '/datasets/SimaLisenceDb')]",
+				"[concat(variables('factoryId'), '/datasets/SImaCensusBlobs')]",
+				"[concat(variables('factoryId'), '/datasets/SimaCensusDb')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BeaItaBlobs')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -6573,6 +6873,123 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DataloaderStorageLogBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "storage-log",
+						"container": "dataloader"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"fileName": {
+							"type": "string"
+						},
+						"snapshot": {
+							"type": "string"
+						},
+						"url": {
+							"type": "string"
+						},
+						"size": {
+							"type": "integer"
+						},
+						"containerName": {
+							"type": "string"
+						},
+						"uploadedAt": {
+							"type": "string"
+						},
+						"metadata": {
+							"type": "object",
+							"properties": {
+								"user_upload": {
+									"type": "string"
+								},
+								"pii": {
+									"type": "string"
+								},
+								"uploaded_by": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataloaderStorageLogDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FILE_NAME",
+						"type": "varchar"
+					},
+					{
+						"name": "SNAPSHOT",
+						"type": "varchar"
+					},
+					{
+						"name": "URL",
+						"type": "varchar"
+					},
+					{
+						"name": "SIZE",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "CONTAINER",
+						"type": "varchar"
+					},
+					{
+						"name": "UPLOADED_AT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "UPLOADED_BY",
+						"type": "varchar"
+					},
+					{
+						"name": "PII",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DATALOADER_STORAGE_LOG"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DemoBinFile')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -8573,7 +8990,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DataloaderStorageLogBlob')]",
+			"name": "[concat(parameters('factoryName'), '/SImaCensusBlobs')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -8582,58 +8999,71 @@
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "Json",
+				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "storage-log",
-						"container": "dataloader"
-					}
+						"folderPath": "translated/census",
+						"container": "sima"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
 				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"fileName": {
-							"type": "string"
-						},
-						"snapshot": {
-							"type": "string"
-						},
-						"url": {
-							"type": "string"
-						},
-						"size": {
-							"type": "integer"
-						},
-						"containerName": {
-							"type": "string"
-						},
-						"uploadedAt": {
-							"type": "string"
-						},
-						"metadata": {
-							"type": "object",
-							"properties": {
-								"user_upload": {
-									"type": "string"
-								},
-								"pii": {
-									"type": "string"
-								},
-								"uploaded_by": {
-									"type": "string"
-								}
-							}
-						}
+				"schema": [
+					{
+						"name": "COUNTRY",
+						"type": "String"
+					},
+					{
+						"name": "CNTYDESC",
+						"type": "String"
+					},
+					{
+						"name": "ldesccen36",
+						"type": "String"
+					},
+					{
+						"name": "grade",
+						"type": "String"
+					},
+					{
+						"name": "VALUE",
+						"type": "String"
+					},
+					{
+						"name": "UNKNOWN_FIELD_1",
+						"type": "String"
+					},
+					{
+						"name": "UNKNOWN_FIELD_2",
+						"type": "String"
+					},
+					{
+						"name": "QTYMT",
+						"type": "String"
+					},
+					{
+						"name": "UNKNOWN_FIELD_3",
+						"type": "String"
+					},
+					{
+						"name": "SMONTH",
+						"type": "String"
+					},
+					{
+						"name": "SYEAR",
+						"type": "String"
 					}
-				}
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DataloaderStorageLogDb')]",
+			"name": "[concat(parameters('factoryName'), '/SimaCensusDb')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -8645,44 +9075,148 @@
 				"type": "AzureSqlTable",
 				"schema": [
 					{
-						"name": "FILE_NAME",
+						"name": "COUNTRY",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CNTYDESC",
 						"type": "varchar"
 					},
 					{
-						"name": "SNAPSHOT",
+						"name": "ldesccen36",
 						"type": "varchar"
 					},
 					{
-						"name": "URL",
+						"name": "grade",
 						"type": "varchar"
 					},
 					{
-						"name": "SIZE",
-						"type": "bigint",
-						"precision": 19
+						"name": "VALUE",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
 					},
 					{
-						"name": "CONTAINER",
-						"type": "varchar"
+						"name": "UNKNOWN_FIELD_1",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
 					},
 					{
-						"name": "UPLOADED_AT",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
+						"name": "UNKNOWN_FIELD_2",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
 					},
 					{
-						"name": "UPLOADED_BY",
-						"type": "varchar"
+						"name": "QTYMT",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
 					},
 					{
-						"name": "PII",
-						"type": "bit"
+						"name": "UNKNOWN_FIELD_3",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
+					},
+					{
+						"name": "SMONTH",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SYEAR",
+						"type": "int",
+						"precision": 10
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "DATALOADER_STORAGE_LOG"
+					"table": "SIMA_CENSUS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SimaLicenseBlobs')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "license",
+						"container": "sima"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SimaLisenceDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Date of Importation",
+						"type": "date"
+					},
+					{
+						"name": "Country of Origin",
+						"type": "varchar"
+					},
+					{
+						"name": "Category",
+						"type": "varchar"
+					},
+					{
+						"name": "HTS Code",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
+					},
+					{
+						"name": "Volume",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
+					},
+					{
+						"name": "License_Number",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "SIMA_LICENSE"
 				}
 			},
 			"dependsOn": [

@@ -1,0 +1,408 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ita-dataloader-datafactory-01"
+		},
+		"otexa-blob-trigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/675d7977-79af-4b94-b0bd-26d4095a4ffb/resourceGroups/ITA-MSDataServices-Dev-East1/providers/Microsoft.Storage/storageAccounts/itadatatloader1"
+		},
+		"select-usa-trigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/675d7977-79af-4b94-b0bd-26d4095a4ffb/resourceGroups/ITA-MSDataServices-Dev-East1/providers/Microsoft.Storage/storageAccounts/itadatatloader1"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/sima')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy License Data",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.txt",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE SIMA_LICENSE;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Date of Importation",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Date of Importation",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "Country of Origin",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Country of Origin",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Category",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Category",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HTS Code",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HTS Code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Value",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Volume",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Volume",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "License #",
+											"type": "String"
+										},
+										"sink": {
+											"name": "License_Number",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SimaLicenseBlobs",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SimaLisenceDb",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy Census Data",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE SIMA_CENSUS;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "COUNTRY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COUNTRY",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CNTYDESC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CNTYDESC",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ldesccen36",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ldesccen36",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "grade",
+											"type": "String"
+										},
+										"sink": {
+											"name": "grade",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "VALUE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "VALUE",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "UNKNOWN_FIELD_1",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UNKNOWN_FIELD_1",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "UNKNOWN_FIELD_2",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UNKNOWN_FIELD_2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "QTYMT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QTYMT",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "UNKNOWN_FIELD_3",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UNKNOWN_FIELD_3",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "SMONTH",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SMONTH",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "SYEAR",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SYEAR",
+											"type": "Int32"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SImaCensusBlobs",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SimaCensusDb",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataloader-trigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dataloader",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2020-03-13T19:31:00.000Z",
+						"timeZone": "UTC",
+						"schedule": {
+							"hours": [
+								3
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/otexa-blob-trigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "otexa",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/otexa/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('otexa-blob-trigger_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/select-usa-trigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "select-usa",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/select-usa/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('select-usa-trigger_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

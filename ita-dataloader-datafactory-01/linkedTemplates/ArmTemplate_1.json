@@ -13,6 +13,119 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/DataloaderStorageLogBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "storage-log",
+						"container": "dataloader"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"fileName": {
+							"type": "string"
+						},
+						"snapshot": {
+							"type": "string"
+						},
+						"url": {
+							"type": "string"
+						},
+						"size": {
+							"type": "integer"
+						},
+						"containerName": {
+							"type": "string"
+						},
+						"uploadedAt": {
+							"type": "string"
+						},
+						"metadata": {
+							"type": "object",
+							"properties": {
+								"user_upload": {
+									"type": "string"
+								},
+								"pii": {
+									"type": "string"
+								},
+								"uploaded_by": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataloaderStorageLogDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FILE_NAME",
+						"type": "varchar"
+					},
+					{
+						"name": "SNAPSHOT",
+						"type": "varchar"
+					},
+					{
+						"name": "URL",
+						"type": "varchar"
+					},
+					{
+						"name": "SIZE",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "CONTAINER",
+						"type": "varchar"
+					},
+					{
+						"name": "UPLOADED_AT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "UPLOADED_BY",
+						"type": "varchar"
+					},
+					{
+						"name": "PII",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DATALOADER_STORAGE_LOG"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DemoBinFile')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1660,70 +1773,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "OTEXA_CATEGORY_REF"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OtexaCountryDescriptionsBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "COUNTRY_DESCRIPTIONS.csv",
-						"container": "otexa"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "CTRY_ID",
-						"type": "String"
-					},
-					{
-						"name": "CTYR_NAME",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OtexaCountryDescriptionsDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "CTRY_ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CTRY_DESCRIPTION",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "OTEXA_COUNTRY_REF"
 				}
 			},
 			"dependsOn": []

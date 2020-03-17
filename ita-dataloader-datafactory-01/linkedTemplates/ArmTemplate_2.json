@@ -6,20 +6,76 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "ita-dataloader-datafactory-01"
-		},
-		"otexa-blob-trigger_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/675d7977-79af-4b94-b0bd-26d4095a4ffb/resourceGroups/ITA-MSDataServices-Dev-East1/providers/Microsoft.Storage/storageAccounts/itadatatloader1"
-		},
-		"select-usa-trigger_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/675d7977-79af-4b94-b0bd-26d4095a4ffb/resourceGroups/ITA-MSDataServices-Dev-East1/providers/Microsoft.Storage/storageAccounts/itadatatloader1"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/OtexaCountryDescriptionsBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "COUNTRY_DESCRIPTIONS.csv",
+						"container": "otexa"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "CTRY_ID",
+						"type": "String"
+					},
+					{
+						"name": "CTYR_NAME",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OtexaCountryDescriptionsDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CTRY_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CTRY_DESCRIPTION",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "OTEXA_COUNTRY_REF"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/OtexaExeHtsBlob')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -253,7 +309,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DataloaderStorageLogBlob')]",
+			"name": "[concat(parameters('factoryName'), '/SImaCensusBlobs')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -262,56 +318,69 @@
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "Json",
+				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "storage-log",
-						"container": "dataloader"
-					}
+						"folderPath": "translated/census",
+						"container": "sima"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
 				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"fileName": {
-							"type": "string"
-						},
-						"snapshot": {
-							"type": "string"
-						},
-						"url": {
-							"type": "string"
-						},
-						"size": {
-							"type": "integer"
-						},
-						"containerName": {
-							"type": "string"
-						},
-						"uploadedAt": {
-							"type": "string"
-						},
-						"metadata": {
-							"type": "object",
-							"properties": {
-								"user_upload": {
-									"type": "string"
-								},
-								"pii": {
-									"type": "string"
-								},
-								"uploaded_by": {
-									"type": "string"
-								}
-							}
-						}
+				"schema": [
+					{
+						"name": "COUNTRY",
+						"type": "String"
+					},
+					{
+						"name": "CNTYDESC",
+						"type": "String"
+					},
+					{
+						"name": "ldesccen36",
+						"type": "String"
+					},
+					{
+						"name": "grade",
+						"type": "String"
+					},
+					{
+						"name": "VALUE",
+						"type": "String"
+					},
+					{
+						"name": "UNKNOWN_FIELD_1",
+						"type": "String"
+					},
+					{
+						"name": "UNKNOWN_FIELD_2",
+						"type": "String"
+					},
+					{
+						"name": "QTYMT",
+						"type": "String"
+					},
+					{
+						"name": "UNKNOWN_FIELD_3",
+						"type": "String"
+					},
+					{
+						"name": "SMONTH",
+						"type": "String"
+					},
+					{
+						"name": "SYEAR",
+						"type": "String"
 					}
-				}
+				]
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DataloaderStorageLogDb')]",
+			"name": "[concat(parameters('factoryName'), '/SimaCensusDb')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -323,44 +392,144 @@
 				"type": "AzureSqlTable",
 				"schema": [
 					{
-						"name": "FILE_NAME",
+						"name": "COUNTRY",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CNTYDESC",
 						"type": "varchar"
 					},
 					{
-						"name": "SNAPSHOT",
+						"name": "ldesccen36",
 						"type": "varchar"
 					},
 					{
-						"name": "URL",
+						"name": "grade",
 						"type": "varchar"
 					},
 					{
-						"name": "SIZE",
-						"type": "bigint",
-						"precision": 19
+						"name": "VALUE",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
 					},
 					{
-						"name": "CONTAINER",
-						"type": "varchar"
+						"name": "UNKNOWN_FIELD_1",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
 					},
 					{
-						"name": "UPLOADED_AT",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
+						"name": "UNKNOWN_FIELD_2",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
 					},
 					{
-						"name": "UPLOADED_BY",
-						"type": "varchar"
+						"name": "QTYMT",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
 					},
 					{
-						"name": "PII",
-						"type": "bit"
+						"name": "UNKNOWN_FIELD_3",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
+					},
+					{
+						"name": "SMONTH",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SYEAR",
+						"type": "int",
+						"precision": 10
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "DATALOADER_STORAGE_LOG"
+					"table": "SIMA_CENSUS"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SimaLicenseBlobs')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "license",
+						"container": "sima"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SimaLisenceDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Date of Importation",
+						"type": "date"
+					},
+					{
+						"name": "Country of Origin",
+						"type": "varchar"
+					},
+					{
+						"name": "Category",
+						"type": "varchar"
+					},
+					{
+						"name": "HTS Code",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
+					},
+					{
+						"name": "Volume",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
+					},
+					{
+						"name": "License_Number",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "SIMA_LICENSE"
 				}
 			},
 			"dependsOn": []
@@ -675,10 +844,7 @@
 				],
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DataloaderStorageLogBlob')]",
-				"[concat(variables('factoryId'), '/datasets/DataloaderStorageLogDb')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/demo')]",
@@ -1277,6 +1443,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/OtexaCountryDescriptionsBlob')]",
+				"[concat(variables('factoryId'), '/datasets/OtexaCountryDescriptionsDb')]",
 				"[concat(variables('factoryId'), '/datasets/OtexaHeaderDescriptionsBlob')]",
 				"[concat(variables('factoryId'), '/datasets/OtexaHeaderDescriptionsDb')]",
 				"[concat(variables('factoryId'), '/datasets/OtexaExeHtsBlob')]",
@@ -4863,101 +5031,6 @@
 				"[concat(variables('factoryId'), '/datasets/WorldbankEaseCountryMetadataDb')]",
 				"[concat(variables('factoryId'), '/datasets/WorldbankEaseCountryIndexBlob')]",
 				"[concat(variables('factoryId'), '/datasets/WorldbankEaseCountryIndexDb')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dataloader-trigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "dataloader",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2020-03-13T19:31:00.000Z",
-						"timeZone": "UTC",
-						"schedule": {
-							"hours": [
-								3
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/dataloader')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/otexa-blob-trigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "otexa",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/otexa/blobs/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('otexa-blob-trigger_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/otexa')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/select-usa-trigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "select-usa",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/select-usa/blobs/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('select-usa-trigger_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/select-usa')]"
 			]
 		}
 	]
