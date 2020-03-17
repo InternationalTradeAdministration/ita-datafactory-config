@@ -162,7 +162,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "COUNTRY"
+									"name": "COUNTRY",
+									"type": "Int32"
 								}
 							},
 							{
@@ -198,7 +199,7 @@
 							{
 								"source": {
 									"name": "VALUE",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "VALUE",
@@ -208,7 +209,7 @@
 							{
 								"source": {
 									"name": "UNKNOWN_FIELD_1",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "UNKNOWN_FIELD_1",
@@ -218,7 +219,7 @@
 							{
 								"source": {
 									"name": "UNKNOWN_FIELD_2",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "UNKNOWN_FIELD_2",
@@ -228,7 +229,7 @@
 							{
 								"source": {
 									"name": "QTYMT",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "QTYMT",
@@ -238,7 +239,7 @@
 							{
 								"source": {
 									"name": "UNKNOWN_FIELD_3",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "UNKNOWN_FIELD_3",
@@ -248,7 +249,7 @@
 							{
 								"source": {
 									"name": "SMONTH",
-									"type": "String"
+									"type": "Int32"
 								},
 								"sink": {
 									"name": "SMONTH",
@@ -258,7 +259,7 @@
 							{
 								"source": {
 									"name": "SYEAR",
-									"type": "String"
+									"type": "Int32"
 								},
 								"sink": {
 									"name": "SYEAR",
