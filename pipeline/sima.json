@@ -1,0 +1,128 @@
+{
+	"name": "sima",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy License Data",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*.txt",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE SIMA_LICENSE;",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Date of Importation",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Date of Importation",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Country of Origin",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Country of Origin",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Category",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Category",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "HTS Code",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HTS Code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Value",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Volume",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Volume",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "License #",
+									"type": "String"
+								},
+								"sink": {
+									"name": "License_Number",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SimaLicenseBlobs",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
