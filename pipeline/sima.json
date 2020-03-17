@@ -159,7 +159,7 @@
 							{
 								"source": {
 									"name": "COUNTRY",
-									"type": "String"
+									"type": "Int32"
 								},
 								"sink": {
 									"name": "COUNTRY",
