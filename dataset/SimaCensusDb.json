@@ -1,0 +1,74 @@
+{
+	"name": "SimaCensusDb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "COUNTRY",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CNTYDESC",
+				"type": "varchar"
+			},
+			{
+				"name": "ldesccen36",
+				"type": "varchar"
+			},
+			{
+				"name": "grade",
+				"type": "varchar"
+			},
+			{
+				"name": "VALUE",
+				"type": "decimal",
+				"precision": 30,
+				"scale": 10
+			},
+			{
+				"name": "UNKNOWN_FIELD_1",
+				"type": "decimal",
+				"precision": 30,
+				"scale": 10
+			},
+			{
+				"name": "UNKNOWN_FIELD_2",
+				"type": "decimal",
+				"precision": 30,
+				"scale": 10
+			},
+			{
+				"name": "QTYMT",
+				"type": "decimal",
+				"precision": 30,
+				"scale": 10
+			},
+			{
+				"name": "UNKNOWN_FIELD_3",
+				"type": "decimal",
+				"precision": 30,
+				"scale": 10
+			},
+			{
+				"name": "SMONTH",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SYEAR",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "SIMA_CENCUS"
+		}
+	}
+}
