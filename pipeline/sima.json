@@ -299,7 +299,8 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"recursive": true
+							"recursive": false,
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -310,7 +311,52 @@
 						"preCopyScript": "TRUNCATE TABLE SIMA_SMP_BY_HTS;",
 						"disableMetricsCollection": false
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "HTS Code",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HTS Code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "HTS Description",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HTS Description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Category",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Category",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Aggregate Category",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Aggregate Category",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
