@@ -1,0 +1,40 @@
+{
+	"name": "SimaSmpByHtsBlob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "SMP_byHTS.csv",
+				"container": "sima"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "HTS Code",
+				"type": "String"
+			},
+			{
+				"name": "HTS Description",
+				"type": "String"
+			},
+			{
+				"name": "Category",
+				"type": "String"
+			},
+			{
+				"name": "Aggregate Category",
+				"type": "String"
+			}
+		]
+	}
+}

@@ -1,0 +1,33 @@
+{
+	"name": "SimaSmpByHtsDb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "HTS Code",
+				"type": "varchar"
+			},
+			{
+				"name": "HTS Description",
+				"type": "varchar"
+			},
+			{
+				"name": "Category",
+				"type": "varchar"
+			},
+			{
+				"name": "Aggregate Category",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "SIMA_SMP_BY_HTS"
+		}
+	}
+}
