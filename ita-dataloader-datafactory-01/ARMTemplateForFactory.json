@@ -4552,7 +4552,7 @@
 									{
 										"source": {
 											"name": "COUNTRY",
-											"type": "String"
+											"type": "Int32"
 										},
 										"sink": {
 											"name": "COUNTRY",
@@ -4592,7 +4592,7 @@
 									{
 										"source": {
 											"name": "VALUE",
-											"type": "String"
+											"type": "Decimal"
 										},
 										"sink": {
 											"name": "VALUE",
@@ -4602,7 +4602,7 @@
 									{
 										"source": {
 											"name": "UNKNOWN_FIELD_1",
-											"type": "String"
+											"type": "Decimal"
 										},
 										"sink": {
 											"name": "UNKNOWN_FIELD_1",
@@ -4612,7 +4612,7 @@
 									{
 										"source": {
 											"name": "UNKNOWN_FIELD_2",
-											"type": "String"
+											"type": "Decimal"
 										},
 										"sink": {
 											"name": "UNKNOWN_FIELD_2",
@@ -4622,7 +4622,7 @@
 									{
 										"source": {
 											"name": "QTYMT",
-											"type": "String"
+											"type": "Decimal"
 										},
 										"sink": {
 											"name": "QTYMT",
@@ -4632,7 +4632,7 @@
 									{
 										"source": {
 											"name": "UNKNOWN_FIELD_3",
-											"type": "String"
+											"type": "Decimal"
 										},
 										"sink": {
 											"name": "UNKNOWN_FIELD_3",
@@ -4642,7 +4642,7 @@
 									{
 										"source": {
 											"name": "SMONTH",
-											"type": "String"
+											"type": "Int32"
 										},
 										"sink": {
 											"name": "SMONTH",
@@ -4652,7 +4652,7 @@
 									{
 										"source": {
 											"name": "SYEAR",
-											"type": "String"
+											"type": "Int32"
 										},
 										"sink": {
 											"name": "SYEAR",
@@ -4676,6 +4676,97 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Copy SMP by HTS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE SIMA_SMP_BY_HTS;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "HTS Code",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HTS Code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HTS Description",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HTS Description",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Category",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Category",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Aggregate Category",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Aggregate Category",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SimaSmpByHtsBlob",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SimaSmpByHtsDb",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"annotations": []
@@ -4684,7 +4775,9 @@
 				"[concat(variables('factoryId'), '/datasets/SimaLicenseBlobs')]",
 				"[concat(variables('factoryId'), '/datasets/SimaLisenceDb')]",
 				"[concat(variables('factoryId'), '/datasets/SImaCensusBlobs')]",
-				"[concat(variables('factoryId'), '/datasets/SimaCensusDb')]"
+				"[concat(variables('factoryId'), '/datasets/SimaCensusDb')]",
+				"[concat(variables('factoryId'), '/datasets/SimaSmpByHtsBlob')]",
+				"[concat(variables('factoryId'), '/datasets/SimaSmpByHtsDb')]"
 			]
 		},
 		{
@@ -9217,6 +9310,89 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "SIMA_LICENSE"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SimaSmpByHtsBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "SMP_byHTS.csv",
+						"container": "sima"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "HTS Code",
+						"type": "String"
+					},
+					{
+						"name": "HTS Description",
+						"type": "String"
+					},
+					{
+						"name": "Category",
+						"type": "String"
+					},
+					{
+						"name": "Aggregate Category",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SimaSmpByHtsDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "HTS Code",
+						"type": "varchar"
+					},
+					{
+						"name": "HTS Description",
+						"type": "varchar"
+					},
+					{
+						"name": "Category",
+						"type": "varchar"
+					},
+					{
+						"name": "Aggregate Category",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "SIMA_SMP_BY_HTS"
 				}
 			},
 			"dependsOn": [
