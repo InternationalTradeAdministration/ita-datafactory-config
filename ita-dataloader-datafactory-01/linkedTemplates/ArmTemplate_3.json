@@ -14,6 +14,10 @@
 		"select-usa-trigger_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/675d7977-79af-4b94-b0bd-26d4095a4ffb/resourceGroups/ITA-MSDataServices-Dev-East1/providers/Microsoft.Storage/storageAccounts/itadatatloader1"
+		},
+		"sima-trigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/675d7977-79af-4b94-b0bd-26d4095a4ffb/resourceGroups/ITA-MSDataServices-Dev-East1/providers/Microsoft.Storage/storageAccounts/itadatatloader1"
 		}
 	},
 	"variables": {
@@ -4616,6 +4620,36 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/select-usa')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sima-trigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "sima",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/sima/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('sima-trigger_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/sima')]"
 			]
 		}
 	]

@@ -23,6 +23,10 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/675d7977-79af-4b94-b0bd-26d4095a4ffb/resourceGroups/ITA-MSDataServices-Dev-East1/providers/Microsoft.Storage/storageAccounts/itadatatloader1"
 		},
+		"sima-trigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/675d7977-79af-4b94-b0bd-26d4095a4ffb/resourceGroups/ITA-MSDataServices-Dev-East1/providers/Microsoft.Storage/storageAccounts/itadatatloader1"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -119,6 +123,9 @@
 					},
 					"select-usa-trigger_properties_typeProperties_scope": {
 						"value": "[parameters('select-usa-trigger_properties_typeProperties_scope')]"
+					},
+					"sima-trigger_properties_typeProperties_scope": {
+						"value": "[parameters('sima-trigger_properties_typeProperties_scope')]"
 					}
 				}
 			},
