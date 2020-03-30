@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "census",
+				"folderPath": "translated/census",
 				"container": "sima"
 			},
 			"columnDelimiter": ",",
