@@ -522,6 +522,94 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy HTS Chapter Ref",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE OTEXA_HTS_CHAPTER__REF;",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "HTS_Chapter",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CHAPTER",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "HTS_Chapter_Description",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CHAPTER_DESCRIPTION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "HTS_Code",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HTS",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Category",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CAT_ID",
+									"type": "Int32"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "OtexaHtsChaptersBlob",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "OtexaHtsChapterDb",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []

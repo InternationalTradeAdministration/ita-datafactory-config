@@ -1,0 +1,40 @@
+{
+	"name": "OtexaHtsChaptersBlob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "OTEXA_HTS_CHAPTER_REF.csv",
+				"container": "otexa"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "HTS_Chapter",
+				"type": "String"
+			},
+			{
+				"name": "HTS_Chapter_Description",
+				"type": "String"
+			},
+			{
+				"name": "HTS_Code",
+				"type": "String"
+			},
+			{
+				"name": "Category",
+				"type": "String"
+			}
+		]
+	}
+}
