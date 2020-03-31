@@ -762,6 +762,96 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Copy HTS Chapter Ref",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE OTEXA_HTS_CHAPTER__REF;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "HTS_Chapter",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CHAPTER",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "HTS_Chapter_Description",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CHAPTER_DESCRIPTION",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HTS_Code",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HTS",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Category",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CAT_ID",
+											"type": "Int32"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "OtexaHtsChaptersBlob",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "OtexaHtsChapterDb",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"annotations": []
@@ -778,7 +868,9 @@
 				"[concat(variables('factoryId'), '/datasets/OtexaExeHtsBlob')]",
 				"[concat(variables('factoryId'), '/datasets/OtexaExeHtsDb')]",
 				"[concat(variables('factoryId'), '/datasets/OtexaHtsRefBlob')]",
-				"[concat(variables('factoryId'), '/datasets/OtexaHtsRefDb')]"
+				"[concat(variables('factoryId'), '/datasets/OtexaHtsRefDb')]",
+				"[concat(variables('factoryId'), '/datasets/OtexaHtsChaptersBlob')]",
+				"[concat(variables('factoryId'), '/datasets/OtexaHtsChapterDb')]"
 			]
 		},
 		{
@@ -9740,6 +9832,91 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/sima')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OtexaHtsChaptersBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "OTEXA_HTS_CHAPTER_REF.csv",
+						"container": "otexa"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "HTS_Chapter",
+						"type": "String"
+					},
+					{
+						"name": "HTS_Chapter_Description",
+						"type": "String"
+					},
+					{
+						"name": "HTS_Code",
+						"type": "String"
+					},
+					{
+						"name": "Category",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OtexaHtsChapterDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CHAPTER",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CHAPTER_DESCRIPTION",
+						"type": "varchar"
+					},
+					{
+						"name": "HTS",
+						"type": "varchar"
+					},
+					{
+						"name": "CAT_ID",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "OTEXA_HTS_CHAPTER__REF"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
 			]
 		}
 	]

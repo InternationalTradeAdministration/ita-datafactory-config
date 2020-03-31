@@ -1,0 +1,720 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ita-dataloader-datafactory-01"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/otexa')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Category Data",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE OTEXA_DATA_SET_CAT;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CTRY_ID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CTRY_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CAT_ID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CAT_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "SYEF",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SYEF",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "HEADER_ID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HEADER_ID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "VAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "VAL",
+											"type": "Decimal"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "OtexaCatDataBlob",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "OtexaCatDataDb",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Copy Category Descriptions",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE OTEXA_CATEGORY_REF;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CAT_ID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CAT_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CAT_DESCRIPTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CAT_DESCRIPTION",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "OtexaCatDescriptionsBlob",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "OtexaCatDescriptionsDb",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Copy Country Descriptions",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE OTEXA_COUNTRY_REF;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CTRY_ID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CTRY_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CTRY_DESCRIPTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CTRY_DESCRIPTION",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "OtexaCountryDescriptionsBlob",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "OtexaCountryDescriptionsDb",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Copy Header Descriptions",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE OTEXA_HEADER_REF;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "HEADER",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HEADER_ID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "YR",
+											"type": "String"
+										},
+										"sink": {
+											"name": "YR",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DESCRIPTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HEADER_DESCRIPTION",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TYPE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HEADER_TYPE",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "OtexaHeaderDescriptionsBlob",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "OtexaHeaderDescriptionsDb",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Copy EXE HTS Data",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE OTEXA_EXE_HTS;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CTRY_ID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CTRY_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CAT_ID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CAT_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "HTS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HTS",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "SYEF",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SYEF",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "HEADER_ID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HEADER_ID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "VAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "VAL",
+											"type": "Decimal"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "OtexaExeHtsBlob",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "OtexaExeHtsDb",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Copy HTS Ref",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE OTEXA_HTS_REF;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "HTS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HTS",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CAT_ID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CAT_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "UNIT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UNIT",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DESCRIPTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DESCRIPTION",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "OtexaHtsRefBlob",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "OtexaHtsRefDb",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Copy HTS Chapter Ref",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE OTEXA_HTS_CHAPTER__REF;",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "HTS_Chapter",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CHAPTER",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "HTS_Chapter_Description",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CHAPTER_DESCRIPTION",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HTS_Code",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HTS",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Category",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CAT_ID",
+											"type": "Int32"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "OtexaHtsChaptersBlob",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "OtexaHtsChapterDb",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/OtexaHtsChaptersBlob')]",
+				"[concat(variables('factoryId'), '/datasets/OtexaHtsChapterDb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OtexaHtsChaptersBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "OTEXA_HTS_CHAPTER_REF.csv",
+						"container": "otexa"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "HTS_Chapter",
+						"type": "String"
+					},
+					{
+						"name": "HTS_Chapter_Description",
+						"type": "String"
+					},
+					{
+						"name": "HTS_Code",
+						"type": "String"
+					},
+					{
+						"name": "Category",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OtexaHtsChapterDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CHAPTER",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CHAPTER_DESCRIPTION",
+						"type": "varchar"
+					},
+					{
+						"name": "HTS",
+						"type": "varchar"
+					},
+					{
+						"name": "CAT_ID",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "OTEXA_HTS_CHAPTER__REF"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
