@@ -1,0 +1,16 @@
+{
+	"name": "AeroTop20SuppliersAnnualDb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "AERO_TOP_20_SUPPLIERS_ANNUAL"
+		}
+	}
+}
