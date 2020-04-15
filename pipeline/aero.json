@@ -1,0 +1,154 @@
+{
+	"name": "aero",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy aero top 20 suppliers annual",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Supplier",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Supplier"
+								}
+							},
+							{
+								"source": {
+									"name": "2015_Value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "2015_Value"
+								}
+							},
+							{
+								"source": {
+									"name": "2015_percentTotal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "2015_percentTotal"
+								}
+							},
+							{
+								"source": {
+									"name": "2016_Value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "2016_Value"
+								}
+							},
+							{
+								"source": {
+									"name": "2016_percentTotal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "2016_percentTotal"
+								}
+							},
+							{
+								"source": {
+									"name": "2017_Value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "2017_Value"
+								}
+							},
+							{
+								"source": {
+									"name": "2017_percentTotal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "2017_percentTotal"
+								}
+							},
+							{
+								"source": {
+									"name": "2018_Value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "2018_Value"
+								}
+							},
+							{
+								"source": {
+									"name": "2018_percentTotal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "2018_percentTotal"
+								}
+							},
+							{
+								"source": {
+									"name": "2019_Value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "2019_Value"
+								}
+							},
+							{
+								"source": {
+									"name": "2019_percentTotal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "2019_percentTotal"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AeroTop20SuppliersAnnual",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AeroTop20SuppliersAnnualDb",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
