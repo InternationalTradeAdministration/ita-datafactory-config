@@ -25,6 +25,252 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/WorldbankEaseCountryMetadataBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "WORLDBANK_EASE_COUNTRY_METADATA.csv",
+						"container": "select-usa"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Country Code",
+						"type": "String"
+					},
+					{
+						"name": "Region",
+						"type": "String"
+					},
+					{
+						"name": "IncomeGroup",
+						"type": "String"
+					},
+					{
+						"name": "SpecialNotes",
+						"type": "String"
+					},
+					{
+						"name": "TableName",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WorldbankEaseCountryMetadataDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "COUNTRY_CODE",
+						"type": "varchar"
+					},
+					{
+						"name": "REGION",
+						"type": "varchar"
+					},
+					{
+						"name": "INCOME_GROUP",
+						"type": "varchar"
+					},
+					{
+						"name": "SPECIAL_NOTES",
+						"type": "varchar"
+					},
+					{
+						"name": "TABLE_NAME",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "WORLDBANK_EASE_COUNTRY_METADATA"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aero')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy aero top 20 suppliers annual",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Supplier",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Supplier"
+										}
+									},
+									{
+										"source": {
+											"name": "2015_Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2015_Value"
+										}
+									},
+									{
+										"source": {
+											"name": "2015_percentTotal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2015_percentTotal"
+										}
+									},
+									{
+										"source": {
+											"name": "2016_Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2016_Value"
+										}
+									},
+									{
+										"source": {
+											"name": "2016_percentTotal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2016_percentTotal"
+										}
+									},
+									{
+										"source": {
+											"name": "2017_Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2017_Value"
+										}
+									},
+									{
+										"source": {
+											"name": "2017_percentTotal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2017_percentTotal"
+										}
+									},
+									{
+										"source": {
+											"name": "2018_Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2018_Value"
+										}
+									},
+									{
+										"source": {
+											"name": "2018_percentTotal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2018_percentTotal"
+										}
+									},
+									{
+										"source": {
+											"name": "2019_Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2019_Value"
+										}
+									},
+									{
+										"source": {
+											"name": "2019_percentTotal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2019_percentTotal"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnual",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnualDb",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/dataloader')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -4417,7 +4663,10 @@
 				],
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/WorldbankEaseCountryMetadataBlob')]",
+				"[concat(variables('factoryId'), '/datasets/WorldbankEaseCountryMetadataDb')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/sima')]",

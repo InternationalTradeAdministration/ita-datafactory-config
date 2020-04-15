@@ -1,0 +1,266 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ita-dataloader-datafactory-01"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/aero')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy aero top 20 suppliers annual",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Supplier",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Supplier"
+										}
+									},
+									{
+										"source": {
+											"name": "2015_Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2015_Value"
+										}
+									},
+									{
+										"source": {
+											"name": "2015_percentTotal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2015_percentTotal"
+										}
+									},
+									{
+										"source": {
+											"name": "2016_Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2016_Value"
+										}
+									},
+									{
+										"source": {
+											"name": "2016_percentTotal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2016_percentTotal"
+										}
+									},
+									{
+										"source": {
+											"name": "2017_Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2017_Value"
+										}
+									},
+									{
+										"source": {
+											"name": "2017_percentTotal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2017_percentTotal"
+										}
+									},
+									{
+										"source": {
+											"name": "2018_Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2018_Value"
+										}
+									},
+									{
+										"source": {
+											"name": "2018_percentTotal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2018_percentTotal"
+										}
+									},
+									{
+										"source": {
+											"name": "2019_Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2019_Value"
+										}
+									},
+									{
+										"source": {
+											"name": "2019_percentTotal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2019_percentTotal"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnual",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnualDb",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnual')]",
+				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnualDb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AeroTop20ExpMktsAnnual_reformat.csv",
+						"container": "demo"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Supplier",
+						"type": "String"
+					},
+					{
+						"name": "2015_Value",
+						"type": "String"
+					},
+					{
+						"name": "2015_percentTotal",
+						"type": "String"
+					},
+					{
+						"name": "2016_Value",
+						"type": "String"
+					},
+					{
+						"name": "2016_percentTotal",
+						"type": "String"
+					},
+					{
+						"name": "2017_Value",
+						"type": "String"
+					},
+					{
+						"name": "2017_percentTotal",
+						"type": "String"
+					},
+					{
+						"name": "2018_Value",
+						"type": "String"
+					},
+					{
+						"name": "2018_percentTotal",
+						"type": "String"
+					},
+					{
+						"name": "2019_Value",
+						"type": "String"
+					},
+					{
+						"name": "2019_percentTotal",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnualDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AERO_TOP_20_SUPPLIERS_ANNUAL"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
