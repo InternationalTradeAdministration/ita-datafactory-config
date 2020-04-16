@@ -1,5 +1,5 @@
 {
-	"name": "AeroTop20SuppliersAnnual",
+	"name": "AeroTop20SuppliersAnnualBlob",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "AeroTop20ExpMktsAnnual_reformat.csv",
+				"fileName": "AeroTop20SuppliersAnnual_reformat.csv",
 				"container": "demo"
 			},
 			"columnDelimiter": ",",
@@ -24,43 +24,43 @@
 				"type": "String"
 			},
 			{
-				"name": "2015_Value",
+				"name": "Value_2015",
 				"type": "String"
 			},
 			{
-				"name": "2015_percentTotal",
+				"name": "percentTotal_2015",
 				"type": "String"
 			},
 			{
-				"name": "2016_Value",
+				"name": "Value_2016",
 				"type": "String"
 			},
 			{
-				"name": "2016_percentTotal",
+				"name": "percentTotal_2016",
 				"type": "String"
 			},
 			{
-				"name": "2017_Value",
+				"name": "Value_2017",
 				"type": "String"
 			},
 			{
-				"name": "2017_percentTotal",
+				"name": "percentTotal_2017",
 				"type": "String"
 			},
 			{
-				"name": "2018_Value",
+				"name": "Value_2018",
 				"type": "String"
 			},
 			{
-				"name": "2018_percentTotal",
+				"name": "percentTotal_2018",
 				"type": "String"
 			},
 			{
-				"name": "2019_Value",
+				"name": "Value_2019",
 				"type": "String"
 			},
 			{
-				"name": "2019_percentTotal",
+				"name": "percentTotal_2019",
 				"type": "String"
 			}
 		]

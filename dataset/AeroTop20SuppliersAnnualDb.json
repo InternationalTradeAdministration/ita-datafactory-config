@@ -7,10 +7,75 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "Supplier",
+				"type": "varchar"
+			},
+			{
+				"name": "Value_2015",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "percentTotal_2015",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Value_2016",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "percentTotal_2016",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Value_2017",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "percentTotal_2017",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Value_2018",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "percentTotal_2018",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Value_2019",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "percentTotal_2019",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			}
+		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "AERO_TOP_20_SUPPLIERS_ANNUAL"
+			"table": "AERO_TOP_SUPPLIERS_ANNUAL"
 		}
 	}
 }

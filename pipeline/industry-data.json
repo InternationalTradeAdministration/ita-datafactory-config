@@ -1,5 +1,5 @@
 {
-	"name": "aero",
+	"name": "industry-data",
 	"properties": {
 		"activities": [
 			{
@@ -26,8 +26,7 @@
 						}
 					},
 					"sink": {
-						"type": "AzureSqlSink",
-						"tableOption": "autoCreate"
+						"type": "AzureSqlSink"
 					},
 					"enableStaging": false,
 					"translator": {
@@ -39,97 +38,108 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "Supplier"
+									"name": "Supplier",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"name": "2015_Value",
-									"type": "String"
+									"name": "Value_2015",
+									"type": "Decimal"
 								},
 								"sink": {
-									"name": "2015_Value"
+									"name": "Value_2015",
+									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "2015_percentTotal",
-									"type": "String"
+									"name": "percentTotal_2015",
+									"type": "Decimal"
 								},
 								"sink": {
-									"name": "2015_percentTotal"
+									"name": "percentTotal_2015",
+									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "2016_Value",
-									"type": "String"
+									"name": "Value_2016",
+									"type": "Decimal"
 								},
 								"sink": {
-									"name": "2016_Value"
+									"name": "Value_2016",
+									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "2016_percentTotal",
-									"type": "String"
+									"name": "percentTotal_2016",
+									"type": "Decimal"
 								},
 								"sink": {
-									"name": "2016_percentTotal"
+									"name": "percentTotal_2016",
+									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "2017_Value",
-									"type": "String"
+									"name": "Value_2017",
+									"type": "Decimal"
 								},
 								"sink": {
-									"name": "2017_Value"
+									"name": "Value_2017",
+									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "2017_percentTotal",
-									"type": "String"
+									"name": "percentTotal_2017",
+									"type": "Decimal"
 								},
 								"sink": {
-									"name": "2017_percentTotal"
+									"name": "percentTotal_2017",
+									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "2018_Value",
-									"type": "String"
+									"name": "Value_2018",
+									"type": "Decimal"
 								},
 								"sink": {
-									"name": "2018_Value"
+									"name": "Value_2018",
+									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "2018_percentTotal",
-									"type": "String"
+									"name": "percentTotal_2018",
+									"type": "Decimal"
 								},
 								"sink": {
-									"name": "2018_percentTotal"
+									"name": "percentTotal_2018",
+									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "2019_Value",
-									"type": "String"
+									"name": "Value_2019",
+									"type": "Decimal"
 								},
 								"sink": {
-									"name": "2019_Value"
+									"name": "Value_2019",
+									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "2019_percentTotal",
-									"type": "String"
+									"name": "percentTotal_2019",
+									"type": "Decimal"
 								},
 								"sink": {
-									"name": "2019_percentTotal"
+									"name": "percentTotal_2019",
+									"type": "Decimal"
 								}
 							}
 						]
@@ -137,7 +147,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "AeroTop20SuppliersAnnual",
+						"referenceName": "AeroTop20SuppliersAnnualBlob",
 						"type": "DatasetReference"
 					}
 				],
