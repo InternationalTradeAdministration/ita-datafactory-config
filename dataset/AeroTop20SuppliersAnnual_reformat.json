@@ -1,0 +1,68 @@
+{
+	"name": "AeroTop20SuppliersAnnual_reformat",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "AeroTop20SuppliersAnnual_reformat.csv",
+				"container": "industry-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Supplier",
+				"type": "String"
+			},
+			{
+				"name": "Value_2015",
+				"type": "String"
+			},
+			{
+				"name": "percentTotal_2015",
+				"type": "String"
+			},
+			{
+				"name": "Value_2016",
+				"type": "String"
+			},
+			{
+				"name": "percentTotal_2016",
+				"type": "String"
+			},
+			{
+				"name": "Value_2017",
+				"type": "String"
+			},
+			{
+				"name": "percentTotal_2017",
+				"type": "String"
+			},
+			{
+				"name": "Value_2018",
+				"type": "String"
+			},
+			{
+				"name": "percentTotal_2018",
+				"type": "String"
+			},
+			{
+				"name": "Value_2019",
+				"type": "String"
+			},
+			{
+				"name": "percentTotal_2019",
+				"type": "String"
+			}
+		]
+	}
+}
