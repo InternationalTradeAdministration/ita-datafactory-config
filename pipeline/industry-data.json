@@ -148,7 +148,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "AeroTop20SuppliersAnnual_reformat",
+						"referenceName": "AeroTop20SuppliersAnnualBlob",
 						"type": "DatasetReference"
 					}
 				],

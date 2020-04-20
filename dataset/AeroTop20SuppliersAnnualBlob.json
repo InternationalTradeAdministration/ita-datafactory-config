@@ -1,5 +1,5 @@
 {
-	"name": "AeroTop20SuppliersAnnual_reformat",
+	"name": "AeroTop20SuppliersAnnualBlob",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage",
