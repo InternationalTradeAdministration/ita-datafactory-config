@@ -1,5 +1,5 @@
 {
-	"name": "KeyAeroIndustryStats1989_2010",
+	"name": "KeyAeroIndustryStats1989_2010blob",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage",
