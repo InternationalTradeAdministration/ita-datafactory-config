@@ -1,0 +1,16 @@
+{
+	"name": "KeyAeroIndustryStats1989_2010db",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "KEY_AERO_INDUSTRY_STATS_1989_2010"
+		}
+	}
+}
