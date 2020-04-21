@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy aero top 20 suppliers annual",
+				"name": "Copy aero top 20 suppliers annual 2015",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -19,8 +19,7 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
+							"recursive": true
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -28,7 +27,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "TRUNCATE TABLE AERO_TOP_SUPPLIERS_ANNUAL",
+						"preCopyScript": "TRUNCATE TABLE AERO_TOP_SUPPLIERS_ANNUAL_2015",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
@@ -37,6 +36,16 @@
 						"mappings": [
 							{
 								"source": {
+									"name": "Rank",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Rank",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "Supplier",
 									"type": "String"
 								},
@@ -47,101 +56,21 @@
 							},
 							{
 								"source": {
-									"name": "Value_2015",
-									"type": "Decimal"
+									"name": "Value",
+									"type": "String"
 								},
 								"sink": {
-									"name": "Value_2015",
+									"name": "Value",
 									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "percentTotal_2015",
-									"type": "Decimal"
+									"name": "% Total",
+									"type": "String"
 								},
 								"sink": {
-									"name": "percentTotal_2015",
-									"type": "Decimal"
-								}
-							},
-							{
-								"source": {
-									"name": "Value_2016",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "Value_2016",
-									"type": "Decimal"
-								}
-							},
-							{
-								"source": {
-									"name": "percentTotal_2016",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "percentTotal_2016",
-									"type": "Decimal"
-								}
-							},
-							{
-								"source": {
-									"name": "Value_2017",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "Value_2017",
-									"type": "Decimal"
-								}
-							},
-							{
-								"source": {
-									"name": "percentTotal_2017",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "percentTotal_2017",
-									"type": "Decimal"
-								}
-							},
-							{
-								"source": {
-									"name": "Value_2018",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "Value_2018",
-									"type": "Decimal"
-								}
-							},
-							{
-								"source": {
-									"name": "percentTotal_2018",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "percentTotal_2018",
-									"type": "Decimal"
-								}
-							},
-							{
-								"source": {
-									"name": "Value_2019",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "Value_2019",
-									"type": "Decimal"
-								}
-							},
-							{
-								"source": {
-									"name": "percentTotal_2019",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "percentTotal_2019",
+									"name": "% Total",
 									"type": "Decimal"
 								}
 							}
@@ -150,7 +79,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "AeroTop20SuppliersAnnualBlob",
+						"referenceName": "AeroTop20SuppliersAnnual2015Blob",
 						"type": "DatasetReference"
 					}
 				],
@@ -584,6 +513,95 @@
 				"outputs": [
 					{
 						"referenceName": "KeyAeroIndustryStats1989_2010db",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copy aero top 20 suppliers annual 2016",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE AERO_TOP_SUPPLIERS_ANNUAL_2016",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Rank",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Rank",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Supplier",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Supplier",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Value",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total",
+									"type": "String"
+								},
+								"sink": {
+									"name": "% Total",
+									"type": "Decimal"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AeroTop20SuppliersAnnual2016Blob",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AeroTop20SuppliersAnnualDb",
 						"type": "DatasetReference"
 					}
 				]

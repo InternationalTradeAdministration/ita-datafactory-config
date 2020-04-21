@@ -1,5 +1,5 @@
 {
-	"name": "AeroTop20SuppliersAnnualBlob",
+	"name": "AeroTop20SuppliersAnnual2016Blob",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "AeroTop20SuppliersAnnual_reformat.csv",
+				"fileName": "AeroTop20SuppliersAnnual_2016.csv",
 				"container": "industry-data"
 			},
 			"columnDelimiter": ",",
@@ -20,47 +20,95 @@
 		},
 		"schema": [
 			{
-				"name": "Supplier",
+				"name": "Top Twenty Aerospace Suppliers to the U.S.",
 				"type": "String"
 			},
 			{
-				"name": "Value_2015",
+				"name": "Prop_1",
 				"type": "String"
 			},
 			{
-				"name": "percentTotal_2015",
+				"name": "Prop_2",
 				"type": "String"
 			},
 			{
-				"name": "Value_2016",
+				"name": "Prop_3",
 				"type": "String"
 			},
 			{
-				"name": "percentTotal_2016",
+				"name": "Prop_4",
 				"type": "String"
 			},
 			{
-				"name": "Value_2017",
+				"name": "Prop_5",
 				"type": "String"
 			},
 			{
-				"name": "percentTotal_2017",
+				"name": "Prop_6",
 				"type": "String"
 			},
 			{
-				"name": "Value_2018",
+				"name": "Prop_7",
 				"type": "String"
 			},
 			{
-				"name": "percentTotal_2018",
+				"name": "Prop_8",
 				"type": "String"
 			},
 			{
-				"name": "Value_2019",
+				"name": "Prop_9",
 				"type": "String"
 			},
 			{
-				"name": "percentTotal_2019",
+				"name": "Prop_10",
+				"type": "String"
+			},
+			{
+				"name": "Prop_11",
+				"type": "String"
+			},
+			{
+				"name": "Prop_12",
+				"type": "String"
+			},
+			{
+				"name": "Prop_13",
+				"type": "String"
+			},
+			{
+				"name": "Prop_14",
+				"type": "String"
+			},
+			{
+				"name": "Prop_15",
+				"type": "String"
+			},
+			{
+				"name": "Prop_16",
+				"type": "String"
+			},
+			{
+				"name": "Prop_17",
+				"type": "String"
+			},
+			{
+				"name": "Prop_18",
+				"type": "String"
+			},
+			{
+				"name": "Prop_19",
+				"type": "String"
+			},
+			{
+				"name": "Prop_20",
+				"type": "String"
+			},
+			{
+				"name": "Prop_21",
+				"type": "String"
+			},
+			{
+				"name": "Prop_22",
 				"type": "String"
 			}
 		]
