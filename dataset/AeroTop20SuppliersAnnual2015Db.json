@@ -75,7 +75,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "AERO_TOP_SUPPLIERS_ANNUAL"
+			"table": "AERO_TOP_SUPPLIERS_ANNUAL_2015"
 		}
 	}
 }
