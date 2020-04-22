@@ -137,8 +137,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "  Value of Aerospace Shipments: Current dollars",
-									"type": "String"
+									"name": "Industry Data Value of Aerospace Shipments: Current dollars"
 								}
 							},
 							{
@@ -147,8 +146,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "   Value of Aerospace Shipments: Constant dollars (2002=100)",
-									"type": "String"
+									"name": "Industry Data Value of Aerospace Shipments: Constant dollars (2002=100)"
 								}
 							},
 							{
@@ -157,8 +155,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "   Value of Aerospace Shipments: Real Growth",
-									"type": "String"
+									"name": "Industry Data Value of Aerospace Shipments: Real Growth"
 								}
 							},
 							{
@@ -267,8 +264,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "Value of Aerospace Shipments: Current dollars",
-									"type": "String"
+									"name": "Product Data Value of Aerospace Shipments: Current dollars"
 								}
 							},
 							{
@@ -277,8 +273,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "Value of Aerospace Shipments: Constant dollars (2002=100)",
-									"type": "String"
+									"name": "Product Data Value of Aerospace Shipments: Constant dollars (2002=100)"
 								}
 							},
 							{
@@ -287,8 +282,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "Value of Aerospace Shipments: Real Growth",
-									"type": "String"
+									"name": "Product Data Value of Aerospace Shipments: Real Growth"
 								}
 							},
 							{
