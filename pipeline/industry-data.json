@@ -57,7 +57,7 @@
 							{
 								"source": {
 									"name": "Value",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "Value",
@@ -67,7 +67,7 @@
 							{
 								"source": {
 									"name": "% Total",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "% Total",
@@ -85,7 +85,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AeroTop20SuppliersAnnualDb",
+						"referenceName": "AeroTop20SuppliersAnnual2015Db",
 						"type": "DatasetReference"
 					}
 				]
@@ -573,7 +573,7 @@
 							{
 								"source": {
 									"name": "Value",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "Value",
@@ -583,7 +583,7 @@
 							{
 								"source": {
 									"name": "% Total",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "% Total",
@@ -601,7 +601,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AeroTop20SuppliersAnnualDb",
+						"referenceName": "AeroTop20SuppliersAnnual2016Db",
 						"type": "DatasetReference"
 					}
 				]

@@ -1,5 +1,5 @@
 {
-	"name": "AeroTop20SuppliersAnnualDb",
+	"name": "AeroTop20SuppliersAnnual2015Db",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase",
