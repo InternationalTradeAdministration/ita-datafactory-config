@@ -133,7 +133,8 @@
 							},
 							{
 								"source": {
-									"name": "Industry Data Value of Aerospace Shipments: Current dollars"
+									"name": "Industry Data Value of Aerospace Shipments: Current dollars",
+									"type": "String"
 								},
 								"sink": {
 									"name": "Industry Data Value of Aerospace Shipments: Current dollars"
