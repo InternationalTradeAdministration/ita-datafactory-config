@@ -1,0 +1,16 @@
+{
+	"name": "KeyStatsQtr2004_2008db",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "KEY_STATS_QTR_2004_2008"
+		}
+	}
+}
