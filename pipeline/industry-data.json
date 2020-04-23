@@ -133,7 +133,8 @@
 							},
 							{
 								"source": {
-									"name": "Value of Aerospace Shipments: Current dollars"
+									"name": "Value of Aerospace Shipments: Current dollars",
+									"type": "String"
 								},
 								"sink": {
 									"name": "Industry Data Value of Aerospace Shipments: Current dollars"
@@ -141,7 +142,8 @@
 							},
 							{
 								"source": {
-									"name": "Value of Aerospace Shipments: Constant dollars (2002=100)"
+									"name": "Value of Aerospace Shipments: Constant dollars (2002=100)",
+									"type": "String"
 								},
 								"sink": {
 									"name": "Industry Data Value of Aerospace Shipments: Constant dollars (2002=100)"
@@ -158,7 +160,8 @@
 							},
 							{
 								"source": {
-									"name": "Value of Aircraft & Parts Shipments: Current dollars"
+									"name": "Value of Aircraft & Parts Shipments: Current dollars",
+									"type": "String"
 								},
 								"sink": {
 									"name": " Value of Aircraft & Parts Shipments: Current dollars",
@@ -176,7 +179,8 @@
 							},
 							{
 								"source": {
-									"name": "Value of Aircraft & Parts Shipments: Real Growth"
+									"name": "Value of Aircraft & Parts Shipments: Real Growth",
+									"type": "String"
 								},
 								"sink": {
 									"name": " Value of Aircraft & Parts Shipments: Real Growth",
@@ -185,7 +189,8 @@
 							},
 							{
 								"source": {
-									"name": "Industrial Production Index (2007=100)2: Aerospace Products & Parts"
+									"name": "Industrial Production Index (2007=100)2: Aerospace Products & Parts",
+									"type": "String"
 								},
 								"sink": {
 									"name": " Industrial Production Index (2007=100)2: Aerospace Products & Parts",
@@ -1093,8 +1098,7 @@
 									"name": "Production Workers (000s)"
 								},
 								"sink": {
-									"name": " Production Workers (000s)",
-									"type": "String"
+									"name": "Production Workers (000s)"
 								}
 							},
 							{
@@ -1131,7 +1135,7 @@
 							},
 							{
 								"source": {
-									"name": "Top Foreign Market",
+									"name": "#2 Top Foreign Market",
 									"type": "String"
 								},
 								"sink": {
@@ -1141,7 +1145,7 @@
 							},
 							{
 								"source": {
-									"name": "Top Foreign Market",
+									"name": "#2 Top Foreign Market",
 									"type": "String"
 								},
 								"sink": {
@@ -1201,7 +1205,7 @@
 							},
 							{
 								"source": {
-									"name": "Top Supplier to United States",
+									"name": "#2 Top Supplier to United States",
 									"type": "String"
 								},
 								"sink": {
