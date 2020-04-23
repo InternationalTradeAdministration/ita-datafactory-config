@@ -142,8 +142,7 @@
 							},
 							{
 								"source": {
-									"name": "Value of Aerospace Shipments: Constant dollars (2002=100)",
-									"type": "String"
+									"name": "Industry Value of Aerospace Shipments: Constant dollars (2002=100)"
 								},
 								"sink": {
 									"name": "Industry Data Value of Aerospace Shipments: Constant dollars (2002=100)"
@@ -151,8 +150,7 @@
 							},
 							{
 								"source": {
-									"name": "Value of Aerospace Shipments: Real Growth",
-									"type": "String"
+									"name": "Industry Value of Aerospace Shipments: Real Growth"
 								},
 								"sink": {
 									"name": "Industry Data Value of Aerospace Shipments: Real Growth"
