@@ -1,0 +1,148 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "KeyStatsQtr2004-2008_reformatted.csv",
+				"container": "industry-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Year",
+				"type": "String"
+			},
+			{
+				"name": "Time Period",
+				"type": "String"
+			},
+			{
+				"name": "INDUSTRY DATA1 Value of Aerospace Shipments",
+				"type": "String"
+			},
+			{
+				"name": "Value of Aerospace Shipments Current dollars",
+				"type": "String"
+			},
+			{
+				"name": "Value of Aerospace Shipments Constant dollars (2002=100)",
+				"type": "String"
+			},
+			{
+				"name": "Value of Aerospace Shipments Real Growth",
+				"type": "String"
+			},
+			{
+				"name": "Value of Aircraft & Parts Shipments Current dollars",
+				"type": "String"
+			},
+			{
+				"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
+				"type": "String"
+			},
+			{
+				"name": "Value of Aircraft & Parts Shipments Real Growth",
+				"type": "String"
+			},
+			{
+				"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
+				"type": "String"
+			},
+			{
+				"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
+				"type": "String"
+			},
+			{
+				"name": "Industrial Production Index (2007=100)1,2 Defense & Space Equipment",
+				"type": "String"
+			},
+			{
+				"name": "Total Employment (000s)",
+				"type": "String"
+			},
+			{
+				"name": "Total Employment (000s) Growth",
+				"type": "String"
+			},
+			{
+				"name": " Production Workers (000s)",
+				"type": "String"
+			},
+			{
+				"name": " Production Workers (000s) Growth",
+				"type": "String"
+			},
+			{
+				"name": "  Total Aerospace Exports",
+				"type": "String"
+			},
+			{
+				"name": "  Total Aerospace Imports",
+				"type": "String"
+			},
+			{
+				"name": "  Balance of Total Aerospace Trade",
+				"type": "String"
+			},
+			{
+				"name": "Top Foreign Market",
+				"type": "String"
+			},
+			{
+				"name": "#2 Top Foreign Market",
+				"type": "String"
+			},
+			{
+				"name": "#3 Top Foreign Market",
+				"type": "String"
+			},
+			{
+				"name": "#4 Top Foreign Market",
+				"type": "String"
+			},
+			{
+				"name": "#5 Top Foreign Market",
+				"type": "String"
+			},
+			{
+				"name": "% Total Exports",
+				"type": "String"
+			},
+			{
+				"name": "Top Supplier to United States",
+				"type": "String"
+			},
+			{
+				"name": "#2 Top Supplier to United States",
+				"type": "String"
+			},
+			{
+				"name": "#3 Top Supplier to United States",
+				"type": "String"
+			},
+			{
+				"name": "#4 Top Supplier to United States",
+				"type": "String"
+			},
+			{
+				"name": "#5 Top Supplier to United States",
+				"type": "String"
+			},
+			{
+				"name": "% Total Imports",
+				"type": "String"
+			}
+		]
+	}
+}
