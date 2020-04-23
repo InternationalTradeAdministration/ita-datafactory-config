@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText1",
+	"name": "KeyStatsQtr2004_2008blob",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage",
