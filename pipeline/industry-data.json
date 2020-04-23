@@ -1090,8 +1090,7 @@
 							},
 							{
 								"source": {
-									"name": " Production Workers (000s)",
-									"type": "Decimal"
+									"name": "Production Workers (000s)"
 								},
 								"sink": {
 									"name": " Production Workers (000s)",
@@ -1100,42 +1099,34 @@
 							},
 							{
 								"source": {
-									"name": " Production Workers (000s) Growth",
-									"type": "String"
+									"name": "Production Workers (000s) Growth"
 								},
 								"sink": {
-									"name": " Production Workers (000s) Growth",
-									"type": "String"
+									"name": "Production Workers (000s) Growth"
 								}
 							},
 							{
 								"source": {
-									"name": "  Total Aerospace Exports",
-									"type": "String"
+									"name": "Total Aerospace Exports"
 								},
 								"sink": {
-									"name": "  Total Aerospace Exports",
-									"type": "String"
+									"name": "Total Aerospace Exports"
 								}
 							},
 							{
 								"source": {
-									"name": "  Total Aerospace Imports",
-									"type": "Decimal"
+									"name": "Total Aerospace Imports"
 								},
 								"sink": {
-									"name": "  Total Aerospace Imports",
-									"type": "String"
+									"name": "Total Aerospace Imports"
 								}
 							},
 							{
 								"source": {
-									"name": "  Balance of Total Aerospace Trade",
-									"type": "String"
+									"name": "Balance of Total Aerospace Trade"
 								},
 								"sink": {
-									"name": "  Balance of Total Aerospace Trade",
-									"type": "String"
+									"name": "Balance of Total Aerospace Trade"
 								}
 							},
 							{
@@ -1150,7 +1141,7 @@
 							},
 							{
 								"source": {
-									"name": "#2 Top Foreign Market",
+									"name": "Top Foreign Market",
 									"type": "String"
 								},
 								"sink": {
@@ -1210,7 +1201,7 @@
 							},
 							{
 								"source": {
-									"name": "#2 Top Supplier to United States",
+									"name": "Top Supplier to United States",
 									"type": "String"
 								},
 								"sink": {
