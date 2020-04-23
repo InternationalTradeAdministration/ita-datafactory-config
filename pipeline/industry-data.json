@@ -890,11 +890,47 @@
 							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE AERO_TOP_SUPPLIERS_ANNUAL_TOTALS",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Year",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Year",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "General Aerospace Imports Value",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "General Aerospace Imports Value",
+									"type": "Decimal"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "AeroTopSuppliersAnnualTotalsBlob",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AeroTopSuppliersAnnualTotalsDb",
 						"type": "DatasetReference"
 					}
 				]

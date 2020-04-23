@@ -1,0 +1,28 @@
+{
+	"name": "AeroTopSuppliersAnnualTotalsDb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Year",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "General Aerospace Imports Value",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "AERO_TOP_SUPPLIERS_ANNUAL_TOTALS"
+		}
+	}
+}
