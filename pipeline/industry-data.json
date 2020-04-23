@@ -133,8 +133,7 @@
 							},
 							{
 								"source": {
-									"name": "  Value of Aerospace Shipments: Current dollars",
-									"type": "String"
+									"name": "Value of Aerospace Shipments: Current dollars"
 								},
 								"sink": {
 									"name": "Industry Data Value of Aerospace Shipments: Current dollars"
@@ -142,8 +141,7 @@
 							},
 							{
 								"source": {
-									"name": "   Value of Aerospace Shipments: Constant dollars (2002=100)",
-									"type": "String"
+									"name": "Value of Aerospace Shipments: Constant dollars (2002=100)"
 								},
 								"sink": {
 									"name": "Industry Data Value of Aerospace Shipments: Constant dollars (2002=100)"
@@ -151,7 +149,7 @@
 							},
 							{
 								"source": {
-									"name": "   Value of Aerospace Shipments: Real Growth",
+									"name": "Value of Aerospace Shipments: Real Growth",
 									"type": "String"
 								},
 								"sink": {
@@ -160,8 +158,7 @@
 							},
 							{
 								"source": {
-									"name": " Value of Aircraft & Parts Shipments: Current dollars",
-									"type": "String"
+									"name": "Value of Aircraft & Parts Shipments: Current dollars"
 								},
 								"sink": {
 									"name": " Value of Aircraft & Parts Shipments: Current dollars",
@@ -170,8 +167,7 @@
 							},
 							{
 								"source": {
-									"name": " Value of Aircraft & Parts Shipments: Constant dollars (2002=100)",
-									"type": "String"
+									"name": "Value of Aircraft & Parts Shipments: Constant dollars (2002=100)"
 								},
 								"sink": {
 									"name": " Value of Aircraft & Parts Shipments: Constant dollars (2002=100)",
@@ -180,8 +176,7 @@
 							},
 							{
 								"source": {
-									"name": " Value of Aircraft & Parts Shipments: Real Growth",
-									"type": "String"
+									"name": "Value of Aircraft & Parts Shipments: Real Growth"
 								},
 								"sink": {
 									"name": " Value of Aircraft & Parts Shipments: Real Growth",
@@ -190,8 +185,7 @@
 							},
 							{
 								"source": {
-									"name": " Industrial Production Index (2007=100)2: Aerospace Products & Parts",
-									"type": "String"
+									"name": "Industrial Production Index (2007=100)2: Aerospace Products & Parts"
 								},
 								"sink": {
 									"name": " Industrial Production Index (2007=100)2: Aerospace Products & Parts",
@@ -220,8 +214,7 @@
 							},
 							{
 								"source": {
-									"name": " Employment (annual average)3: Total Employment (000s)",
-									"type": "String"
+									"name": "Employment (annual average)3: Total Employment (000s)"
 								},
 								"sink": {
 									"name": " Employment (annual average)3: Total Employment (000s)",
@@ -230,8 +223,7 @@
 							},
 							{
 								"source": {
-									"name": " Employment (annual average)3: Total Employment (000s) Growth",
-									"type": "String"
+									"name": "Employment (annual average)3: Total Employment (000s) Growth"
 								},
 								"sink": {
 									"name": " Employment (annual average)3: Total Employment (000s) Growth",
@@ -307,7 +299,7 @@
 							},
 							{
 								"source": {
-									"name": "  Value of Imports for Consumption",
+									"name": "Value of Imports for Consumption",
 									"type": "String"
 								},
 								"sink": {
@@ -317,7 +309,7 @@
 							},
 							{
 								"source": {
-									"name": "  Apparent Domestic Consumption",
+									"name": "Apparent Domestic Consumption",
 									"type": "String"
 								},
 								"sink": {
@@ -327,7 +319,7 @@
 							},
 							{
 								"source": {
-									"name": "  Imports/Apparent Consumption",
+									"name": "Imports/Apparent Consumption",
 									"type": "String"
 								},
 								"sink": {
@@ -447,7 +439,7 @@
 							},
 							{
 								"source": {
-									"name": "2nd Top Supplier to United States",
+									"name": "Top Supplier to United States",
 									"type": "String"
 								},
 								"sink": {
