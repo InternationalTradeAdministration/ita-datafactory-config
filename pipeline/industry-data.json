@@ -133,8 +133,7 @@
 							},
 							{
 								"source": {
-									"name": "Value of Aerospace Shipments: Current dollars",
-									"type": "String"
+									"name": "Industry Data Value of Aerospace Shipments: Current dollars"
 								},
 								"sink": {
 									"name": "Industry Data Value of Aerospace Shipments: Current dollars"
@@ -1135,8 +1134,7 @@
 							},
 							{
 								"source": {
-									"name": "#2 Top Foreign Market",
-									"type": "String"
+									"name": "Top Foreign Market"
 								},
 								"sink": {
 									"name": "Top Foreign Market",
