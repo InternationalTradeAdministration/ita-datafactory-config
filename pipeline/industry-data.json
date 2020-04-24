@@ -1145,7 +1145,7 @@
 							},
 							{
 								"source": {
-									"name": "#2 Top Foreign Market",
+									"name": "Top Foreign Market",
 									"type": "String"
 								},
 								"sink": {
@@ -1205,7 +1205,7 @@
 							},
 							{
 								"source": {
-									"name": "#2 Top Supplier to United States",
+									"name": "Top Supplier to United States",
 									"type": "String"
 								},
 								"sink": {
@@ -1214,24 +1214,40 @@
 								}
 							},
 							{
+								"source": {
+									"name": "#2 Top Supplier to United States",
+									"type": "String"
+								},
 								"sink": {
 									"name": "2nd Top Supplier to United States",
 									"type": "String"
 								}
 							},
 							{
+								"source": {
+									"name": "#3 Top Supplier to United States",
+									"type": "String"
+								},
 								"sink": {
 									"name": "3rd Top Supplier to United States",
 									"type": "String"
 								}
 							},
 							{
+								"source": {
+									"name": "#4 Top Supplier to United States",
+									"type": "String"
+								},
 								"sink": {
 									"name": "4th Top Supplier to United States",
 									"type": "String"
 								}
 							},
 							{
+								"source": {
+									"name": "#5 Top Supplier to United States",
+									"type": "String"
+								},
 								"sink": {
 									"name": "5th Top Supplier to United States",
 									"type": "String"
