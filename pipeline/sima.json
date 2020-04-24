@@ -159,7 +159,7 @@
 							{
 								"source": {
 									"name": "COUNTRY",
-									"type": "Int32"
+									"type": "String"
 								},
 								"sink": {
 									"name": "COUNTRY",
@@ -168,38 +168,38 @@
 							},
 							{
 								"source": {
-									"name": "CNTYDESC",
+									"name": "CTRY_DESC",
 									"type": "String"
 								},
 								"sink": {
-									"name": "CNTYDESC",
+									"name": "CTRY_DESC",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"name": "ldesccen36",
+									"name": "COMM_DESC",
 									"type": "String"
 								},
 								"sink": {
-									"name": "ldesccen36",
+									"name": "COMM_DESC",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"name": "grade",
+									"name": "STEEL_TYPE",
 									"type": "String"
 								},
 								"sink": {
-									"name": "grade",
+									"name": "STEEL_TYPE",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "VALUE",
-									"type": "Decimal"
+									"type": "String"
 								},
 								"sink": {
 									"name": "VALUE",
@@ -208,61 +208,61 @@
 							},
 							{
 								"source": {
-									"name": "UNKNOWN_FIELD_1",
-									"type": "Decimal"
+									"name": "NETTON",
+									"type": "String"
 								},
 								"sink": {
-									"name": "UNKNOWN_FIELD_1",
+									"name": "NETTON",
 									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "UNKNOWN_FIELD_2",
-									"type": "Decimal"
+									"name": "AVGNETPR",
+									"type": "String"
 								},
 								"sink": {
-									"name": "UNKNOWN_FIELD_2",
+									"name": "AVGNETPR",
 									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "QTYMT",
-									"type": "Decimal"
+									"name": "METRICTON",
+									"type": "String"
 								},
 								"sink": {
-									"name": "QTYMT",
+									"name": "METRICTON",
 									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "UNKNOWN_FIELD_3",
-									"type": "Decimal"
+									"name": "AVGMETPR",
+									"type": "String"
 								},
 								"sink": {
-									"name": "UNKNOWN_FIELD_3",
+									"name": "AVGMETPR",
 									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
-									"name": "SMONTH",
+									"name": "STAT_MO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "STAT_MO",
 									"type": "Int32"
-								},
-								"sink": {
-									"name": "SMONTH",
-									"type": "Int32"
 								}
 							},
 							{
 								"source": {
-									"name": "SYEAR",
-									"type": "Int32"
+									"name": "STAT_YEAR",
+									"type": "String"
 								},
 								"sink": {
-									"name": "SYEAR",
+									"name": "STAT_YEAR",
 									"type": "Int32"
 								}
 							}
