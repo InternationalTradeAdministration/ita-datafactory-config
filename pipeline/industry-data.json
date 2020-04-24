@@ -443,7 +443,7 @@
 							},
 							{
 								"source": {
-									"name": "2nd Top Supplier to United States",
+									"name": "Top Supplier to United States",
 									"type": "String"
 								},
 								"sink": {
