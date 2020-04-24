@@ -14,186 +14,12 @@
 		"AzureSqlDatabase_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase'"
-		},
-		"otexa-blob-trigger_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/675d7977-79af-4b94-b0bd-26d4095a4ffb/resourceGroups/ITA-MSDataServices-Dev-East1/providers/Microsoft.Storage/storageAccounts/itadatatloader1"
-		},
-		"select-usa-trigger_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/675d7977-79af-4b94-b0bd-26d4095a4ffb/resourceGroups/ITA-MSDataServices-Dev-East1/providers/Microsoft.Storage/storageAccounts/itadatatloader1"
-		},
-		"sima-trigger_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/675d7977-79af-4b94-b0bd-26d4095a4ffb/resourceGroups/ITA-MSDataServices-Dev-East1/providers/Microsoft.Storage/storageAccounts/itadatatloader1"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/aero')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy aero top 20 suppliers annual",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"tableOption": "autoCreate"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Supplier",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Supplier"
-										}
-									},
-									{
-										"source": {
-											"name": "2015_Value",
-											"type": "String"
-										},
-										"sink": {
-											"name": "2015_Value"
-										}
-									},
-									{
-										"source": {
-											"name": "2015_percentTotal",
-											"type": "String"
-										},
-										"sink": {
-											"name": "2015_percentTotal"
-										}
-									},
-									{
-										"source": {
-											"name": "2016_Value",
-											"type": "String"
-										},
-										"sink": {
-											"name": "2016_Value"
-										}
-									},
-									{
-										"source": {
-											"name": "2016_percentTotal",
-											"type": "String"
-										},
-										"sink": {
-											"name": "2016_percentTotal"
-										}
-									},
-									{
-										"source": {
-											"name": "2017_Value",
-											"type": "String"
-										},
-										"sink": {
-											"name": "2017_Value"
-										}
-									},
-									{
-										"source": {
-											"name": "2017_percentTotal",
-											"type": "String"
-										},
-										"sink": {
-											"name": "2017_percentTotal"
-										}
-									},
-									{
-										"source": {
-											"name": "2018_Value",
-											"type": "String"
-										},
-										"sink": {
-											"name": "2018_Value"
-										}
-									},
-									{
-										"source": {
-											"name": "2018_percentTotal",
-											"type": "String"
-										},
-										"sink": {
-											"name": "2018_percentTotal"
-										}
-									},
-									{
-										"source": {
-											"name": "2019_Value",
-											"type": "String"
-										},
-										"sink": {
-											"name": "2019_Value"
-										}
-									},
-									{
-										"source": {
-											"name": "2019_percentTotal",
-											"type": "String"
-										},
-										"sink": {
-											"name": "2019_percentTotal"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "AeroTop20SuppliersAnnual",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AeroTop20SuppliersAnnualDb",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnual')]",
-				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnualDb')]"
-			]
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/dataloader')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -384,6 +210,1336 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DemoBinFile')]",
 				"[concat(variables('factoryId'), '/datasets/DemoBinFileDest')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/industry-data')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy aero top 20 suppliers annual 2015",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE AERO_TOP_SUPPLIERS_ANNUAL_2015",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Rank",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Rank",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Supplier",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Supplier",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Value",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "% Total",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "% Total",
+											"type": "Decimal"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnual2015Blob",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnual2015Db",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy Aero Key Industry Stats 1989-2010",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Year",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Year",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": " Industry Data Value of Aerospace Shipments: Current dollars",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Industry Data Value of Aerospace Shipments: Current dollars",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Industry Data Value of Aerospace Shipments: Constant dollars (2002=100)",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Industry Data Value of Aerospace Shipments: Constant dollars (2002=100)",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Industry Data Value of Aerospace Shipments: Real Growth",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Industry Data Value of Aerospace Shipments: Real Growth",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": " Value of Aircraft & Parts Shipments: Current dollars",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Value of Aircraft & Parts Shipments: Current dollars",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": " Value of Aircraft & Parts Shipments: Constant dollars (2002=100)",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Value of Aircraft & Parts Shipments: Constant dollars (2002=100)",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": " Value of Aircraft & Parts Shipments: Real Growth",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Value of Aircraft & Parts Shipments: Real Growth",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": " Industrial Production Index (2007=100)2: Aerospace Products & Parts",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Industrial Production Index (2007=100)2: Aerospace Products & Parts",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Industrial Production Index (2007=100)2: Aircraft & Parts",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Industrial Production Index (2007=100)2: Aircraft & Parts",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Industrial Production Index (2007=100)2: Defense & Space Equipment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Indusrtial Production Index (2007=100)2: Defense & Space Equipment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": " Employment (annual average)3: Total Employment (000s)",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Employment (annual average)3: Total Employment (000s)",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": " Employment (annual average)3: Total Employment (000s) Growth",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Employment (annual average)3: Total Employment (000s) Growth",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Employment (annual average)3: Production Workers (000s)",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Employment (annual average)3: Production Workers (000s)",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Employment (annual average)3: Production Workers (000s) Growth",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Employment (annual average)3: Production Workers (000s) Growth",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value of Aerospace Shipments: Current dollars",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Product Data Value of Aerospace Shipments: Current dollars",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value of Aerospace Shipments: Constant dollars (2002=100)",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Product Data Value of Aerospace Shipments: Constant dollars (2002=100)",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value of Aerospace Shipments: Real Growth",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Product Data Value of Aerospace Shipments: Real Growth",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Trade: Value of Domestic Exports*",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Trade: value of Domestic Exports*",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Trade: Exports/Shipments",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Trade: Exports/Shipments",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "  Value of Imports for Consumption",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Value of Imports for Consumption",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "  Apparent Domestic Consumption",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Apparent Domestic Consumption",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "  Imports/Apparent Consumption",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Imports/Apparent Consumption",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "  Balance of Trade",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Balance of Trade",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": " TOTAL AEROSPACE TRADE4: Value of Domestic Exports*",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TOTAL AEROSPACE TRADE4: Value of Domestic Exports*",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": " TOTAL AEROSPACE TRADE4: Value of Imports for Consumption",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TOTAL AEROSPACE TRADE4: Value of Imports for Consumption",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "  Balance of Total Aerospace Trade",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Balance of Total Aerospace Trade",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#1 Foreign Market",
+											"type": "String"
+										},
+										"sink": {
+											"name": "#1 Foreign Market",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#2 Foreign Market",
+											"type": "String"
+										},
+										"sink": {
+											"name": "#2 Foreign Market",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#3 Foreign Market",
+											"type": "String"
+										},
+										"sink": {
+											"name": "#3 Foreign Market",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#4 Foreign Market",
+											"type": "String"
+										},
+										"sink": {
+											"name": "#4 Foreign Market",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#5 Foreign Market",
+											"type": "String"
+										},
+										"sink": {
+											"name": "#5 Foreign Market",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "% Total Exports",
+											"type": "String"
+										},
+										"sink": {
+											"name": "% Total Exports",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Top Supplier to United States",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Top Supplier to United States",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "2nd Top Supplier to United States",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2nd Top Supplier to United States",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "3rd Top Supplier to United States",
+											"type": "String"
+										},
+										"sink": {
+											"name": "3rd Top Supplier to United States",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "4th Top Supplier to United States",
+											"type": "String"
+										},
+										"sink": {
+											"name": "4th Top Supplier to United States",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "5th Top Supplier to United States",
+											"type": "String"
+										},
+										"sink": {
+											"name": "5th Top Supplier to United States",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "% Total Imports",
+											"type": "String"
+										},
+										"sink": {
+											"name": "% Total Imports",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "KeyAeroIndustryStats1989_2010blob",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "KeyAeroIndustryStats1989_2010db",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy aero top 20 suppliers annual 2016",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE AERO_TOP_SUPPLIERS_ANNUAL_2016",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Rank",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Rank",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Supplier",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Supplier",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Value",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "% Total",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "% Total",
+											"type": "Decimal"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnual2016Blob",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnual2016Db",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy aero top 20 suppliers annual 2017",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE AERO_TOP_SUPPLIERS_ANNUAL_2017",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Rank",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Rank",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Supplier",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Supplier",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Value",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "% Total",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "% Total",
+											"type": "Decimal"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnual2017Blob",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnual2017Db",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy aero top 20 suppliers annual 2018",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE AERO_TOP_SUPPLIERS_ANNUAL_2018",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Rank",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Rank",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Supplier",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Supplier",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Value",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "% Total",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "% Total",
+											"type": "Decimal"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnual2018Blob",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnual2018Db",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy aero top 20 suppliers annual 2019",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE AERO_TOP_SUPPLIERS_ANNUAL_2019",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Rank",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Rank",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Supplier",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Supplier",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Value",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "% Total",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "% Total",
+											"type": "Decimal"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AeroTop20SupplierAnnual2019Blob",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AeroTop20SuppliersAnnual2019Db",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy aero top 20 suppliers annual totals",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE AERO_TOP_SUPPLIERS_ANNUAL_TOTALS",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Year",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Year",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "General Aerospace Imports Value",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "General Aerospace Imports Value",
+											"type": "Decimal"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AeroTopSuppliersAnnualTotalsBlob",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AeroTopSuppliersAnnualTotalsDb",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy Key Aero Stats 2004-2008",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Year",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Year",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Time Period",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Time Period",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value of Aerospace Shipments Current dollars",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Value of Aerospace Shipments Current dollars",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value of Aerospace Shipments Constant dollars (2002=100)",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Value of Aerospace Shipments Constant dollars (2002=100)",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Value of Aerospace Shipments Real Growth",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Value of Aerospace Shipments Real Growth",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value of Aircraft & Parts Shipments Current dollars",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Value of Aircraft & Parts Shipments Current dollars",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Value of Aircraft & Parts Shipments Real Growth",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Value of Aircraft & Parts Shipments Real Growth",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Industrial Production Index (2007=100)1,2 Defense & Space Equipment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Indusrtial Production Index (2007=100)1,2 Defense & Space Equipment",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Total Employment (000s)",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Total Employment (000s)",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Total Employment (000s) Growth",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Total Employment (000s) Growth",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": " Production Workers (000s)",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Production Workers (000s)",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": " Production Workers (000s) Growth",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Production Workers (000s) Growth",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "  Total Aerospace Exports",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Total Aerospace Exports",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "  Total Aerospace Imports",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Total Aerospace Imports",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "  Balance of Total Aerospace Trade",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Balance of Total Aerospace Trade",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Top Foreign Market",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Top Foreign Market",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#2 Top Foreign Market",
+											"type": "String"
+										},
+										"sink": {
+											"name": "#2 Top Foreign Market",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#3 Top Foreign Market",
+											"type": "String"
+										},
+										"sink": {
+											"name": "#3 Top Foreign Market",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#4 Top Foreign Market",
+											"type": "String"
+										},
+										"sink": {
+											"name": "#4 Top Foreign Market",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#5 Top Foreign Market",
+											"type": "String"
+										},
+										"sink": {
+											"name": "#5 Top Foreign Market",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "% Total Exports",
+											"type": "String"
+										},
+										"sink": {
+											"name": "% Total Exports",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Top Supplier to United States",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Top Supplier to United States",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#2 Top Supplier to United States",
+											"type": "String"
+										},
+										"sink": {
+											"name": "2nd Top Supplier to United States",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#3 Top Supplier to United States",
+											"type": "String"
+										},
+										"sink": {
+											"name": "3rd Top Supplier to United States",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#4 Top Supplier to United States",
+											"type": "String"
+										},
+										"sink": {
+											"name": "4th Top Supplier to United States",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "#5 Top Supplier to United States",
+											"type": "String"
+										},
+										"sink": {
+											"name": "5th Top Supplier to United States",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "% Total Imports",
+											"type": "String"
+										},
+										"sink": {
+											"name": "% Total Imports",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "KeyStatsQtr2004_2008blob",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "KeyStatsQtr2004_2008db",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnual2015Blob')]",
+				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnual2015Db')]",
+				"[concat(variables('factoryId'), '/datasets/KeyAeroIndustryStats1989_2010blob')]",
+				"[concat(variables('factoryId'), '/datasets/KeyAeroIndustryStats1989_2010db')]",
+				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnual2016Blob')]",
+				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnual2016Db')]",
+				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnual2017Blob')]",
+				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnual2017Db')]",
+				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnual2018Blob')]",
+				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnual2018Db')]",
+				"[concat(variables('factoryId'), '/datasets/AeroTop20SupplierAnnual2019Blob')]",
+				"[concat(variables('factoryId'), '/datasets/AeroTop20SuppliersAnnual2019Db')]",
+				"[concat(variables('factoryId'), '/datasets/AeroTopSuppliersAnnualTotalsBlob')]",
+				"[concat(variables('factoryId'), '/datasets/AeroTopSuppliersAnnualTotalsDb')]",
+				"[concat(variables('factoryId'), '/datasets/KeyStatsQtr2004_2008blob')]",
+				"[concat(variables('factoryId'), '/datasets/KeyStatsQtr2004_2008db')]"
 			]
 		},
 		{
@@ -4810,7 +5966,7 @@
 									{
 										"source": {
 											"name": "COUNTRY",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "COUNTRY",
@@ -4819,38 +5975,38 @@
 									},
 									{
 										"source": {
-											"name": "CNTYDESC",
+											"name": "CTRY_DESC",
 											"type": "String"
 										},
 										"sink": {
-											"name": "CNTYDESC",
+											"name": "CTRY_DESC",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "ldesccen36",
+											"name": "COMM_DESC",
 											"type": "String"
 										},
 										"sink": {
-											"name": "ldesccen36",
+											"name": "COMM_DESC",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "grade",
+											"name": "STEEL_TYPE",
 											"type": "String"
 										},
 										"sink": {
-											"name": "grade",
+											"name": "STEEL_TYPE",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
 											"name": "VALUE",
-											"type": "Decimal"
+											"type": "String"
 										},
 										"sink": {
 											"name": "VALUE",
@@ -4859,61 +6015,61 @@
 									},
 									{
 										"source": {
-											"name": "UNKNOWN_FIELD_1",
-											"type": "Decimal"
+											"name": "NETTON",
+											"type": "String"
 										},
 										"sink": {
-											"name": "UNKNOWN_FIELD_1",
+											"name": "NETTON",
 											"type": "Decimal"
 										}
 									},
 									{
 										"source": {
-											"name": "UNKNOWN_FIELD_2",
-											"type": "Decimal"
+											"name": "AVGNETPR",
+											"type": "String"
 										},
 										"sink": {
-											"name": "UNKNOWN_FIELD_2",
+											"name": "AVGNETPR",
 											"type": "Decimal"
 										}
 									},
 									{
 										"source": {
-											"name": "QTYMT",
-											"type": "Decimal"
+											"name": "METRICTON",
+											"type": "String"
 										},
 										"sink": {
-											"name": "QTYMT",
+											"name": "METRICTON",
 											"type": "Decimal"
 										}
 									},
 									{
 										"source": {
-											"name": "UNKNOWN_FIELD_3",
-											"type": "Decimal"
+											"name": "AVGMETPR",
+											"type": "String"
 										},
 										"sink": {
-											"name": "UNKNOWN_FIELD_3",
+											"name": "AVGMETPR",
 											"type": "Decimal"
 										}
 									},
 									{
 										"source": {
-											"name": "SMONTH",
+											"name": "STAT_MO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "STAT_MO",
 											"type": "Int32"
-										},
-										"sink": {
-											"name": "SMONTH",
-											"type": "Int32"
 										}
 									},
 									{
 										"source": {
-											"name": "SYEAR",
-											"type": "Int32"
+											"name": "STAT_YEAR",
+											"type": "String"
 										},
 										"sink": {
-											"name": "SYEAR",
+											"name": "STAT_YEAR",
 											"type": "Int32"
 										}
 									}
@@ -5039,7 +6195,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual')]",
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SupplierAnnual2019Blob')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -5052,8 +6208,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "AeroTop20ExpMktsAnnual_reformat.csv",
-						"container": "demo"
+						"fileName": "AeroTop20SuppliersAnnual_2019.csv",
+						"container": "industry-data"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -5062,47 +6218,19 @@
 				},
 				"schema": [
 					{
+						"name": "Rank",
+						"type": "String"
+					},
+					{
 						"name": "Supplier",
 						"type": "String"
 					},
 					{
-						"name": "2015_Value",
+						"name": "Value",
 						"type": "String"
 					},
 					{
-						"name": "2015_percentTotal",
-						"type": "String"
-					},
-					{
-						"name": "2016_Value",
-						"type": "String"
-					},
-					{
-						"name": "2016_percentTotal",
-						"type": "String"
-					},
-					{
-						"name": "2017_Value",
-						"type": "String"
-					},
-					{
-						"name": "2017_percentTotal",
-						"type": "String"
-					},
-					{
-						"name": "2018_Value",
-						"type": "String"
-					},
-					{
-						"name": "2018_percentTotal",
-						"type": "String"
-					},
-					{
-						"name": "2019_Value",
-						"type": "String"
-					},
-					{
-						"name": "2019_percentTotal",
+						"name": "% Total",
 						"type": "String"
 					}
 				]
@@ -5112,7 +6240,52 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnualDb')]",
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2015Blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AeroTop20SuppliersAnnual_2015.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "String"
+					},
+					{
+						"name": "Supplier",
+						"type": "String"
+					},
+					{
+						"name": "Value",
+						"type": "String"
+					},
+					{
+						"name": "% Total",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2015Db')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -5122,10 +6295,524 @@
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
-				"schema": [],
+				"schema": [
+					{
+						"name": "Supplier",
+						"type": "varchar"
+					},
+					{
+						"name": "Value_2015",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "percentTotal_2015",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Value_2016",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "percentTotal_2016",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Value_2017",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "percentTotal_2017",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Value_2018",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "percentTotal_2018",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Value_2019",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "percentTotal_2019",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "AERO_TOP_20_SUPPLIERS_ANNUAL"
+					"table": "AERO_TOP_SUPPLIERS_ANNUAL_2015"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2016Blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AeroTop20SuppliersAnnual_2016.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Top Twenty Aerospace Suppliers to the U.S.",
+						"type": "String"
+					},
+					{
+						"name": "Prop_1",
+						"type": "String"
+					},
+					{
+						"name": "Prop_2",
+						"type": "String"
+					},
+					{
+						"name": "Prop_3",
+						"type": "String"
+					},
+					{
+						"name": "Prop_4",
+						"type": "String"
+					},
+					{
+						"name": "Prop_5",
+						"type": "String"
+					},
+					{
+						"name": "Prop_6",
+						"type": "String"
+					},
+					{
+						"name": "Prop_7",
+						"type": "String"
+					},
+					{
+						"name": "Prop_8",
+						"type": "String"
+					},
+					{
+						"name": "Prop_9",
+						"type": "String"
+					},
+					{
+						"name": "Prop_10",
+						"type": "String"
+					},
+					{
+						"name": "Prop_11",
+						"type": "String"
+					},
+					{
+						"name": "Prop_12",
+						"type": "String"
+					},
+					{
+						"name": "Prop_13",
+						"type": "String"
+					},
+					{
+						"name": "Prop_14",
+						"type": "String"
+					},
+					{
+						"name": "Prop_15",
+						"type": "String"
+					},
+					{
+						"name": "Prop_16",
+						"type": "String"
+					},
+					{
+						"name": "Prop_17",
+						"type": "String"
+					},
+					{
+						"name": "Prop_18",
+						"type": "String"
+					},
+					{
+						"name": "Prop_19",
+						"type": "String"
+					},
+					{
+						"name": "Prop_20",
+						"type": "String"
+					},
+					{
+						"name": "Prop_21",
+						"type": "String"
+					},
+					{
+						"name": "Prop_22",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2016Db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "varchar"
+					},
+					{
+						"name": "Supplier",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "% Total",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AERO_TOP_SUPPLIERS_ANNUAL_2016"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2017Blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AeroTop20SuppliersAnnual_2017.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "String"
+					},
+					{
+						"name": "Supplier",
+						"type": "String"
+					},
+					{
+						"name": "Value",
+						"type": "String"
+					},
+					{
+						"name": "% Total",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2017Db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "varchar"
+					},
+					{
+						"name": "Supplier",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "% Total",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AERO_TOP_SUPPLIERS_ANNUAL_2017"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2018Blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AeroTop20SuppliersAnnual_2018.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "String"
+					},
+					{
+						"name": "Supplier",
+						"type": "String"
+					},
+					{
+						"name": "Value",
+						"type": "String"
+					},
+					{
+						"name": "% Total",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2018Db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "varchar"
+					},
+					{
+						"name": "Supplier",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "% Total",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AERO_TOP_SUPPLIERS_ANNUAL_2018"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2019Db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "varchar"
+					},
+					{
+						"name": "Supplier",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "% Total",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AERO_TOP_SUPPLIERS_ANNUAL_2019"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTopSuppliersAnnualTotalsBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AeroTop20SuppliersAnnual_totals.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000b�h^\u0001\u0000\u0000�\u0004\u0000\u0000\u0013\u0000\b\u0002[Content_Types].xml �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000���N�0\u0010E�H�C�-Jܲ@\b5��\u0012*Q>�ēƪc[�ii����\u0010B�\u0015j7�\u0012��{2��h�nm���ƻR\f����U^\u001b7/���%�\u0017\u0019�rZY�\u0014\u001b@1\u0019__�f�\u0000�q��R4D�AJ�\u001ah\u0015\u0016>����V\u0011�ƹ\f�Z�9����NV�\u00118ʩ�\u0010��\u0013�ji){^��-I\u0004�\"{�\u0016v^�P!XS)bR�r��K�s(�3�`c\u0002�0���\u000e���\u0006��7\u001eM4\u001a����ZƐk+�|\\|z�(���P��6\u0015h_-[�@�!���\u0000Pk��\u0016�2n�}�?\u0015�L��� ��%�\u0013\u001c��\u001bd����dN\u0018\"m",
+						"type": "String"
+					},
+					{
+						"name": "�ǞDO97*�~��ɸ8�O�c\u001c|n��\u0007�\u0004E��\u0014�\u0011���B\u0010��!$}�����;{���[����2�\u0006\u0000\u0000��\u0003\u0000PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000�U0#�\u0000\u0000\u0000L\u0002\u0000\u0000\u000b\u0000\b\u0002_rels/.rels �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000��MO�0\f��H�����ݐ\u0010BKwAH�!T~�I�\u000f���$\u001bݿ'\u001c\u0010T\u001a�\u0003G�~����<���!��4��\u0012\u0014;#�w����qu\u0007*&r�Fq���\u0011v�����GJy(v��*����K��#F��D�\u0010�.W\u001a\t\u0013�\u001c�\u0016=��Z�MY�b��\u0001�BS����7��ϛז��",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTopSuppliersAnnualTotalsDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "General Aerospace Imports Value",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AERO_TOP_SUPPLIERS_ANNUAL_TOTALS"
 				}
 			},
 			"dependsOn": [
@@ -8451,6 +10138,528 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/KeyAeroIndustryStats1989_2010blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "KeyStats1989-2010_reformatted.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Year",
+						"type": "String"
+					},
+					{
+						"name": "INDUSTRY DATA1",
+						"type": "String"
+					},
+					{
+						"name": "  Value of Aerospace Shipments: Current dollars",
+						"type": "String"
+					},
+					{
+						"name": "   Value of Aerospace Shipments: Constant dollars (2002=100)",
+						"type": "String"
+					},
+					{
+						"name": "   Value of Aerospace Shipments: Real Growth",
+						"type": "String"
+					},
+					{
+						"name": " Value of Aircraft & Parts Shipments: Current dollars",
+						"type": "String"
+					},
+					{
+						"name": " Value of Aircraft & Parts Shipments: Constant dollars (2002=100)",
+						"type": "String"
+					},
+					{
+						"name": " Value of Aircraft & Parts Shipments: Real Growth",
+						"type": "String"
+					},
+					{
+						"name": " Industrial Production Index (2007=100)2: Aerospace Products & Parts",
+						"type": "String"
+					},
+					{
+						"name": "Industrial Production Index (2007=100)2: Aircraft & Parts",
+						"type": "String"
+					},
+					{
+						"name": "Industrial Production Index (2007=100)2: Defense & Space Equipment",
+						"type": "String"
+					},
+					{
+						"name": " Employment (annual average)3: Total Employment (000s)",
+						"type": "String"
+					},
+					{
+						"name": " Employment (annual average)3: Total Employment (000s) Growth",
+						"type": "String"
+					},
+					{
+						"name": "Employment (annual average)3: Production Workers (000s)",
+						"type": "String"
+					},
+					{
+						"name": "Employment (annual average)3: Production Workers (000s) Growth",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aerospace Shipments: Current dollars",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aerospace Shipments: Constant dollars (2002=100)",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aerospace Shipments: Real Growth",
+						"type": "String"
+					},
+					{
+						"name": "Trade ",
+						"type": "String"
+					},
+					{
+						"name": "Trade: Value of Domestic Exports*",
+						"type": "String"
+					},
+					{
+						"name": "Trade: Exports/Shipments",
+						"type": "String"
+					},
+					{
+						"name": "  Value of Imports for Consumption",
+						"type": "String"
+					},
+					{
+						"name": "  Apparent Domestic Consumption",
+						"type": "String"
+					},
+					{
+						"name": "  Imports/Apparent Consumption",
+						"type": "String"
+					},
+					{
+						"name": "  Balance of Trade",
+						"type": "String"
+					},
+					{
+						"name": " TOTAL AEROSPACE TRADE4: Value of Domestic Exports*",
+						"type": "String"
+					},
+					{
+						"name": " TOTAL AEROSPACE TRADE4: Value of Imports for Consumption",
+						"type": "String"
+					},
+					{
+						"name": "  Balance of Total Aerospace Trade",
+						"type": "String"
+					},
+					{
+						"name": "#1 Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#2 Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#3 Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#4 Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#5 Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "% Total Exports",
+						"type": "String"
+					},
+					{
+						"name": "Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "2nd Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "3rd Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "4th Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "5th Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "% Total Imports",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/KeyAeroIndustryStats1989_2010db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "KEY_AERO_INDUSTRY_STATS_1989_2010"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/KeyStatsQtr2004_2008blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "KeyStatsQtr2004-2008_reformatted.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Year",
+						"type": "String"
+					},
+					{
+						"name": "Time Period",
+						"type": "String"
+					},
+					{
+						"name": "INDUSTRY DATA1 Value of Aerospace Shipments",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aerospace Shipments Current dollars",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aerospace Shipments Constant dollars (2002=100)",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aerospace Shipments Real Growth",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aircraft & Parts Shipments Current dollars",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aircraft & Parts Shipments Real Growth",
+						"type": "String"
+					},
+					{
+						"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
+						"type": "String"
+					},
+					{
+						"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
+						"type": "String"
+					},
+					{
+						"name": "Industrial Production Index (2007=100)1,2 Defense & Space Equipment",
+						"type": "String"
+					},
+					{
+						"name": "Total Employment (000s)",
+						"type": "String"
+					},
+					{
+						"name": "Total Employment (000s) Growth",
+						"type": "String"
+					},
+					{
+						"name": " Production Workers (000s)",
+						"type": "String"
+					},
+					{
+						"name": " Production Workers (000s) Growth",
+						"type": "String"
+					},
+					{
+						"name": "  Total Aerospace Exports",
+						"type": "String"
+					},
+					{
+						"name": "  Total Aerospace Imports",
+						"type": "String"
+					},
+					{
+						"name": "  Balance of Total Aerospace Trade",
+						"type": "String"
+					},
+					{
+						"name": "Top Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#2 Top Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#3 Top Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#4 Top Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#5 Top Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "% Total Exports",
+						"type": "String"
+					},
+					{
+						"name": "Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "#2 Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "#3 Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "#4 Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "#5 Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "% Total Imports",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/KeyStatsQtr2004_2008db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Time Period",
+						"type": "varchar"
+					},
+					{
+						"name": "Value of Aerospace Shipments Current dollars",
+						"type": "varchar"
+					},
+					{
+						"name": "Value of Aerospace Shipments Constant dollars (2002=100)",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Value of Aerospace Shipments Real Growth",
+						"type": "varchar"
+					},
+					{
+						"name": "Value of Aircraft & Parts Shipments Current dollars",
+						"type": "varchar"
+					},
+					{
+						"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Value of Aircraft & Parts Shipments Real Growth",
+						"type": "varchar"
+					},
+					{
+						"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Indusrtial Production Index (2007=100)1,2 Defense & Space Equipment",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Total Employment (000s)",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Total Employment (000s) Growth",
+						"type": "varchar"
+					},
+					{
+						"name": "Production Workers (000s)",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Production Workers (000s) Growth",
+						"type": "varchar"
+					},
+					{
+						"name": "Total Aerospace Exports",
+						"type": "varchar"
+					},
+					{
+						"name": "Total Aerospace Imports",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Balance of Total Aerospace Trade",
+						"type": "varchar"
+					},
+					{
+						"name": "Top Foreign Market",
+						"type": "varchar"
+					},
+					{
+						"name": "#2 Top Foreign Market",
+						"type": "varchar"
+					},
+					{
+						"name": "#3 Top Foreign Market",
+						"type": "varchar"
+					},
+					{
+						"name": "#4 Top Foreign Market",
+						"type": "varchar"
+					},
+					{
+						"name": "#5 Top Foreign Market",
+						"type": "varchar"
+					},
+					{
+						"name": "% Total Exports",
+						"type": "varchar"
+					},
+					{
+						"name": "Top Supplier to United States",
+						"type": "varchar"
+					},
+					{
+						"name": "2nd Top Supplier to United States",
+						"type": "varchar"
+					},
+					{
+						"name": "3rd Top Supplier to United States",
+						"type": "varchar"
+					},
+					{
+						"name": "4th Top Supplier to United States",
+						"type": "varchar"
+					},
+					{
+						"name": "5th Top Supplier to United States",
+						"type": "varchar"
+					},
+					{
+						"name": "% Total Imports",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "KEY_STATS_QTR_2004_2008"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/OecdAvgAnnualHrsWorkedPerWorkerBlob')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -10049,131 +12258,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dataloader-trigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "dataloader",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2020-03-13T19:31:00.000Z",
-						"timeZone": "UTC",
-						"schedule": {
-							"hours": [
-								3
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/dataloader')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/otexa-blob-trigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "otexa",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/otexa/blobs/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('otexa-blob-trigger_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/otexa')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/select-usa-trigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "select-usa",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/select-usa/blobs/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('select-usa-trigger_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/select-usa')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/sima-trigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "sima",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/sima/blobs/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('sima-trigger_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/sima')]"
-			]
 		}
 	]
 }

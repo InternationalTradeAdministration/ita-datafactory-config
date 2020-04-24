@@ -13,6 +13,1184 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/BeaMneCountryByTypeDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DIRECTIONOFINVESTMENT",
+						"type": "varchar"
+					},
+					{
+						"name": "OwnershipLevel",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeriesID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeriesName",
+						"type": "varchar"
+					},
+					{
+						"name": "Row",
+						"type": "varchar"
+					},
+					{
+						"name": "Column",
+						"type": "varchar"
+					},
+					{
+						"name": "RowCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnCode",
+						"type": "varchar"
+					},
+					{
+						"name": "TableScale",
+						"type": "varchar"
+					},
+					{
+						"name": "DataValueUnformatted",
+						"type": "varchar"
+					},
+					{
+						"name": "DataValue",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnParent",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnParentCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ColumnGParent",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnGParentCode",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BEA_MNE_COUNTRY_BY_TYPE"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BeaMneCountryDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DIRECTIONOFINVESTMENT",
+						"type": "varchar"
+					},
+					{
+						"name": "OwnershipLevel",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeriesID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeriesName",
+						"type": "varchar"
+					},
+					{
+						"name": "Row",
+						"type": "varchar"
+					},
+					{
+						"name": "Column",
+						"type": "varchar"
+					},
+					{
+						"name": "RowCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnCode",
+						"type": "varchar"
+					},
+					{
+						"name": "TableScale",
+						"type": "varchar"
+					},
+					{
+						"name": "DataValueUnformatted",
+						"type": "varchar"
+					},
+					{
+						"name": "DataValue",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnParentCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ColumnGParentCode",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BEA_MNE_COUNTRY"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BeaMneCountryUboByIndustryBlobs')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "bea-mne-country-ubo-by-industry",
+						"container": "select-usa"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"BEAAPI": {
+							"type": "object",
+							"properties": {
+								"Request": {
+									"type": "object",
+									"properties": {
+										"RequestParam": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"ParameterName": {
+														"type": "string"
+													},
+													"ParameterValue": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								},
+								"Results": {
+									"type": "object",
+									"properties": {
+										"Table_Count": {
+											"type": "string"
+										},
+										"rowTypeID": {
+											"type": "string"
+										},
+										"InvestmentType": {
+											"type": "string"
+										},
+										"DataType": {
+											"type": "string"
+										},
+										"Entity": {
+											"type": "string"
+										},
+										"IndustryClassification": {
+											"type": "string"
+										},
+										"YearList": {
+											"type": "string"
+										},
+										"DIRECTIONOFINVESTMENT": {
+											"type": "string"
+										},
+										"OwnershipLevel": {
+											"type": "string"
+										},
+										"NonbankAffiliatesOnly": {
+											"type": "string"
+										},
+										"Tables": {
+											"type": "string"
+										},
+										"cnt": {
+											"type": "string"
+										},
+										"Dimensions": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"Ordinal": {
+														"type": "string"
+													},
+													"Name": {
+														"type": "string"
+													},
+													"DataType": {
+														"type": "string"
+													},
+													"IsValue": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"Data": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"Year": {
+														"type": "string"
+													},
+													"SeriesID": {
+														"type": "string"
+													},
+													"SeriesName": {
+														"type": "string"
+													},
+													"Row": {
+														"type": "string"
+													},
+													"ColumnGParent": {
+														"type": "string"
+													},
+													"ColumnParent": {
+														"type": "string"
+													},
+													"Column": {
+														"type": "string"
+													},
+													"RowCode": {
+														"type": "string"
+													},
+													"ColumnCode": {
+														"type": "string"
+													},
+													"ColumnParentCode": {
+														"type": "string"
+													},
+													"ColumnGParentCode": {
+														"type": "string"
+													},
+													"TableScale": {
+														"type": "string"
+													},
+													"DataValueUnformatted": {
+														"type": "string"
+													},
+													"TableColumnDisplayOrder": {
+														"type": "string"
+													},
+													"TableRowDisplayOrder": {
+														"type": "string"
+													},
+													"DataValue": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BeaMneCountryUboByIndustryDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DIRECTIONOFINVESTMENT",
+						"type": "varchar"
+					},
+					{
+						"name": "OwnershipLevel",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeriesID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeriesName",
+						"type": "varchar"
+					},
+					{
+						"name": "Row",
+						"type": "varchar"
+					},
+					{
+						"name": "Column",
+						"type": "varchar"
+					},
+					{
+						"name": "RowCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnCode",
+						"type": "varchar"
+					},
+					{
+						"name": "TableScale",
+						"type": "varchar"
+					},
+					{
+						"name": "DataValueUnformatted",
+						"type": "varchar"
+					},
+					{
+						"name": "DataValue",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnParentCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ColumnGParentCode",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BEA_MNE_COUNTRY_UBO_BY_INDUSTRY"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BeaMneIndustryBlobs')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "bea-mne-industry",
+						"container": "select-usa"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"BEAAPI": {
+							"type": "object",
+							"properties": {
+								"Request": {
+									"type": "object",
+									"properties": {
+										"RequestParam": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"ParameterName": {
+														"type": "string"
+													},
+													"ParameterValue": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								},
+								"Results": {
+									"type": "object",
+									"properties": {
+										"Table_Count": {
+											"type": "string"
+										},
+										"rowTypeID": {
+											"type": "string"
+										},
+										"InvestmentType": {
+											"type": "string"
+										},
+										"DataType": {
+											"type": "string"
+										},
+										"Entity": {
+											"type": "string"
+										},
+										"IndustryClassification": {
+											"type": "string"
+										},
+										"YearList": {
+											"type": "string"
+										},
+										"DIRECTIONOFINVESTMENT": {
+											"type": "string"
+										},
+										"OwnershipLevel": {
+											"type": "string"
+										},
+										"NonbankAffiliatesOnly": {
+											"type": "string"
+										},
+										"Tables": {
+											"type": "string"
+										},
+										"cnt": {
+											"type": "string"
+										},
+										"Dimensions": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"Ordinal": {
+														"type": "string"
+													},
+													"Name": {
+														"type": "string"
+													},
+													"DataType": {
+														"type": "string"
+													},
+													"IsValue": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"Data": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"Year": {
+														"type": "string"
+													},
+													"SeriesID": {
+														"type": "string"
+													},
+													"SeriesName": {
+														"type": "string"
+													},
+													"Row": {
+														"type": "string"
+													},
+													"ColumnGParent": {
+														"type": "string"
+													},
+													"ColumnParent": {
+														"type": "string"
+													},
+													"Column": {
+														"type": "string"
+													},
+													"RowCode": {
+														"type": "string"
+													},
+													"ColumnCode": {
+														"type": "string"
+													},
+													"ColumnParentCode": {
+														"type": "string"
+													},
+													"ColumnGParentCode": {
+														"type": "string"
+													},
+													"TableScale": {
+														"type": "string"
+													},
+													"DataValueUnformatted": {
+														"type": "string"
+													},
+													"TableColumnDisplayOrder": {
+														"type": "string"
+													},
+													"TableRowDisplayOrder": {
+														"type": "string"
+													},
+													"DataValue": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BeaMneIndustryByType')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "bea-mne-industry-by-type",
+						"container": "select-usa"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"BEAAPI": {
+							"type": "object",
+							"properties": {
+								"Request": {
+									"type": "object",
+									"properties": {
+										"RequestParam": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"ParameterName": {
+														"type": "string"
+													},
+													"ParameterValue": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								},
+								"Results": {
+									"type": "object",
+									"properties": {
+										"Table_Count": {
+											"type": "string"
+										},
+										"rowTypeID": {
+											"type": "string"
+										},
+										"InvestmentType": {
+											"type": "string"
+										},
+										"DataType": {
+											"type": "string"
+										},
+										"Entity": {
+											"type": "string"
+										},
+										"IndustryClassification": {
+											"type": "string"
+										},
+										"YearList": {
+											"type": "string"
+										},
+										"DIRECTIONOFINVESTMENT": {
+											"type": "string"
+										},
+										"OwnershipLevel": {
+											"type": "string"
+										},
+										"NonbankAffiliatesOnly": {
+											"type": "string"
+										},
+										"Tables": {
+											"type": "string"
+										},
+										"cnt": {
+											"type": "string"
+										},
+										"Dimensions": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"Ordinal": {
+														"type": "string"
+													},
+													"Name": {
+														"type": "string"
+													},
+													"DataType": {
+														"type": "string"
+													},
+													"IsValue": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"Data": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"Year": {
+														"type": "string"
+													},
+													"SeriesID": {
+														"type": "string"
+													},
+													"SeriesName": {
+														"type": "string"
+													},
+													"Row": {
+														"type": "string"
+													},
+													"ColumnGParent": {
+														"type": "string"
+													},
+													"ColumnParent": {
+														"type": "string"
+													},
+													"Column": {
+														"type": "string"
+													},
+													"RowCode": {
+														"type": "string"
+													},
+													"ColumnCode": {
+														"type": "string"
+													},
+													"ColumnParentCode": {
+														"type": "string"
+													},
+													"ColumnGParentCode": {
+														"type": "string"
+													},
+													"TableScale": {
+														"type": "string"
+													},
+													"DataValueUnformatted": {
+														"type": "string"
+													},
+													"TableColumnDisplayOrder": {
+														"type": "string"
+													},
+													"TableRowDisplayOrder": {
+														"type": "string"
+													},
+													"DataValue": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BeaMneIndustryByTypeDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DIRECTIONOFINVESTMENT",
+						"type": "varchar"
+					},
+					{
+						"name": "OwnershipLevel",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeriesID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeriesName",
+						"type": "varchar"
+					},
+					{
+						"name": "Row",
+						"type": "varchar"
+					},
+					{
+						"name": "Column",
+						"type": "varchar"
+					},
+					{
+						"name": "RowCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnCode",
+						"type": "varchar"
+					},
+					{
+						"name": "TableScale",
+						"type": "varchar"
+					},
+					{
+						"name": "DataValueUnformatted",
+						"type": "varchar"
+					},
+					{
+						"name": "DataValue",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnParent",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnParentCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ColumnGParent",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnGParentCode",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BEA_MNE_INDUSTRY_BY_TYPE"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BeaMneIndustryDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DIRECTIONOFINVESTMENT",
+						"type": "varchar"
+					},
+					{
+						"name": "OwnershipLevel",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeriesID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeriesName",
+						"type": "varchar"
+					},
+					{
+						"name": "Row",
+						"type": "varchar"
+					},
+					{
+						"name": "Column",
+						"type": "varchar"
+					},
+					{
+						"name": "RowCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnCode",
+						"type": "varchar"
+					},
+					{
+						"name": "TableScale",
+						"type": "varchar"
+					},
+					{
+						"name": "DataValueUnformatted",
+						"type": "varchar"
+					},
+					{
+						"name": "DataValue",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnParentCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ColumnGParentCode",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BEA_MNE_INDUSTRY"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BeaMneStateByTypeBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "bea-mne-state-by-type",
+						"container": "select-usa"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"BEAAPI": {
+							"type": "object",
+							"properties": {
+								"Request": {
+									"type": "object",
+									"properties": {
+										"RequestParam": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"ParameterName": {
+														"type": "string"
+													},
+													"ParameterValue": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								},
+								"Results": {
+									"type": "object",
+									"properties": {
+										"Table_Count": {
+											"type": "string"
+										},
+										"rowTypeID": {
+											"type": "string"
+										},
+										"InvestmentType": {
+											"type": "string"
+										},
+										"DataType": {
+											"type": "string"
+										},
+										"Entity": {
+											"type": "string"
+										},
+										"IndustryClassification": {
+											"type": "string"
+										},
+										"YearList": {
+											"type": "string"
+										},
+										"DIRECTIONOFINVESTMENT": {
+											"type": "string"
+										},
+										"OwnershipLevel": {
+											"type": "string"
+										},
+										"NonbankAffiliatesOnly": {
+											"type": "string"
+										},
+										"Tables": {
+											"type": "string"
+										},
+										"cnt": {
+											"type": "string"
+										},
+										"Dimensions": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"Ordinal": {
+														"type": "string"
+													},
+													"Name": {
+														"type": "string"
+													},
+													"DataType": {
+														"type": "string"
+													},
+													"IsValue": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"Data": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"Year": {
+														"type": "string"
+													},
+													"SeriesID": {
+														"type": "string"
+													},
+													"SeriesName": {
+														"type": "string"
+													},
+													"Row": {
+														"type": "string"
+													},
+													"ColumnGParent": {
+														"type": "string"
+													},
+													"ColumnParent": {
+														"type": "string"
+													},
+													"Column": {
+														"type": "string"
+													},
+													"RowCode": {
+														"type": "string"
+													},
+													"ColumnCode": {
+														"type": "string"
+													},
+													"ColumnParentCode": {
+														"type": "string"
+													},
+													"ColumnGParentCode": {
+														"type": "string"
+													},
+													"TableScale": {
+														"type": "string"
+													},
+													"DataValueUnformatted": {
+														"type": "string"
+													},
+													"TableColumnDisplayOrder": {
+														"type": "string"
+													},
+													"TableRowDisplayOrder": {
+														"type": "string"
+													},
+													"DataValue": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BeaMneStateByTypeDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DIRECTIONOFINVESTMENT",
+						"type": "varchar"
+					},
+					{
+						"name": "OwnershipLevel",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeriesID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeriesName",
+						"type": "varchar"
+					},
+					{
+						"name": "Row",
+						"type": "varchar"
+					},
+					{
+						"name": "Column",
+						"type": "varchar"
+					},
+					{
+						"name": "RowCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnCode",
+						"type": "varchar"
+					},
+					{
+						"name": "TableScale",
+						"type": "varchar"
+					},
+					{
+						"name": "DataValueUnformatted",
+						"type": "varchar"
+					},
+					{
+						"name": "DataValue",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnParent",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnParentCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ColumnGParent",
+						"type": "varchar"
+					},
+					{
+						"name": "ColumnGParentCode",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BEA_MNE_STATE_BY_TYPE"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BeaNipaBlob')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -832,1078 +2010,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "IESE_VCPE_INDEX"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ImfWeoDataBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "WEODATA.csv",
-						"container": "select-usa"
-					},
-					"columnDelimiter": "\t",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "WEO Country Group Code",
-						"type": "String"
-					},
-					{
-						"name": "WEO Subject Code",
-						"type": "String"
-					},
-					{
-						"name": "Country Group Name",
-						"type": "String"
-					},
-					{
-						"name": "Subject Descriptor",
-						"type": "String"
-					},
-					{
-						"name": "Subject Notes",
-						"type": "String"
-					},
-					{
-						"name": "Units",
-						"type": "String"
-					},
-					{
-						"name": "Scale",
-						"type": "String"
-					},
-					{
-						"name": "Series-specific Notes",
-						"type": "String"
-					},
-					{
-						"name": "1980",
-						"type": "String"
-					},
-					{
-						"name": "1981",
-						"type": "String"
-					},
-					{
-						"name": "1982",
-						"type": "String"
-					},
-					{
-						"name": "1983",
-						"type": "String"
-					},
-					{
-						"name": "1984",
-						"type": "String"
-					},
-					{
-						"name": "1985",
-						"type": "String"
-					},
-					{
-						"name": "1986",
-						"type": "String"
-					},
-					{
-						"name": "1987",
-						"type": "String"
-					},
-					{
-						"name": "1988",
-						"type": "String"
-					},
-					{
-						"name": "1989",
-						"type": "String"
-					},
-					{
-						"name": "1990",
-						"type": "String"
-					},
-					{
-						"name": "1991",
-						"type": "String"
-					},
-					{
-						"name": "1992",
-						"type": "String"
-					},
-					{
-						"name": "1993",
-						"type": "String"
-					},
-					{
-						"name": "1994",
-						"type": "String"
-					},
-					{
-						"name": "1995",
-						"type": "String"
-					},
-					{
-						"name": "1996",
-						"type": "String"
-					},
-					{
-						"name": "1997",
-						"type": "String"
-					},
-					{
-						"name": "1998",
-						"type": "String"
-					},
-					{
-						"name": "1999",
-						"type": "String"
-					},
-					{
-						"name": "2000",
-						"type": "String"
-					},
-					{
-						"name": "2001",
-						"type": "String"
-					},
-					{
-						"name": "2002",
-						"type": "String"
-					},
-					{
-						"name": "2003",
-						"type": "String"
-					},
-					{
-						"name": "2004",
-						"type": "String"
-					},
-					{
-						"name": "2005",
-						"type": "String"
-					},
-					{
-						"name": "2006",
-						"type": "String"
-					},
-					{
-						"name": "2007",
-						"type": "String"
-					},
-					{
-						"name": "2008",
-						"type": "String"
-					},
-					{
-						"name": "2009",
-						"type": "String"
-					},
-					{
-						"name": "2010",
-						"type": "String"
-					},
-					{
-						"name": "2011",
-						"type": "String"
-					},
-					{
-						"name": "2012",
-						"type": "String"
-					},
-					{
-						"name": "2013",
-						"type": "String"
-					},
-					{
-						"name": "2014",
-						"type": "String"
-					},
-					{
-						"name": "2015",
-						"type": "String"
-					},
-					{
-						"name": "2016",
-						"type": "String"
-					},
-					{
-						"name": "2017",
-						"type": "String"
-					},
-					{
-						"name": "2018",
-						"type": "String"
-					},
-					{
-						"name": "2019",
-						"type": "String"
-					},
-					{
-						"name": "2020",
-						"type": "String"
-					},
-					{
-						"name": "2021",
-						"type": "String"
-					},
-					{
-						"name": "2022",
-						"type": "String"
-					},
-					{
-						"name": "2023",
-						"type": "String"
-					},
-					{
-						"name": "2024",
-						"type": "String"
-					},
-					{
-						"name": "Estimates Start After",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ImfWeodataDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "WEO Country Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ISO",
-						"type": "varchar"
-					},
-					{
-						"name": "WEO Subject Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Country",
-						"type": "varchar"
-					},
-					{
-						"name": "Subject Descriptor",
-						"type": "varchar"
-					},
-					{
-						"name": "Subject Notes",
-						"type": "varchar"
-					},
-					{
-						"name": "Units",
-						"type": "varchar"
-					},
-					{
-						"name": "Scale",
-						"type": "varchar"
-					},
-					{
-						"name": "Series-specific Notes",
-						"type": "varchar"
-					},
-					{
-						"name": "1980",
-						"type": "varchar"
-					},
-					{
-						"name": "1981",
-						"type": "varchar"
-					},
-					{
-						"name": "1982",
-						"type": "varchar"
-					},
-					{
-						"name": "1983",
-						"type": "varchar"
-					},
-					{
-						"name": "1984",
-						"type": "varchar"
-					},
-					{
-						"name": "1985",
-						"type": "varchar"
-					},
-					{
-						"name": "1986",
-						"type": "varchar"
-					},
-					{
-						"name": "1987",
-						"type": "varchar"
-					},
-					{
-						"name": "1988",
-						"type": "varchar"
-					},
-					{
-						"name": "1989",
-						"type": "varchar"
-					},
-					{
-						"name": "1990",
-						"type": "varchar"
-					},
-					{
-						"name": "1991",
-						"type": "varchar"
-					},
-					{
-						"name": "1992",
-						"type": "varchar"
-					},
-					{
-						"name": "1993",
-						"type": "varchar"
-					},
-					{
-						"name": "1994",
-						"type": "varchar"
-					},
-					{
-						"name": "1995",
-						"type": "varchar"
-					},
-					{
-						"name": "1996",
-						"type": "varchar"
-					},
-					{
-						"name": "1997",
-						"type": "varchar"
-					},
-					{
-						"name": "1998",
-						"type": "varchar"
-					},
-					{
-						"name": "1999",
-						"type": "varchar"
-					},
-					{
-						"name": "2000",
-						"type": "varchar"
-					},
-					{
-						"name": "2001",
-						"type": "varchar"
-					},
-					{
-						"name": "2002",
-						"type": "varchar"
-					},
-					{
-						"name": "2003",
-						"type": "varchar"
-					},
-					{
-						"name": "2004",
-						"type": "varchar"
-					},
-					{
-						"name": "2005",
-						"type": "varchar"
-					},
-					{
-						"name": "2006",
-						"type": "varchar"
-					},
-					{
-						"name": "2007",
-						"type": "varchar"
-					},
-					{
-						"name": "2008",
-						"type": "varchar"
-					},
-					{
-						"name": "2009",
-						"type": "varchar"
-					},
-					{
-						"name": "2010",
-						"type": "varchar"
-					},
-					{
-						"name": "2011",
-						"type": "varchar"
-					},
-					{
-						"name": "2012",
-						"type": "varchar"
-					},
-					{
-						"name": "2013",
-						"type": "varchar"
-					},
-					{
-						"name": "2014",
-						"type": "varchar"
-					},
-					{
-						"name": "2015",
-						"type": "varchar"
-					},
-					{
-						"name": "2016",
-						"type": "varchar"
-					},
-					{
-						"name": "2017",
-						"type": "varchar"
-					},
-					{
-						"name": "2018",
-						"type": "varchar"
-					},
-					{
-						"name": "2019",
-						"type": "varchar"
-					},
-					{
-						"name": "2020",
-						"type": "varchar"
-					},
-					{
-						"name": "2021",
-						"type": "varchar"
-					},
-					{
-						"name": "2022",
-						"type": "varchar"
-					},
-					{
-						"name": "2023",
-						"type": "varchar"
-					},
-					{
-						"name": "2024",
-						"type": "varchar"
-					},
-					{
-						"name": "Estimates Start After",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "IMF_WEODATA"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OecdAvgAnnualHrsWorkedPerWorkerBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "OECD_AVERAGE_ANNUAL_HOURS_WORKED_PER_WORKER.csv",
-						"container": "select-usa"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"nullValue": "\"\"",
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OecdGdpBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "OECD_GDP.csv",
-						"container": "select-usa"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"nullValue": "\"\"",
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "LOCATION",
-						"type": "String"
-					},
-					{
-						"name": "Country",
-						"type": "String"
-					},
-					{
-						"name": "SUBJECT",
-						"type": "String"
-					},
-					{
-						"name": "Subject",
-						"type": "String"
-					},
-					{
-						"name": "MEASURE",
-						"type": "String"
-					},
-					{
-						"name": "Measure",
-						"type": "String"
-					},
-					{
-						"name": "TIME",
-						"type": "String"
-					},
-					{
-						"name": "Time",
-						"type": "String"
-					},
-					{
-						"name": "Unit Code",
-						"type": "String"
-					},
-					{
-						"name": "Unit",
-						"type": "String"
-					},
-					{
-						"name": "PowerCode Code",
-						"type": "String"
-					},
-					{
-						"name": "PowerCode",
-						"type": "String"
-					},
-					{
-						"name": "Reference Period Code",
-						"type": "String"
-					},
-					{
-						"name": "Reference Period",
-						"type": "String"
-					},
-					{
-						"name": "Value",
-						"type": "String"
-					},
-					{
-						"name": "Flag Codes",
-						"type": "String"
-					},
-					{
-						"name": "Flags",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OecdGdpDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "LOCATION",
-						"type": "varchar"
-					},
-					{
-						"name": "Country",
-						"type": "varchar"
-					},
-					{
-						"name": "Subject",
-						"type": "varchar"
-					},
-					{
-						"name": "Measure",
-						"type": "varchar"
-					},
-					{
-						"name": "TIME",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Unit_Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Unit",
-						"type": "varchar"
-					},
-					{
-						"name": "PowerCode_Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "PowerCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Reference_Period_Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Reference_Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Value",
-						"type": "decimal",
-						"precision": 30,
-						"scale": 10
-					},
-					{
-						"name": "Flag_Codes",
-						"type": "varchar"
-					},
-					{
-						"name": "Flags",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "OECD_GDP"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OecdStrictnessOfEmploymentProtectionBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "OCED_STRICTNESS_OF_EMPLOYMENT_PROTECTION.csv",
-						"container": "select-usa"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"nullValue": "\"\"",
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "COUNTRY",
-						"type": "String"
-					},
-					{
-						"name": "Country",
-						"type": "String"
-					},
-					{
-						"name": "SERIES",
-						"type": "String"
-					},
-					{
-						"name": "Series",
-						"type": "String"
-					},
-					{
-						"name": "TIME",
-						"type": "String"
-					},
-					{
-						"name": "Time",
-						"type": "String"
-					},
-					{
-						"name": "Unit Code",
-						"type": "String"
-					},
-					{
-						"name": "Unit",
-						"type": "String"
-					},
-					{
-						"name": "PowerCode Code",
-						"type": "String"
-					},
-					{
-						"name": "PowerCode",
-						"type": "String"
-					},
-					{
-						"name": "Reference Period Code",
-						"type": "String"
-					},
-					{
-						"name": "Reference Period",
-						"type": "String"
-					},
-					{
-						"name": "Value",
-						"type": "String"
-					},
-					{
-						"name": "Flag Codes",
-						"type": "String"
-					},
-					{
-						"name": "Flags",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OecdStrictnessOfEmploymentProtectionDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Country",
-						"type": "varchar"
-					},
-					{
-						"name": "Series",
-						"type": "varchar"
-					},
-					{
-						"name": "TIME",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Unit_Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Unit",
-						"type": "varchar"
-					},
-					{
-						"name": "PowerCode_Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "PowerCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Reference_Period_Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Reference_Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Value",
-						"type": "decimal",
-						"precision": 30,
-						"scale": 10
-					},
-					{
-						"name": "Flag_Codes",
-						"type": "varchar"
-					},
-					{
-						"name": "Flags",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "OECD_STRICTNESS_OF_EMPLOYMENT_PROTECTION"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OeceAvgAnnualHrsWorkedPerWorkerDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Country",
-						"type": "varchar"
-					},
-					{
-						"name": "EMPSTAT",
-						"type": "varchar"
-					},
-					{
-						"name": "Employment_status",
-						"type": "varchar"
-					},
-					{
-						"name": "Frequency",
-						"type": "varchar"
-					},
-					{
-						"name": "TIME",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Unit_Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Unit",
-						"type": "varchar"
-					},
-					{
-						"name": "PowerCode_Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "PowerCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Reference_Period_Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Reference_Period",
-						"type": "varchar"
-					},
-					{
-						"name": "Value",
-						"type": "decimal",
-						"precision": 30,
-						"scale": 10
-					},
-					{
-						"name": "Flag_Codes",
-						"type": "varchar"
-					},
-					{
-						"name": "Flags",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "OECD_AVERAGE_ANNUAL_HOURS_WORKED_PER_WORKER"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OtexaCatDataBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "translated/OTEXA_DATA_SET_CAT.csv",
-						"container": "otexa"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "CTRY_ID",
-						"type": "String"
-					},
-					{
-						"name": "CAT_ID",
-						"type": "String"
-					},
-					{
-						"name": "SYEF",
-						"type": "String"
-					},
-					{
-						"name": "HEADER_ID",
-						"type": "String"
-					},
-					{
-						"name": "VAL",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OtexaCatDataDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "CTRY_ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CAT_ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SYEF",
-						"type": "decimal",
-						"precision": 5,
-						"scale": 2
-					},
-					{
-						"name": "HEADER_ID",
-						"type": "varchar"
-					},
-					{
-						"name": "VAL",
-						"type": "decimal",
-						"precision": 30,
-						"scale": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "OTEXA_DATA_SET_CAT"
 				}
 			},
 			"dependsOn": []

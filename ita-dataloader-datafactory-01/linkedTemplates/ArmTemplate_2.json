@@ -13,6 +13,1592 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/ImfWeoDataBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "WEODATA.csv",
+						"container": "select-usa"
+					},
+					"columnDelimiter": "\t",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "WEO Country Group Code",
+						"type": "String"
+					},
+					{
+						"name": "WEO Subject Code",
+						"type": "String"
+					},
+					{
+						"name": "Country Group Name",
+						"type": "String"
+					},
+					{
+						"name": "Subject Descriptor",
+						"type": "String"
+					},
+					{
+						"name": "Subject Notes",
+						"type": "String"
+					},
+					{
+						"name": "Units",
+						"type": "String"
+					},
+					{
+						"name": "Scale",
+						"type": "String"
+					},
+					{
+						"name": "Series-specific Notes",
+						"type": "String"
+					},
+					{
+						"name": "1980",
+						"type": "String"
+					},
+					{
+						"name": "1981",
+						"type": "String"
+					},
+					{
+						"name": "1982",
+						"type": "String"
+					},
+					{
+						"name": "1983",
+						"type": "String"
+					},
+					{
+						"name": "1984",
+						"type": "String"
+					},
+					{
+						"name": "1985",
+						"type": "String"
+					},
+					{
+						"name": "1986",
+						"type": "String"
+					},
+					{
+						"name": "1987",
+						"type": "String"
+					},
+					{
+						"name": "1988",
+						"type": "String"
+					},
+					{
+						"name": "1989",
+						"type": "String"
+					},
+					{
+						"name": "1990",
+						"type": "String"
+					},
+					{
+						"name": "1991",
+						"type": "String"
+					},
+					{
+						"name": "1992",
+						"type": "String"
+					},
+					{
+						"name": "1993",
+						"type": "String"
+					},
+					{
+						"name": "1994",
+						"type": "String"
+					},
+					{
+						"name": "1995",
+						"type": "String"
+					},
+					{
+						"name": "1996",
+						"type": "String"
+					},
+					{
+						"name": "1997",
+						"type": "String"
+					},
+					{
+						"name": "1998",
+						"type": "String"
+					},
+					{
+						"name": "1999",
+						"type": "String"
+					},
+					{
+						"name": "2000",
+						"type": "String"
+					},
+					{
+						"name": "2001",
+						"type": "String"
+					},
+					{
+						"name": "2002",
+						"type": "String"
+					},
+					{
+						"name": "2003",
+						"type": "String"
+					},
+					{
+						"name": "2004",
+						"type": "String"
+					},
+					{
+						"name": "2005",
+						"type": "String"
+					},
+					{
+						"name": "2006",
+						"type": "String"
+					},
+					{
+						"name": "2007",
+						"type": "String"
+					},
+					{
+						"name": "2008",
+						"type": "String"
+					},
+					{
+						"name": "2009",
+						"type": "String"
+					},
+					{
+						"name": "2010",
+						"type": "String"
+					},
+					{
+						"name": "2011",
+						"type": "String"
+					},
+					{
+						"name": "2012",
+						"type": "String"
+					},
+					{
+						"name": "2013",
+						"type": "String"
+					},
+					{
+						"name": "2014",
+						"type": "String"
+					},
+					{
+						"name": "2015",
+						"type": "String"
+					},
+					{
+						"name": "2016",
+						"type": "String"
+					},
+					{
+						"name": "2017",
+						"type": "String"
+					},
+					{
+						"name": "2018",
+						"type": "String"
+					},
+					{
+						"name": "2019",
+						"type": "String"
+					},
+					{
+						"name": "2020",
+						"type": "String"
+					},
+					{
+						"name": "2021",
+						"type": "String"
+					},
+					{
+						"name": "2022",
+						"type": "String"
+					},
+					{
+						"name": "2023",
+						"type": "String"
+					},
+					{
+						"name": "2024",
+						"type": "String"
+					},
+					{
+						"name": "Estimates Start After",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ImfWeodataDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "WEO Country Code",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ISO",
+						"type": "varchar"
+					},
+					{
+						"name": "WEO Subject Code",
+						"type": "varchar"
+					},
+					{
+						"name": "Country",
+						"type": "varchar"
+					},
+					{
+						"name": "Subject Descriptor",
+						"type": "varchar"
+					},
+					{
+						"name": "Subject Notes",
+						"type": "varchar"
+					},
+					{
+						"name": "Units",
+						"type": "varchar"
+					},
+					{
+						"name": "Scale",
+						"type": "varchar"
+					},
+					{
+						"name": "Series-specific Notes",
+						"type": "varchar"
+					},
+					{
+						"name": "1980",
+						"type": "varchar"
+					},
+					{
+						"name": "1981",
+						"type": "varchar"
+					},
+					{
+						"name": "1982",
+						"type": "varchar"
+					},
+					{
+						"name": "1983",
+						"type": "varchar"
+					},
+					{
+						"name": "1984",
+						"type": "varchar"
+					},
+					{
+						"name": "1985",
+						"type": "varchar"
+					},
+					{
+						"name": "1986",
+						"type": "varchar"
+					},
+					{
+						"name": "1987",
+						"type": "varchar"
+					},
+					{
+						"name": "1988",
+						"type": "varchar"
+					},
+					{
+						"name": "1989",
+						"type": "varchar"
+					},
+					{
+						"name": "1990",
+						"type": "varchar"
+					},
+					{
+						"name": "1991",
+						"type": "varchar"
+					},
+					{
+						"name": "1992",
+						"type": "varchar"
+					},
+					{
+						"name": "1993",
+						"type": "varchar"
+					},
+					{
+						"name": "1994",
+						"type": "varchar"
+					},
+					{
+						"name": "1995",
+						"type": "varchar"
+					},
+					{
+						"name": "1996",
+						"type": "varchar"
+					},
+					{
+						"name": "1997",
+						"type": "varchar"
+					},
+					{
+						"name": "1998",
+						"type": "varchar"
+					},
+					{
+						"name": "1999",
+						"type": "varchar"
+					},
+					{
+						"name": "2000",
+						"type": "varchar"
+					},
+					{
+						"name": "2001",
+						"type": "varchar"
+					},
+					{
+						"name": "2002",
+						"type": "varchar"
+					},
+					{
+						"name": "2003",
+						"type": "varchar"
+					},
+					{
+						"name": "2004",
+						"type": "varchar"
+					},
+					{
+						"name": "2005",
+						"type": "varchar"
+					},
+					{
+						"name": "2006",
+						"type": "varchar"
+					},
+					{
+						"name": "2007",
+						"type": "varchar"
+					},
+					{
+						"name": "2008",
+						"type": "varchar"
+					},
+					{
+						"name": "2009",
+						"type": "varchar"
+					},
+					{
+						"name": "2010",
+						"type": "varchar"
+					},
+					{
+						"name": "2011",
+						"type": "varchar"
+					},
+					{
+						"name": "2012",
+						"type": "varchar"
+					},
+					{
+						"name": "2013",
+						"type": "varchar"
+					},
+					{
+						"name": "2014",
+						"type": "varchar"
+					},
+					{
+						"name": "2015",
+						"type": "varchar"
+					},
+					{
+						"name": "2016",
+						"type": "varchar"
+					},
+					{
+						"name": "2017",
+						"type": "varchar"
+					},
+					{
+						"name": "2018",
+						"type": "varchar"
+					},
+					{
+						"name": "2019",
+						"type": "varchar"
+					},
+					{
+						"name": "2020",
+						"type": "varchar"
+					},
+					{
+						"name": "2021",
+						"type": "varchar"
+					},
+					{
+						"name": "2022",
+						"type": "varchar"
+					},
+					{
+						"name": "2023",
+						"type": "varchar"
+					},
+					{
+						"name": "2024",
+						"type": "varchar"
+					},
+					{
+						"name": "Estimates Start After",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "IMF_WEODATA"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/KeyAeroIndustryStats1989_2010blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "KeyStats1989-2010_reformatted.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Year",
+						"type": "String"
+					},
+					{
+						"name": "INDUSTRY DATA1",
+						"type": "String"
+					},
+					{
+						"name": "  Value of Aerospace Shipments: Current dollars",
+						"type": "String"
+					},
+					{
+						"name": "   Value of Aerospace Shipments: Constant dollars (2002=100)",
+						"type": "String"
+					},
+					{
+						"name": "   Value of Aerospace Shipments: Real Growth",
+						"type": "String"
+					},
+					{
+						"name": " Value of Aircraft & Parts Shipments: Current dollars",
+						"type": "String"
+					},
+					{
+						"name": " Value of Aircraft & Parts Shipments: Constant dollars (2002=100)",
+						"type": "String"
+					},
+					{
+						"name": " Value of Aircraft & Parts Shipments: Real Growth",
+						"type": "String"
+					},
+					{
+						"name": " Industrial Production Index (2007=100)2: Aerospace Products & Parts",
+						"type": "String"
+					},
+					{
+						"name": "Industrial Production Index (2007=100)2: Aircraft & Parts",
+						"type": "String"
+					},
+					{
+						"name": "Industrial Production Index (2007=100)2: Defense & Space Equipment",
+						"type": "String"
+					},
+					{
+						"name": " Employment (annual average)3: Total Employment (000s)",
+						"type": "String"
+					},
+					{
+						"name": " Employment (annual average)3: Total Employment (000s) Growth",
+						"type": "String"
+					},
+					{
+						"name": "Employment (annual average)3: Production Workers (000s)",
+						"type": "String"
+					},
+					{
+						"name": "Employment (annual average)3: Production Workers (000s) Growth",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aerospace Shipments: Current dollars",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aerospace Shipments: Constant dollars (2002=100)",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aerospace Shipments: Real Growth",
+						"type": "String"
+					},
+					{
+						"name": "Trade ",
+						"type": "String"
+					},
+					{
+						"name": "Trade: Value of Domestic Exports*",
+						"type": "String"
+					},
+					{
+						"name": "Trade: Exports/Shipments",
+						"type": "String"
+					},
+					{
+						"name": "  Value of Imports for Consumption",
+						"type": "String"
+					},
+					{
+						"name": "  Apparent Domestic Consumption",
+						"type": "String"
+					},
+					{
+						"name": "  Imports/Apparent Consumption",
+						"type": "String"
+					},
+					{
+						"name": "  Balance of Trade",
+						"type": "String"
+					},
+					{
+						"name": " TOTAL AEROSPACE TRADE4: Value of Domestic Exports*",
+						"type": "String"
+					},
+					{
+						"name": " TOTAL AEROSPACE TRADE4: Value of Imports for Consumption",
+						"type": "String"
+					},
+					{
+						"name": "  Balance of Total Aerospace Trade",
+						"type": "String"
+					},
+					{
+						"name": "#1 Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#2 Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#3 Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#4 Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#5 Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "% Total Exports",
+						"type": "String"
+					},
+					{
+						"name": "Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "2nd Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "3rd Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "4th Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "5th Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "% Total Imports",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/KeyAeroIndustryStats1989_2010db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "KEY_AERO_INDUSTRY_STATS_1989_2010"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/KeyStatsQtr2004_2008blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "KeyStatsQtr2004-2008_reformatted.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Year",
+						"type": "String"
+					},
+					{
+						"name": "Time Period",
+						"type": "String"
+					},
+					{
+						"name": "INDUSTRY DATA1 Value of Aerospace Shipments",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aerospace Shipments Current dollars",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aerospace Shipments Constant dollars (2002=100)",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aerospace Shipments Real Growth",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aircraft & Parts Shipments Current dollars",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
+						"type": "String"
+					},
+					{
+						"name": "Value of Aircraft & Parts Shipments Real Growth",
+						"type": "String"
+					},
+					{
+						"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
+						"type": "String"
+					},
+					{
+						"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
+						"type": "String"
+					},
+					{
+						"name": "Industrial Production Index (2007=100)1,2 Defense & Space Equipment",
+						"type": "String"
+					},
+					{
+						"name": "Total Employment (000s)",
+						"type": "String"
+					},
+					{
+						"name": "Total Employment (000s) Growth",
+						"type": "String"
+					},
+					{
+						"name": " Production Workers (000s)",
+						"type": "String"
+					},
+					{
+						"name": " Production Workers (000s) Growth",
+						"type": "String"
+					},
+					{
+						"name": "  Total Aerospace Exports",
+						"type": "String"
+					},
+					{
+						"name": "  Total Aerospace Imports",
+						"type": "String"
+					},
+					{
+						"name": "  Balance of Total Aerospace Trade",
+						"type": "String"
+					},
+					{
+						"name": "Top Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#2 Top Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#3 Top Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#4 Top Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "#5 Top Foreign Market",
+						"type": "String"
+					},
+					{
+						"name": "% Total Exports",
+						"type": "String"
+					},
+					{
+						"name": "Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "#2 Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "#3 Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "#4 Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "#5 Top Supplier to United States",
+						"type": "String"
+					},
+					{
+						"name": "% Total Imports",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/KeyStatsQtr2004_2008db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Time Period",
+						"type": "varchar"
+					},
+					{
+						"name": "Value of Aerospace Shipments Current dollars",
+						"type": "varchar"
+					},
+					{
+						"name": "Value of Aerospace Shipments Constant dollars (2002=100)",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Value of Aerospace Shipments Real Growth",
+						"type": "varchar"
+					},
+					{
+						"name": "Value of Aircraft & Parts Shipments Current dollars",
+						"type": "varchar"
+					},
+					{
+						"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Value of Aircraft & Parts Shipments Real Growth",
+						"type": "varchar"
+					},
+					{
+						"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Indusrtial Production Index (2007=100)1,2 Defense & Space Equipment",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Total Employment (000s)",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Total Employment (000s) Growth",
+						"type": "varchar"
+					},
+					{
+						"name": "Production Workers (000s)",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Production Workers (000s) Growth",
+						"type": "varchar"
+					},
+					{
+						"name": "Total Aerospace Exports",
+						"type": "varchar"
+					},
+					{
+						"name": "Total Aerospace Imports",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Balance of Total Aerospace Trade",
+						"type": "varchar"
+					},
+					{
+						"name": "Top Foreign Market",
+						"type": "varchar"
+					},
+					{
+						"name": "#2 Top Foreign Market",
+						"type": "varchar"
+					},
+					{
+						"name": "#3 Top Foreign Market",
+						"type": "varchar"
+					},
+					{
+						"name": "#4 Top Foreign Market",
+						"type": "varchar"
+					},
+					{
+						"name": "#5 Top Foreign Market",
+						"type": "varchar"
+					},
+					{
+						"name": "% Total Exports",
+						"type": "varchar"
+					},
+					{
+						"name": "Top Supplier to United States",
+						"type": "varchar"
+					},
+					{
+						"name": "2nd Top Supplier to United States",
+						"type": "varchar"
+					},
+					{
+						"name": "3rd Top Supplier to United States",
+						"type": "varchar"
+					},
+					{
+						"name": "4th Top Supplier to United States",
+						"type": "varchar"
+					},
+					{
+						"name": "5th Top Supplier to United States",
+						"type": "varchar"
+					},
+					{
+						"name": "% Total Imports",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "KEY_STATS_QTR_2004_2008"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OecdAvgAnnualHrsWorkedPerWorkerBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "OECD_AVERAGE_ANNUAL_HOURS_WORKED_PER_WORKER.csv",
+						"container": "select-usa"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"nullValue": "\"\"",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OecdGdpBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "OECD_GDP.csv",
+						"container": "select-usa"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"nullValue": "\"\"",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "LOCATION",
+						"type": "String"
+					},
+					{
+						"name": "Country",
+						"type": "String"
+					},
+					{
+						"name": "SUBJECT",
+						"type": "String"
+					},
+					{
+						"name": "Subject",
+						"type": "String"
+					},
+					{
+						"name": "MEASURE",
+						"type": "String"
+					},
+					{
+						"name": "Measure",
+						"type": "String"
+					},
+					{
+						"name": "TIME",
+						"type": "String"
+					},
+					{
+						"name": "Time",
+						"type": "String"
+					},
+					{
+						"name": "Unit Code",
+						"type": "String"
+					},
+					{
+						"name": "Unit",
+						"type": "String"
+					},
+					{
+						"name": "PowerCode Code",
+						"type": "String"
+					},
+					{
+						"name": "PowerCode",
+						"type": "String"
+					},
+					{
+						"name": "Reference Period Code",
+						"type": "String"
+					},
+					{
+						"name": "Reference Period",
+						"type": "String"
+					},
+					{
+						"name": "Value",
+						"type": "String"
+					},
+					{
+						"name": "Flag Codes",
+						"type": "String"
+					},
+					{
+						"name": "Flags",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OecdGdpDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "LOCATION",
+						"type": "varchar"
+					},
+					{
+						"name": "Country",
+						"type": "varchar"
+					},
+					{
+						"name": "Subject",
+						"type": "varchar"
+					},
+					{
+						"name": "Measure",
+						"type": "varchar"
+					},
+					{
+						"name": "TIME",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unit_Code",
+						"type": "varchar"
+					},
+					{
+						"name": "Unit",
+						"type": "varchar"
+					},
+					{
+						"name": "PowerCode_Code",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PowerCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Reference_Period_Code",
+						"type": "varchar"
+					},
+					{
+						"name": "Reference_Period",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
+					},
+					{
+						"name": "Flag_Codes",
+						"type": "varchar"
+					},
+					{
+						"name": "Flags",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "OECD_GDP"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OecdStrictnessOfEmploymentProtectionBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "OCED_STRICTNESS_OF_EMPLOYMENT_PROTECTION.csv",
+						"container": "select-usa"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"nullValue": "\"\"",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "COUNTRY",
+						"type": "String"
+					},
+					{
+						"name": "Country",
+						"type": "String"
+					},
+					{
+						"name": "SERIES",
+						"type": "String"
+					},
+					{
+						"name": "Series",
+						"type": "String"
+					},
+					{
+						"name": "TIME",
+						"type": "String"
+					},
+					{
+						"name": "Time",
+						"type": "String"
+					},
+					{
+						"name": "Unit Code",
+						"type": "String"
+					},
+					{
+						"name": "Unit",
+						"type": "String"
+					},
+					{
+						"name": "PowerCode Code",
+						"type": "String"
+					},
+					{
+						"name": "PowerCode",
+						"type": "String"
+					},
+					{
+						"name": "Reference Period Code",
+						"type": "String"
+					},
+					{
+						"name": "Reference Period",
+						"type": "String"
+					},
+					{
+						"name": "Value",
+						"type": "String"
+					},
+					{
+						"name": "Flag Codes",
+						"type": "String"
+					},
+					{
+						"name": "Flags",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OecdStrictnessOfEmploymentProtectionDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Country",
+						"type": "varchar"
+					},
+					{
+						"name": "Series",
+						"type": "varchar"
+					},
+					{
+						"name": "TIME",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unit_Code",
+						"type": "varchar"
+					},
+					{
+						"name": "Unit",
+						"type": "varchar"
+					},
+					{
+						"name": "PowerCode_Code",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PowerCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Reference_Period_Code",
+						"type": "varchar"
+					},
+					{
+						"name": "Reference_Period",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
+					},
+					{
+						"name": "Flag_Codes",
+						"type": "varchar"
+					},
+					{
+						"name": "Flags",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "OECD_STRICTNESS_OF_EMPLOYMENT_PROTECTION"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OeceAvgAnnualHrsWorkedPerWorkerDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Country",
+						"type": "varchar"
+					},
+					{
+						"name": "EMPSTAT",
+						"type": "varchar"
+					},
+					{
+						"name": "Employment_status",
+						"type": "varchar"
+					},
+					{
+						"name": "Frequency",
+						"type": "varchar"
+					},
+					{
+						"name": "TIME",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Unit_Code",
+						"type": "varchar"
+					},
+					{
+						"name": "Unit",
+						"type": "varchar"
+					},
+					{
+						"name": "PowerCode_Code",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PowerCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Reference_Period_Code",
+						"type": "varchar"
+					},
+					{
+						"name": "Reference_Period",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
+					},
+					{
+						"name": "Flag_Codes",
+						"type": "varchar"
+					},
+					{
+						"name": "Flags",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "OECD_AVERAGE_ANNUAL_HOURS_WORKED_PER_WORKER"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OtexaCatDataBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "translated/OTEXA_DATA_SET_CAT.csv",
+						"container": "otexa"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "CTRY_ID",
+						"type": "String"
+					},
+					{
+						"name": "CAT_ID",
+						"type": "String"
+					},
+					{
+						"name": "SYEF",
+						"type": "String"
+					},
+					{
+						"name": "HEADER_ID",
+						"type": "String"
+					},
+					{
+						"name": "VAL",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OtexaCatDataDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CTRY_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CAT_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SYEF",
+						"type": "decimal",
+						"precision": 5,
+						"scale": 2
+					},
+					{
+						"name": "HEADER_ID",
+						"type": "varchar"
+					},
+					{
+						"name": "VAL",
+						"type": "decimal",
+						"precision": 30,
+						"scale": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "OTEXA_DATA_SET_CAT"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/OtexaCatDescriptionsBlob')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -212,641 +1798,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "OTEXA_EXE_HTS"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OtexaHeaderDescriptionsBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "HEADER_DESCRIPTIONS.csv",
-						"container": "otexa"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "HEADER",
-						"type": "String"
-					},
-					{
-						"name": "YR",
-						"type": "String"
-					},
-					{
-						"name": "DESCRIPTION",
-						"type": "String"
-					},
-					{
-						"name": "TYPE",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OtexaHeaderDescriptionsDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "HEADER_ID",
-						"type": "varchar"
-					},
-					{
-						"name": "YR",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "HEADER_DESCRIPTION",
-						"type": "varchar"
-					},
-					{
-						"name": "HEADER_TYPE",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "OTEXA_HEADER_REF"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OtexaHtsChapterDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "CHAPTER",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CHAPTER_DESCRIPTION",
-						"type": "varchar"
-					},
-					{
-						"name": "HTS",
-						"type": "varchar"
-					},
-					{
-						"name": "CAT_ID",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "OTEXA_HTS_CHAPTER__REF"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OtexaHtsChaptersBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "OTEXA_HTS_CHAPTER_REF.csv",
-						"container": "otexa"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "HTS_Chapter",
-						"type": "String"
-					},
-					{
-						"name": "HTS_Chapter_Description",
-						"type": "String"
-					},
-					{
-						"name": "HTS_Code",
-						"type": "String"
-					},
-					{
-						"name": "Category",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OtexaHtsRefBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "OTEXA_HTS_REF.csv",
-						"container": "otexa"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OtexaHtsRefDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "HTS",
-						"type": "varchar"
-					},
-					{
-						"name": "CAT_ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "UNIT",
-						"type": "varchar"
-					},
-					{
-						"name": "DESCRIPTION",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "OTEXA_HTS_REF"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SImaCensusBlobs')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "translated/census",
-						"container": "sima"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "COUNTRY",
-						"type": "String"
-					},
-					{
-						"name": "CNTYDESC",
-						"type": "String"
-					},
-					{
-						"name": "ldesccen36",
-						"type": "String"
-					},
-					{
-						"name": "grade",
-						"type": "String"
-					},
-					{
-						"name": "VALUE",
-						"type": "String"
-					},
-					{
-						"name": "UNKNOWN_FIELD_1",
-						"type": "String"
-					},
-					{
-						"name": "UNKNOWN_FIELD_2",
-						"type": "String"
-					},
-					{
-						"name": "QTYMT",
-						"type": "String"
-					},
-					{
-						"name": "UNKNOWN_FIELD_3",
-						"type": "String"
-					},
-					{
-						"name": "SMONTH",
-						"type": "String"
-					},
-					{
-						"name": "SYEAR",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SimaCensusDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "COUNTRY",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CNTYDESC",
-						"type": "varchar"
-					},
-					{
-						"name": "ldesccen36",
-						"type": "varchar"
-					},
-					{
-						"name": "grade",
-						"type": "varchar"
-					},
-					{
-						"name": "VALUE",
-						"type": "decimal",
-						"precision": 30,
-						"scale": 10
-					},
-					{
-						"name": "UNKNOWN_FIELD_1",
-						"type": "decimal",
-						"precision": 30,
-						"scale": 10
-					},
-					{
-						"name": "UNKNOWN_FIELD_2",
-						"type": "decimal",
-						"precision": 30,
-						"scale": 10
-					},
-					{
-						"name": "QTYMT",
-						"type": "decimal",
-						"precision": 30,
-						"scale": 10
-					},
-					{
-						"name": "UNKNOWN_FIELD_3",
-						"type": "decimal",
-						"precision": 30,
-						"scale": 10
-					},
-					{
-						"name": "SMONTH",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SYEAR",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "SIMA_CENSUS"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SimaLicenseBlobs')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "license",
-						"container": "sima"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SimaLisenceDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Date of Importation",
-						"type": "date"
-					},
-					{
-						"name": "Country of Origin",
-						"type": "varchar"
-					},
-					{
-						"name": "Category",
-						"type": "varchar"
-					},
-					{
-						"name": "HTS Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Value",
-						"type": "decimal",
-						"precision": 30,
-						"scale": 10
-					},
-					{
-						"name": "Volume",
-						"type": "decimal",
-						"precision": 30,
-						"scale": 10
-					},
-					{
-						"name": "License_Number",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "SIMA_LICENSE"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SimaSmpByHtsBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "SMP_byHTS.csv",
-						"container": "sima"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "HTS Code",
-						"type": "String"
-					},
-					{
-						"name": "HTS Description",
-						"type": "String"
-					},
-					{
-						"name": "Category",
-						"type": "String"
-					},
-					{
-						"name": "Aggregate Category",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SimaSmpByHtsDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "HTS Code",
-						"type": "varchar"
-					},
-					{
-						"name": "HTS Description",
-						"type": "varchar"
-					},
-					{
-						"name": "Category",
-						"type": "varchar"
-					},
-					{
-						"name": "Aggregate Category",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "SIMA_SMP_BY_HTS"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WorldbankEaseCountryIndexBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "translated/WORLDBANK_EASE_COUNTRY_INDEX.csv",
-						"container": "select-usa"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Country_Name",
-						"type": "String"
-					},
-					{
-						"name": "Country_Code",
-						"type": "String"
-					},
-					{
-						"name": "Indicator_Name",
-						"type": "String"
-					},
-					{
-						"name": "Indicator_Code",
-						"type": "String"
-					},
-					{
-						"name": "Year",
-						"type": "String"
-					},
-					{
-						"name": "Val",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WorldbankEaseCountryIndexDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Country_Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Country_Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Indicator_Code",
-						"type": "varchar"
-					},
-					{
-						"name": "Year",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Val",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "WORLDBANK_EASE_COUNTRY_INDEX"
 				}
 			},
 			"dependsOn": []

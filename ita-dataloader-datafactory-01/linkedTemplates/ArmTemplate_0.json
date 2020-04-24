@@ -47,7 +47,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual')]",
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SupplierAnnual2019Blob')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -60,8 +60,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "AeroTop20ExpMktsAnnual_reformat.csv",
-						"container": "demo"
+						"fileName": "AeroTop20SuppliersAnnual_2019.csv",
+						"container": "industry-data"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -70,47 +70,19 @@
 				},
 				"schema": [
 					{
+						"name": "Rank",
+						"type": "String"
+					},
+					{
 						"name": "Supplier",
 						"type": "String"
 					},
 					{
-						"name": "2015_Value",
+						"name": "Value",
 						"type": "String"
 					},
 					{
-						"name": "2015_percentTotal",
-						"type": "String"
-					},
-					{
-						"name": "2016_Value",
-						"type": "String"
-					},
-					{
-						"name": "2016_percentTotal",
-						"type": "String"
-					},
-					{
-						"name": "2017_Value",
-						"type": "String"
-					},
-					{
-						"name": "2017_percentTotal",
-						"type": "String"
-					},
-					{
-						"name": "2018_Value",
-						"type": "String"
-					},
-					{
-						"name": "2018_percentTotal",
-						"type": "String"
-					},
-					{
-						"name": "2019_Value",
-						"type": "String"
-					},
-					{
-						"name": "2019_percentTotal",
+						"name": "% Total",
 						"type": "String"
 					}
 				]
@@ -120,7 +92,52 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnualDb')]",
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2015Blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AeroTop20SuppliersAnnual_2015.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "String"
+					},
+					{
+						"name": "Supplier",
+						"type": "String"
+					},
+					{
+						"name": "Value",
+						"type": "String"
+					},
+					{
+						"name": "% Total",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2015Db')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -130,10 +147,524 @@
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
-				"schema": [],
+				"schema": [
+					{
+						"name": "Supplier",
+						"type": "varchar"
+					},
+					{
+						"name": "Value_2015",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "percentTotal_2015",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Value_2016",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "percentTotal_2016",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Value_2017",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "percentTotal_2017",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Value_2018",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "percentTotal_2018",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Value_2019",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "percentTotal_2019",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "AERO_TOP_20_SUPPLIERS_ANNUAL"
+					"table": "AERO_TOP_SUPPLIERS_ANNUAL_2015"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2016Blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AeroTop20SuppliersAnnual_2016.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Top Twenty Aerospace Suppliers to the U.S.",
+						"type": "String"
+					},
+					{
+						"name": "Prop_1",
+						"type": "String"
+					},
+					{
+						"name": "Prop_2",
+						"type": "String"
+					},
+					{
+						"name": "Prop_3",
+						"type": "String"
+					},
+					{
+						"name": "Prop_4",
+						"type": "String"
+					},
+					{
+						"name": "Prop_5",
+						"type": "String"
+					},
+					{
+						"name": "Prop_6",
+						"type": "String"
+					},
+					{
+						"name": "Prop_7",
+						"type": "String"
+					},
+					{
+						"name": "Prop_8",
+						"type": "String"
+					},
+					{
+						"name": "Prop_9",
+						"type": "String"
+					},
+					{
+						"name": "Prop_10",
+						"type": "String"
+					},
+					{
+						"name": "Prop_11",
+						"type": "String"
+					},
+					{
+						"name": "Prop_12",
+						"type": "String"
+					},
+					{
+						"name": "Prop_13",
+						"type": "String"
+					},
+					{
+						"name": "Prop_14",
+						"type": "String"
+					},
+					{
+						"name": "Prop_15",
+						"type": "String"
+					},
+					{
+						"name": "Prop_16",
+						"type": "String"
+					},
+					{
+						"name": "Prop_17",
+						"type": "String"
+					},
+					{
+						"name": "Prop_18",
+						"type": "String"
+					},
+					{
+						"name": "Prop_19",
+						"type": "String"
+					},
+					{
+						"name": "Prop_20",
+						"type": "String"
+					},
+					{
+						"name": "Prop_21",
+						"type": "String"
+					},
+					{
+						"name": "Prop_22",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2016Db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "varchar"
+					},
+					{
+						"name": "Supplier",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "% Total",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AERO_TOP_SUPPLIERS_ANNUAL_2016"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2017Blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AeroTop20SuppliersAnnual_2017.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "String"
+					},
+					{
+						"name": "Supplier",
+						"type": "String"
+					},
+					{
+						"name": "Value",
+						"type": "String"
+					},
+					{
+						"name": "% Total",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2017Db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "varchar"
+					},
+					{
+						"name": "Supplier",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "% Total",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AERO_TOP_SUPPLIERS_ANNUAL_2017"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2018Blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AeroTop20SuppliersAnnual_2018.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "String"
+					},
+					{
+						"name": "Supplier",
+						"type": "String"
+					},
+					{
+						"name": "Value",
+						"type": "String"
+					},
+					{
+						"name": "% Total",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2018Db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "varchar"
+					},
+					{
+						"name": "Supplier",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "% Total",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AERO_TOP_SUPPLIERS_ANNUAL_2018"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTop20SuppliersAnnual2019Db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Rank",
+						"type": "varchar"
+					},
+					{
+						"name": "Supplier",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "% Total",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AERO_TOP_SUPPLIERS_ANNUAL_2019"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTopSuppliersAnnualTotalsBlob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AeroTop20SuppliersAnnual_totals.csv",
+						"container": "industry-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000b�h^\u0001\u0000\u0000�\u0004\u0000\u0000\u0013\u0000\b\u0002[Content_Types].xml �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000���N�0\u0010E�H�C�-Jܲ@\b5��\u0012*Q>�ēƪc[�ii����\u0010B�\u0015j7�\u0012��{2��h�nm���ƻR\f����U^\u001b7/���%�\u0017\u0019�rZY�\u0014\u001b@1\u0019__�f�\u0000�q��R4D�AJ�\u001ah\u0015\u0016>����V\u0011�ƹ\f�Z�9����NV�\u00118ʩ�\u0010��\u0013�ji){^��-I\u0004�\"{�\u0016v^�P!XS)bR�r��K�s(�3�`c\u0002�0���\u000e���\u0006��7\u001eM4\u001a����ZƐk+�|\\|z�(���P��6\u0015h_-[�@�!���\u0000Pk��\u0016�2n�}�?\u0015�L��� ��%�\u0013\u001c��\u001bd����dN\u0018\"m",
+						"type": "String"
+					},
+					{
+						"name": "�ǞDO97*�~��ɸ8�O�c\u001c|n��\u0007�\u0004E��\u0014�\u0011���B\u0010��!$}�����;{���[����2�\u0006\u0000\u0000��\u0003\u0000PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000�U0#�\u0000\u0000\u0000L\u0002\u0000\u0000\u000b\u0000\b\u0002_rels/.rels �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000��MO�0\f��H�����ݐ\u0010BKwAH�!T~�I�\u000f���$\u001bݿ'\u001c\u0010T\u001a�\u0003G�~����<���!��4��\u0012\u0014;#�w����qu\u0007*&r�Fq���\u0011v�����GJy(v��*����K��#F��D�\u0010�.W\u001a\t\u0013�\u001c�\u0016=��Z�MY�b��\u0001�BS����7��ϛז��",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AeroTopSuppliersAnnualTotalsDb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "General Aerospace Imports Value",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AERO_TOP_SUPPLIERS_ANNUAL_TOTALS"
 				}
 			},
 			"dependsOn": [
@@ -926,1204 +1457,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BeaMneCountryByTypeDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "DIRECTIONOFINVESTMENT",
-						"type": "varchar"
-					},
-					{
-						"name": "OwnershipLevel",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Year",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SeriesID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SeriesName",
-						"type": "varchar"
-					},
-					{
-						"name": "Row",
-						"type": "varchar"
-					},
-					{
-						"name": "Column",
-						"type": "varchar"
-					},
-					{
-						"name": "RowCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnCode",
-						"type": "varchar"
-					},
-					{
-						"name": "TableScale",
-						"type": "varchar"
-					},
-					{
-						"name": "DataValueUnformatted",
-						"type": "varchar"
-					},
-					{
-						"name": "DataValue",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnParent",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnParentCode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ColumnGParent",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnGParentCode",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "BEA_MNE_COUNTRY_BY_TYPE"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BeaMneCountryDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "DIRECTIONOFINVESTMENT",
-						"type": "varchar"
-					},
-					{
-						"name": "OwnershipLevel",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Year",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SeriesID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SeriesName",
-						"type": "varchar"
-					},
-					{
-						"name": "Row",
-						"type": "varchar"
-					},
-					{
-						"name": "Column",
-						"type": "varchar"
-					},
-					{
-						"name": "RowCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnCode",
-						"type": "varchar"
-					},
-					{
-						"name": "TableScale",
-						"type": "varchar"
-					},
-					{
-						"name": "DataValueUnformatted",
-						"type": "varchar"
-					},
-					{
-						"name": "DataValue",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnParentCode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ColumnGParentCode",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "BEA_MNE_COUNTRY"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BeaMneCountryUboByIndustryBlobs')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "bea-mne-country-ubo-by-industry",
-						"container": "select-usa"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"BEAAPI": {
-							"type": "object",
-							"properties": {
-								"Request": {
-									"type": "object",
-									"properties": {
-										"RequestParam": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"ParameterName": {
-														"type": "string"
-													},
-													"ParameterValue": {
-														"type": "string"
-													}
-												}
-											}
-										}
-									}
-								},
-								"Results": {
-									"type": "object",
-									"properties": {
-										"Table_Count": {
-											"type": "string"
-										},
-										"rowTypeID": {
-											"type": "string"
-										},
-										"InvestmentType": {
-											"type": "string"
-										},
-										"DataType": {
-											"type": "string"
-										},
-										"Entity": {
-											"type": "string"
-										},
-										"IndustryClassification": {
-											"type": "string"
-										},
-										"YearList": {
-											"type": "string"
-										},
-										"DIRECTIONOFINVESTMENT": {
-											"type": "string"
-										},
-										"OwnershipLevel": {
-											"type": "string"
-										},
-										"NonbankAffiliatesOnly": {
-											"type": "string"
-										},
-										"Tables": {
-											"type": "string"
-										},
-										"cnt": {
-											"type": "string"
-										},
-										"Dimensions": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"Ordinal": {
-														"type": "string"
-													},
-													"Name": {
-														"type": "string"
-													},
-													"DataType": {
-														"type": "string"
-													},
-													"IsValue": {
-														"type": "string"
-													}
-												}
-											}
-										},
-										"Data": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"Year": {
-														"type": "string"
-													},
-													"SeriesID": {
-														"type": "string"
-													},
-													"SeriesName": {
-														"type": "string"
-													},
-													"Row": {
-														"type": "string"
-													},
-													"ColumnGParent": {
-														"type": "string"
-													},
-													"ColumnParent": {
-														"type": "string"
-													},
-													"Column": {
-														"type": "string"
-													},
-													"RowCode": {
-														"type": "string"
-													},
-													"ColumnCode": {
-														"type": "string"
-													},
-													"ColumnParentCode": {
-														"type": "string"
-													},
-													"ColumnGParentCode": {
-														"type": "string"
-													},
-													"TableScale": {
-														"type": "string"
-													},
-													"DataValueUnformatted": {
-														"type": "string"
-													},
-													"TableColumnDisplayOrder": {
-														"type": "string"
-													},
-													"TableRowDisplayOrder": {
-														"type": "string"
-													},
-													"DataValue": {
-														"type": "string"
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BeaMneCountryUboByIndustryDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "DIRECTIONOFINVESTMENT",
-						"type": "varchar"
-					},
-					{
-						"name": "OwnershipLevel",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Year",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SeriesID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SeriesName",
-						"type": "varchar"
-					},
-					{
-						"name": "Row",
-						"type": "varchar"
-					},
-					{
-						"name": "Column",
-						"type": "varchar"
-					},
-					{
-						"name": "RowCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnCode",
-						"type": "varchar"
-					},
-					{
-						"name": "TableScale",
-						"type": "varchar"
-					},
-					{
-						"name": "DataValueUnformatted",
-						"type": "varchar"
-					},
-					{
-						"name": "DataValue",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnParentCode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ColumnGParentCode",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "BEA_MNE_COUNTRY_UBO_BY_INDUSTRY"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BeaMneIndustryBlobs')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "bea-mne-industry",
-						"container": "select-usa"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"BEAAPI": {
-							"type": "object",
-							"properties": {
-								"Request": {
-									"type": "object",
-									"properties": {
-										"RequestParam": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"ParameterName": {
-														"type": "string"
-													},
-													"ParameterValue": {
-														"type": "string"
-													}
-												}
-											}
-										}
-									}
-								},
-								"Results": {
-									"type": "object",
-									"properties": {
-										"Table_Count": {
-											"type": "string"
-										},
-										"rowTypeID": {
-											"type": "string"
-										},
-										"InvestmentType": {
-											"type": "string"
-										},
-										"DataType": {
-											"type": "string"
-										},
-										"Entity": {
-											"type": "string"
-										},
-										"IndustryClassification": {
-											"type": "string"
-										},
-										"YearList": {
-											"type": "string"
-										},
-										"DIRECTIONOFINVESTMENT": {
-											"type": "string"
-										},
-										"OwnershipLevel": {
-											"type": "string"
-										},
-										"NonbankAffiliatesOnly": {
-											"type": "string"
-										},
-										"Tables": {
-											"type": "string"
-										},
-										"cnt": {
-											"type": "string"
-										},
-										"Dimensions": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"Ordinal": {
-														"type": "string"
-													},
-													"Name": {
-														"type": "string"
-													},
-													"DataType": {
-														"type": "string"
-													},
-													"IsValue": {
-														"type": "string"
-													}
-												}
-											}
-										},
-										"Data": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"Year": {
-														"type": "string"
-													},
-													"SeriesID": {
-														"type": "string"
-													},
-													"SeriesName": {
-														"type": "string"
-													},
-													"Row": {
-														"type": "string"
-													},
-													"ColumnGParent": {
-														"type": "string"
-													},
-													"ColumnParent": {
-														"type": "string"
-													},
-													"Column": {
-														"type": "string"
-													},
-													"RowCode": {
-														"type": "string"
-													},
-													"ColumnCode": {
-														"type": "string"
-													},
-													"ColumnParentCode": {
-														"type": "string"
-													},
-													"ColumnGParentCode": {
-														"type": "string"
-													},
-													"TableScale": {
-														"type": "string"
-													},
-													"DataValueUnformatted": {
-														"type": "string"
-													},
-													"TableColumnDisplayOrder": {
-														"type": "string"
-													},
-													"TableRowDisplayOrder": {
-														"type": "string"
-													},
-													"DataValue": {
-														"type": "string"
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BeaMneIndustryByType')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "bea-mne-industry-by-type",
-						"container": "select-usa"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"BEAAPI": {
-							"type": "object",
-							"properties": {
-								"Request": {
-									"type": "object",
-									"properties": {
-										"RequestParam": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"ParameterName": {
-														"type": "string"
-													},
-													"ParameterValue": {
-														"type": "string"
-													}
-												}
-											}
-										}
-									}
-								},
-								"Results": {
-									"type": "object",
-									"properties": {
-										"Table_Count": {
-											"type": "string"
-										},
-										"rowTypeID": {
-											"type": "string"
-										},
-										"InvestmentType": {
-											"type": "string"
-										},
-										"DataType": {
-											"type": "string"
-										},
-										"Entity": {
-											"type": "string"
-										},
-										"IndustryClassification": {
-											"type": "string"
-										},
-										"YearList": {
-											"type": "string"
-										},
-										"DIRECTIONOFINVESTMENT": {
-											"type": "string"
-										},
-										"OwnershipLevel": {
-											"type": "string"
-										},
-										"NonbankAffiliatesOnly": {
-											"type": "string"
-										},
-										"Tables": {
-											"type": "string"
-										},
-										"cnt": {
-											"type": "string"
-										},
-										"Dimensions": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"Ordinal": {
-														"type": "string"
-													},
-													"Name": {
-														"type": "string"
-													},
-													"DataType": {
-														"type": "string"
-													},
-													"IsValue": {
-														"type": "string"
-													}
-												}
-											}
-										},
-										"Data": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"Year": {
-														"type": "string"
-													},
-													"SeriesID": {
-														"type": "string"
-													},
-													"SeriesName": {
-														"type": "string"
-													},
-													"Row": {
-														"type": "string"
-													},
-													"ColumnGParent": {
-														"type": "string"
-													},
-													"ColumnParent": {
-														"type": "string"
-													},
-													"Column": {
-														"type": "string"
-													},
-													"RowCode": {
-														"type": "string"
-													},
-													"ColumnCode": {
-														"type": "string"
-													},
-													"ColumnParentCode": {
-														"type": "string"
-													},
-													"ColumnGParentCode": {
-														"type": "string"
-													},
-													"TableScale": {
-														"type": "string"
-													},
-													"DataValueUnformatted": {
-														"type": "string"
-													},
-													"TableColumnDisplayOrder": {
-														"type": "string"
-													},
-													"TableRowDisplayOrder": {
-														"type": "string"
-													},
-													"DataValue": {
-														"type": "string"
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BeaMneIndustryByTypeDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "DIRECTIONOFINVESTMENT",
-						"type": "varchar"
-					},
-					{
-						"name": "OwnershipLevel",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Year",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SeriesID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SeriesName",
-						"type": "varchar"
-					},
-					{
-						"name": "Row",
-						"type": "varchar"
-					},
-					{
-						"name": "Column",
-						"type": "varchar"
-					},
-					{
-						"name": "RowCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnCode",
-						"type": "varchar"
-					},
-					{
-						"name": "TableScale",
-						"type": "varchar"
-					},
-					{
-						"name": "DataValueUnformatted",
-						"type": "varchar"
-					},
-					{
-						"name": "DataValue",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnParent",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnParentCode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ColumnGParent",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnGParentCode",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "BEA_MNE_INDUSTRY_BY_TYPE"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BeaMneIndustryDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "DIRECTIONOFINVESTMENT",
-						"type": "varchar"
-					},
-					{
-						"name": "OwnershipLevel",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Year",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SeriesID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SeriesName",
-						"type": "varchar"
-					},
-					{
-						"name": "Row",
-						"type": "varchar"
-					},
-					{
-						"name": "Column",
-						"type": "varchar"
-					},
-					{
-						"name": "RowCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnCode",
-						"type": "varchar"
-					},
-					{
-						"name": "TableScale",
-						"type": "varchar"
-					},
-					{
-						"name": "DataValueUnformatted",
-						"type": "varchar"
-					},
-					{
-						"name": "DataValue",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnParentCode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ColumnGParentCode",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "BEA_MNE_INDUSTRY"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BeaMneStateByTypeBlob')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "bea-mne-state-by-type",
-						"container": "select-usa"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"BEAAPI": {
-							"type": "object",
-							"properties": {
-								"Request": {
-									"type": "object",
-									"properties": {
-										"RequestParam": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"ParameterName": {
-														"type": "string"
-													},
-													"ParameterValue": {
-														"type": "string"
-													}
-												}
-											}
-										}
-									}
-								},
-								"Results": {
-									"type": "object",
-									"properties": {
-										"Table_Count": {
-											"type": "string"
-										},
-										"rowTypeID": {
-											"type": "string"
-										},
-										"InvestmentType": {
-											"type": "string"
-										},
-										"DataType": {
-											"type": "string"
-										},
-										"Entity": {
-											"type": "string"
-										},
-										"IndustryClassification": {
-											"type": "string"
-										},
-										"YearList": {
-											"type": "string"
-										},
-										"DIRECTIONOFINVESTMENT": {
-											"type": "string"
-										},
-										"OwnershipLevel": {
-											"type": "string"
-										},
-										"NonbankAffiliatesOnly": {
-											"type": "string"
-										},
-										"Tables": {
-											"type": "string"
-										},
-										"cnt": {
-											"type": "string"
-										},
-										"Dimensions": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"Ordinal": {
-														"type": "string"
-													},
-													"Name": {
-														"type": "string"
-													},
-													"DataType": {
-														"type": "string"
-													},
-													"IsValue": {
-														"type": "string"
-													}
-												}
-											}
-										},
-										"Data": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"Year": {
-														"type": "string"
-													},
-													"SeriesID": {
-														"type": "string"
-													},
-													"SeriesName": {
-														"type": "string"
-													},
-													"Row": {
-														"type": "string"
-													},
-													"ColumnGParent": {
-														"type": "string"
-													},
-													"ColumnParent": {
-														"type": "string"
-													},
-													"Column": {
-														"type": "string"
-													},
-													"RowCode": {
-														"type": "string"
-													},
-													"ColumnCode": {
-														"type": "string"
-													},
-													"ColumnParentCode": {
-														"type": "string"
-													},
-													"ColumnGParentCode": {
-														"type": "string"
-													},
-													"TableScale": {
-														"type": "string"
-													},
-													"DataValueUnformatted": {
-														"type": "string"
-													},
-													"TableColumnDisplayOrder": {
-														"type": "string"
-													},
-													"TableRowDisplayOrder": {
-														"type": "string"
-													},
-													"DataValue": {
-														"type": "string"
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BeaMneStateByTypeDb')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "DIRECTIONOFINVESTMENT",
-						"type": "varchar"
-					},
-					{
-						"name": "OwnershipLevel",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Year",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SeriesID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "SeriesName",
-						"type": "varchar"
-					},
-					{
-						"name": "Row",
-						"type": "varchar"
-					},
-					{
-						"name": "Column",
-						"type": "varchar"
-					},
-					{
-						"name": "RowCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnCode",
-						"type": "varchar"
-					},
-					{
-						"name": "TableScale",
-						"type": "varchar"
-					},
-					{
-						"name": "DataValueUnformatted",
-						"type": "varchar"
-					},
-					{
-						"name": "DataValue",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnParent",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnParentCode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ColumnGParent",
-						"type": "varchar"
-					},
-					{
-						"name": "ColumnGParentCode",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "BEA_MNE_STATE_BY_TYPE"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
 			]
 		}
 	]
