@@ -220,7 +220,8 @@
 							},
 							{
 								"source": {
-									"name": "Employment (annual average)3: Total Employment (000s)"
+									"name": "Employment (annual average)3: Total Employment (000s)",
+									"type": "String"
 								},
 								"sink": {
 									"name": " Employment (annual average)3: Total Employment (000s)",
@@ -229,7 +230,8 @@
 							},
 							{
 								"source": {
-									"name": "Employment (annual average)3: Total Employment (000s) Growth"
+									"name": "Employment (annual average)3: Total Employment (000s) Growth",
+									"type": "String"
 								},
 								"sink": {
 									"name": " Employment (annual average)3: Total Employment (000s) Growth",
@@ -445,7 +447,8 @@
 							},
 							{
 								"source": {
-									"name": "2nd Top Supplier to United States"
+									"name": "2nd Top Supplier to United States",
+									"type": "String"
 								},
 								"sink": {
 									"name": "2nd Top Supplier to United States",
