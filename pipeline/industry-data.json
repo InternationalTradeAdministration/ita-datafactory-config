@@ -445,8 +445,7 @@
 							},
 							{
 								"source": {
-									"name": "Top Supplier to United States",
-									"type": "String"
+									"name": "2nd Top Supplier to United States"
 								},
 								"sink": {
 									"name": "2nd Top Supplier to United States",
