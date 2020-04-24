@@ -263,7 +263,7 @@
 							},
 							{
 								"source": {
-									"name": " Value of Aircraft & Parts Shipments: Current dollars",
+									"name": "Value of Aerospace Shipments: Current dollars",
 									"type": "String"
 								},
 								"sink": {
