@@ -772,7 +772,7 @@
 							{
 								"source": {
 									"name": "QUANTITY",
-									"type": "Int16"
+									"type": "Int32"
 								},
 								"sink": {
 									"name": "QUANTITY",
