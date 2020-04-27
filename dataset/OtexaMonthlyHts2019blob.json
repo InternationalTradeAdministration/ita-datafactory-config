@@ -1,0 +1,53 @@
+{
+	"name": "OtexaMonthlyHts2019blob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "2019.csv",
+				"folderPath": "monthly_hts",
+				"container": "otexa"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "YR",
+				"type": "String"
+			},
+			{
+				"name": "MON",
+				"type": "String"
+			},
+			{
+				"name": "QUANTITY",
+				"type": "String"
+			},
+			{
+				"name": "VAL",
+				"type": "String"
+			},
+			{
+				"name": "COUNTRY",
+				"type": "String"
+			},
+			{
+				"name": "cat",
+				"type": "String"
+			},
+			{
+				"name": "tsusa",
+				"type": "String"
+			}
+		]
+	}
+}
