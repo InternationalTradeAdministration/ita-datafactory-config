@@ -1,0 +1,16 @@
+{
+	"name": "OtexaMonthlyHtsdb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "OTEXA_MONTHLY_HTS_2019"
+		}
+	}
+}

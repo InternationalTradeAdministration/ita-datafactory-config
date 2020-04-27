@@ -717,6 +717,123 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy OTEXA Monthly Data by HTS 2019",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "YR",
+									"type": "Int16"
+								},
+								"sink": {
+									"name": "YR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MON",
+									"type": "Int16"
+								},
+								"sink": {
+									"name": "MON",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QUANTITY",
+									"type": "Int16"
+								},
+								"sink": {
+									"name": "QUANTITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VAL",
+									"type": "Int16"
+								},
+								"sink": {
+									"name": "VAL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COUNTRY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COUNTRY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "cat",
+									"type": "Int16"
+								},
+								"sink": {
+									"name": "cat",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "tsusa",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "tsusa",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "OtexaMonthlyHts2019blob",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "OtexaMonthlyHtsdb",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
