@@ -812,7 +812,7 @@
 							{
 								"source": {
 									"name": "tsusa",
-									"type": "Int32"
+									"type": "Int64"
 								},
 								"sink": {
 									"name": "tsusa",
