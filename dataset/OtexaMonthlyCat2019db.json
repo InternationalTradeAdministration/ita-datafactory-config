@@ -1,0 +1,16 @@
+{
+	"name": "OtexaMonthlyCat2019db",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "OTEXA_MONTHLY_CAT_2019"
+		}
+	}
+}
