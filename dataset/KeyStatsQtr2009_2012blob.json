@@ -1,0 +1,132 @@
+{
+	"name": "KeyStatsQtr2009_2012blob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "KeyStatsQtr2009-2012_reformatted.csv",
+				"container": "industry-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Year",
+				"type": "String"
+			},
+			{
+				"name": "Quarter",
+				"type": "String"
+			},
+			{
+				"name": "Value of Aircraft & Parts Shipments Current dollars",
+				"type": "String"
+			},
+			{
+				"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
+				"type": "String"
+			},
+			{
+				"name": "Value of Aircraft & Parts Shipments Real Growth",
+				"type": "String"
+			},
+			{
+				"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
+				"type": "String"
+			},
+			{
+				"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
+				"type": "String"
+			},
+			{
+				"name": "Industrial Production Index (2007=100)1,2 Defense & Space Equipment",
+				"type": "String"
+			},
+			{
+				"name": " Total Employment (000s)",
+				"type": "String"
+			},
+			{
+				"name": "Total Employment Growth",
+				"type": "String"
+			},
+			{
+				"name": " Production Workers (000s)",
+				"type": "String"
+			},
+			{
+				"name": "Production Workers Growth",
+				"type": "String"
+			},
+			{
+				"name": "  Total Aerospace Exports",
+				"type": "String"
+			},
+			{
+				"name": "  Total Aerospace Imports",
+				"type": "String"
+			},
+			{
+				"name": "  Balance of Total Aerospace Trade",
+				"type": "String"
+			},
+			{
+				"name": "Top Foreign Market",
+				"type": "String"
+			},
+			{
+				"name": "2nd Top Foreign Market",
+				"type": "String"
+			},
+			{
+				"name": "3rd Top Foreign Market",
+				"type": "String"
+			},
+			{
+				"name": "4th Top Foreign Market",
+				"type": "String"
+			},
+			{
+				"name": "5th Top Foreign Market",
+				"type": "String"
+			},
+			{
+				"name": "% Total Exports",
+				"type": "String"
+			},
+			{
+				"name": "Top Supplier to United States",
+				"type": "String"
+			},
+			{
+				"name": "2nd Top Supplier to United States",
+				"type": "String"
+			},
+			{
+				"name": "3rd Top Supplier to United States",
+				"type": "String"
+			},
+			{
+				"name": "4th Top Supplier to United States",
+				"type": "String"
+			},
+			{
+				"name": "5th Top Supplier to United States",
+				"type": "String"
+			},
+			{
+				"name": "% Total Imports",
+				"type": "String"
+			}
+		]
+	}
+}
