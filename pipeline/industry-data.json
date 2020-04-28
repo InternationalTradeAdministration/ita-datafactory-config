@@ -1287,6 +1287,323 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Year",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Year",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Quarter",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Quarter",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Value of Aircraft & Parts Shipments Current dollars",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Value of Aircraft & Parts Shipments Current dollars",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Value of Aircraft & Parts Shipments Real Growth",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Value of Aircraft & Parts Shipments Real Growth",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Industrial Production Index (2007=100)1,2 Defense & Space Equipment",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Industrial Production Index (2007=100)1,2 Defense & Space Equipment",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": " Total Employment (000s)",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": " Total Employment (000s)",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Employment Growth",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Total Employment Growth",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": " Production Workers (000s)",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": " Production Workers (000s)",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Production Workers Growth",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Production Workers Growth",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "  Total Aerospace Exports",
+									"type": "String"
+								},
+								"sink": {
+									"name": "  Total Aerospace Exports",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "  Total Aerospace Imports",
+									"type": "String"
+								},
+								"sink": {
+									"name": "  Total Aerospace Imports",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "  Balance of Total Aerospace Trade",
+									"type": "String"
+								},
+								"sink": {
+									"name": "  Balance of Total Aerospace Trade",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Top Foreign Market",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Top Foreign Market",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "2nd Top Foreign Market",
+									"type": "String"
+								},
+								"sink": {
+									"name": "2nd Top Foreign Market",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "3rd Top Foreign Market",
+									"type": "String"
+								},
+								"sink": {
+									"name": "3rd Top Foreign Market",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "4th Top Foreign Market",
+									"type": "String"
+								},
+								"sink": {
+									"name": "4th Top Foreign Market",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "5th Top Foreign Market",
+									"type": "String"
+								},
+								"sink": {
+									"name": "5th Top Foreign Market",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total Exports",
+									"type": "String"
+								},
+								"sink": {
+									"name": "% Total Exports",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Top Supplier to United States",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Top Supplier to United States",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "2nd Top Supplier to United States",
+									"type": "String"
+								},
+								"sink": {
+									"name": "2nd Top Supplier to United States",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "3rd Top Supplier to United States",
+									"type": "String"
+								},
+								"sink": {
+									"name": "3rd Top Supplier to United States",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "4th Top Supplier to United States",
+									"type": "String"
+								},
+								"sink": {
+									"name": "4th Top Supplier to United States",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "5th Top Supplier to United States",
+									"type": "String"
+								},
+								"sink": {
+									"name": "5th Top Supplier to United States",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total Imports",
+									"type": "String"
+								},
+								"sink": {
+									"name": "% Total Imports",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "KeyStatsQtr2009_2012blob",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "KeyStatsQtr2009_2012",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
