@@ -1401,12 +1401,11 @@
 							},
 							{
 								"source": {
-									"name": " Total Employment (000s)",
+									"name": "Total Employment (000s)",
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": " Total Employment (000s)",
-									"type": "String"
+									"name": "Total Employment (000s)"
 								}
 							},
 							{
@@ -1421,7 +1420,7 @@
 							},
 							{
 								"source": {
-									"name": " Production Workers (000s)",
+									"name": "Production Workers (000s)",
 									"type": "Decimal"
 								},
 								"sink": {
@@ -1440,7 +1439,7 @@
 							},
 							{
 								"source": {
-									"name": "  Total Aerospace Exports",
+									"name": "Total Aerospace Exports",
 									"type": "String"
 								},
 								"sink": {
@@ -1449,7 +1448,7 @@
 							},
 							{
 								"source": {
-									"name": "  Total Aerospace Imports",
+									"name": "Total Aerospace Imports",
 									"type": "String"
 								},
 								"sink": {
@@ -1458,7 +1457,7 @@
 							},
 							{
 								"source": {
-									"name": "  Balance of Total Aerospace Trade",
+									"name": "Balance of Total Aerospace Trade",
 									"type": "String"
 								},
 								"sink": {
