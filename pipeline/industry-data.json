@@ -1352,7 +1352,7 @@
 							{
 								"source": {
 									"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
@@ -1372,7 +1372,7 @@
 							{
 								"source": {
 									"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
@@ -1382,7 +1382,7 @@
 							{
 								"source": {
 									"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
@@ -1392,7 +1392,7 @@
 							{
 								"source": {
 									"name": "Industrial Production Index (2007=100)1,2 Defense & Space Equipment",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "Industrial Production Index (2007=100)1,2 Defense & Space Equipment",
@@ -1405,7 +1405,8 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "Total Employment (000s)"
+									"name": "Total Employment (000s)",
+									"type": "String"
 								}
 							},
 							{
@@ -1424,7 +1425,8 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "Production Workers (000s)"
+									"name": "Production Workers (000s)",
+									"type": "String"
 								}
 							},
 							{
@@ -1443,7 +1445,8 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "Total Aerospace Exports"
+									"name": "Total Aerospace Exports",
+									"type": "String"
 								}
 							},
 							{
@@ -1452,7 +1455,8 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "Total Aerospace Imports"
+									"name": "Total Aerospace Imports",
+									"type": "String"
 								}
 							},
 							{
@@ -1461,7 +1465,8 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "Balance of Total Aerospace Trade"
+									"name": "Balance of Total Aerospace Trade",
+									"type": "String"
 								}
 							},
 							{
