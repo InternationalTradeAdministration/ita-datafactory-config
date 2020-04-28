@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "KEY_STATS_QTR_2009_2012"
+			"table": "KEY_AERO_STATS_QTR_2009_2012"
 		}
 	}
 }
