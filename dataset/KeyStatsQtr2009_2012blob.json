@@ -52,7 +52,7 @@
 				"type": "String"
 			},
 			{
-				"name": " Total Employment (000s)",
+				"name": "Total Employment (000s)",
 				"type": "String"
 			},
 			{
@@ -60,7 +60,7 @@
 				"type": "String"
 			},
 			{
-				"name": " Production Workers (000s)",
+				"name": "Production Workers (000s)",
 				"type": "String"
 			},
 			{
@@ -68,15 +68,15 @@
 				"type": "String"
 			},
 			{
-				"name": "  Total Aerospace Exports",
+				"name": "Total Aerospace Exports",
 				"type": "String"
 			},
 			{
-				"name": "  Total Aerospace Imports",
+				"name": "Total Aerospace Imports",
 				"type": "String"
 			},
 			{
-				"name": "  Balance of Total Aerospace Trade",
+				"name": "Balance of Total Aerospace Trade",
 				"type": "String"
 			},
 			{
