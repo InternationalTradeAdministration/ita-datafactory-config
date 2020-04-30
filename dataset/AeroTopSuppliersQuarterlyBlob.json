@@ -1,0 +1,156 @@
+{
+	"name": "AeroTopSuppliersQuarterlyBlob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "AeroTopSuppliersQuarterly.csv",
+				"container": "industry-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Supplier",
+				"type": "String"
+			},
+			{
+				"name": "Value 2019 Q1",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2019 Q1",
+				"type": "String"
+			},
+			{
+				"name": "Value 2019 Q2",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2019 Q2",
+				"type": "String"
+			},
+			{
+				"name": "Value 2019 Q3",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2019 Q3",
+				"type": "String"
+			},
+			{
+				"name": "Value 2019 Q4",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2019 Q4",
+				"type": "String"
+			},
+			{
+				"name": "Value 2018 Q1",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2018 Q1",
+				"type": "String"
+			},
+			{
+				"name": "Value 2018 Q2",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2018 Q2",
+				"type": "String"
+			},
+			{
+				"name": "Value 2018 Q3",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2018 Q3",
+				"type": "String"
+			},
+			{
+				"name": "Value 2018 Q4",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2018 Q4",
+				"type": "String"
+			},
+			{
+				"name": "Value 2017 Q1",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2017 Q1",
+				"type": "String"
+			},
+			{
+				"name": "Value 2017 Q2",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2017 Q2",
+				"type": "String"
+			},
+			{
+				"name": "Value 2017 Q3",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2017 Q3",
+				"type": "String"
+			},
+			{
+				"name": "Value 2017 Q4",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2017 Q4",
+				"type": "String"
+			},
+			{
+				"name": "Value 2016 Q1",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2016 Q1",
+				"type": "String"
+			},
+			{
+				"name": "Value 2016 Q2",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2016 Q2",
+				"type": "String"
+			},
+			{
+				"name": "Value 2016 Q3",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2016 Q3",
+				"type": "String"
+			},
+			{
+				"name": "Value 2016 Q4",
+				"type": "String"
+			},
+			{
+				"name": "% Total 2016 Q4",
+				"type": "String"
+			}
+		]
+	}
+}

@@ -1604,6 +1604,384 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy Aero Top Suppliers Quarterly",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE AERO_TOP_SUPPLIERS_QUARTERLY",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Supplier",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Supplier",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2019 Q1",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2019 Q1",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2019 Q1",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2019 Q1",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2019 Q2",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2019 Q2",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2019 Q2",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2019 Q2",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2019 Q3",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2019 Q3",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2019 Q3",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2019 Q3",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2019 Q4",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2019 Q4",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2019 Q4",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2019 Q4",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2018 Q1",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2018 Q1",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2018 Q1",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2018 Q1",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2018 Q2",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2018 Q2",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2018 Q2",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2018 Q2",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2018 Q3",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2018 Q3",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2018 Q3",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2018 Q3",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2018 Q4",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2018 Q4",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2018 Q4",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2018 Q4",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2017 Q1",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2017 Q1",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2017 Q1",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2017 Q1",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2017 Q2",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2017 Q2",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2017 Q2",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2017 Q2",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2017 Q3",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2017 Q3",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2017 Q3",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2017 Q3",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2017 Q4",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2017 Q4",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2017 Q4",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2017 Q4",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2016 Q1",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2016 Q1",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2016 Q1",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2016 Q1",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2016 Q2",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2016 Q2",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2016 Q2",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2016 Q2",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2016 Q3",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2016 Q3",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2016 Q3",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2016 Q3",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Value 2016 Q4",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Value 2016 Q4",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "% Total 2016 Q4",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "% Total 2016 Q4",
+									"type": "Decimal"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AeroTopSuppliersQuarterlyBlob",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AeroTopSuppliersQuarterlyDb",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
