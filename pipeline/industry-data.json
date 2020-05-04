@@ -1326,7 +1326,7 @@
 								},
 								"sink": {
 									"name": "Year",
-									"type": "String"
+									"type": "Int32"
 								}
 							},
 							{
@@ -1352,11 +1352,11 @@
 							{
 								"source": {
 									"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
-									"type": "Decimal"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
-									"type": "String"
+									"type": "Decimal"
 								}
 							},
 							{
@@ -1372,21 +1372,21 @@
 							{
 								"source": {
 									"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
-									"type": "Decimal"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
-									"type": "String"
+									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
 									"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
-									"type": "Decimal"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
-									"type": "String"
+									"type": "Decimal"
 								}
 							},
 							{
@@ -1395,18 +1395,18 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "Industrial Production Index (2007=100)1,2 Defense & Space Equipment",
-									"type": "String"
+									"name": "Indusrtial Production Index (2007=100)1,2 Defense & Space Equipment",
+									"type": "Decimal"
 								}
 							},
 							{
 								"source": {
 									"name": "Total Employment (000s)",
-									"type": "Decimal"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Total Employment (000s)",
-									"type": "String"
+									"type": "Decimal"
 								}
 							},
 							{
@@ -1422,11 +1422,11 @@
 							{
 								"source": {
 									"name": "Production Workers (000s)",
-									"type": "Decimal"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Production Workers (000s)",
-									"type": "String"
+									"type": "Decimal"
 								}
 							},
 							{
@@ -1456,7 +1456,7 @@
 								},
 								"sink": {
 									"name": "Total Aerospace Imports",
-									"type": "String"
+									"type": "Decimal"
 								}
 							},
 							{
