@@ -7,7 +7,131 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "Year",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Quarter",
+				"type": "varchar"
+			},
+			{
+				"name": "Value of Aircraft & Parts Shipments Current dollars",
+				"type": "varchar"
+			},
+			{
+				"name": "Value of Aircraft & Parts Shipments Constant dollars (2002=100)",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Value of Aircraft & Parts Shipments Real Growth",
+				"type": "varchar"
+			},
+			{
+				"name": "Industrial Production Index (2007=100)1,2 Aerospace Products & Parts",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Industrial Production Index (2007=100)1,2 Aircraft & Parts",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Indusrtial Production Index (2007=100)1,2 Defense & Space Equipment",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Total Employment (000s)",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Total Employment Growth",
+				"type": "varchar"
+			},
+			{
+				"name": "Production Workers (000s)",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Production Workers Growth",
+				"type": "varchar"
+			},
+			{
+				"name": "Total Aerospace Exports",
+				"type": "varchar"
+			},
+			{
+				"name": "Total Aerospace Imports",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Balance of Total Aerospace Trade",
+				"type": "varchar"
+			},
+			{
+				"name": "Top Foreign Market",
+				"type": "varchar"
+			},
+			{
+				"name": "2nd Top Foreign Market",
+				"type": "varchar"
+			},
+			{
+				"name": "3rd Top Foreign Market",
+				"type": "varchar"
+			},
+			{
+				"name": "4th Top Foreign Market",
+				"type": "varchar"
+			},
+			{
+				"name": "5th Top Foreign Market",
+				"type": "varchar"
+			},
+			{
+				"name": "% Total Exports",
+				"type": "varchar"
+			},
+			{
+				"name": "Top Supplier to United States",
+				"type": "varchar"
+			},
+			{
+				"name": "2nd Top Supplier to United States",
+				"type": "varchar"
+			},
+			{
+				"name": "3rd Top Supplier to United States",
+				"type": "varchar"
+			},
+			{
+				"name": "4th Top Supplier to United States",
+				"type": "varchar"
+			},
+			{
+				"name": "5th Top Supplier to United States",
+				"type": "varchar"
+			},
+			{
+				"name": "% Total Imports",
+				"type": "varchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "dbo",
 			"table": "KEY_AERO_STATS_QTR_2009_2012"
