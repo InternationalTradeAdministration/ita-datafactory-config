@@ -1452,7 +1452,7 @@
 							{
 								"source": {
 									"name": "Total Aerospace Imports",
-									"type": "String"
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "Total Aerospace Imports",
