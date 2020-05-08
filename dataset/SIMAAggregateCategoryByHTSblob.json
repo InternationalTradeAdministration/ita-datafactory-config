@@ -1,0 +1,40 @@
+{
+	"name": "SIMAAggregateCategoryByHTSblob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "SIMA_AggregateCategory_6HTS.csv",
+				"container": "sima"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "HTS Code",
+				"type": "String"
+			},
+			{
+				"name": "HTS Description",
+				"type": "String"
+			},
+			{
+				"name": "Aggregate Category",
+				"type": "String"
+			},
+			{
+				"name": "Grade",
+				"type": "String"
+			}
+		]
+	}
+}
