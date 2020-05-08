@@ -370,6 +370,83 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copy Aggregate Category by Category",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Category",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Category",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Aggregate Category",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Aggregate Category",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Grade",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Grade",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SIMA_AggregateCat_by_Catblob",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SimaAggregateCatByCatdb",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
