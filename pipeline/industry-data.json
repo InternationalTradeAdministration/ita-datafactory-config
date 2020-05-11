@@ -430,7 +430,7 @@
 				]
 			},
 			{
-				"name": "Copy aero top suppliers annual",
+				"name": "Copy Aero Top Suppliers Annual",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
