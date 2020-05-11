@@ -29,7 +29,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "OTEXA_HTS_CHAPTER__REF"
+			"table": "OTEXA_HTS_CHAPTER_REF"
 		}
 	}
 }

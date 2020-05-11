@@ -548,7 +548,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "TRUNCATE TABLE OTEXA_HTS_CHAPTER__REF;",
+						"preCopyScript": "TRUNCATE TABLE OTEXA_HTS_CHAPTER_REF;",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
