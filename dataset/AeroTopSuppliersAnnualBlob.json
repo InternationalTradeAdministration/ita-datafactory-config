@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "AeroTop20SuppliersAnnual_reformat.csv",
+				"fileName": "AeroTopSuppliersAnnual.csv",
 				"container": "industry-data"
 			},
 			"columnDelimiter": ",",
