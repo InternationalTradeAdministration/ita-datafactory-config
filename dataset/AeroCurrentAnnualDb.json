@@ -1,0 +1,41 @@
+{
+	"name": "AeroCurrentAnnualDb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Measure",
+				"type": "varchar"
+			},
+			{
+				"name": "Year",
+				"type": "varchar"
+			},
+			{
+				"name": "Market, Supplier, or Product",
+				"type": "varchar"
+			},
+			{
+				"name": "Name of Market or Product",
+				"type": "varchar"
+			},
+			{
+				"name": "Value Type",
+				"type": "varchar"
+			},
+			{
+				"name": "Value Entry",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "AERO_CURRENT_ANNUAL"
+		}
+	}
+}
